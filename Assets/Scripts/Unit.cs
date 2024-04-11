@@ -30,8 +30,9 @@ public class Unit : MonoBehaviour
     public event SelectedHandler OnSelected;
     public delegate void DeselectedHandler(Unit deselectedUnit);
     public event DeselectedHandler OnDeselected;
-    public delegate void OnIdleTargetLostHandler();
-    public event OnIdleTargetLostHandler OnIdleTargetLost;
+    public delegate void FocusedHandler(Unit focusedUnit);
+    public event FocusedHandler OnFocused;
+    public event FocusedHandler OnUnfocused;
 
     [Tooltip("The maximum HP of this unit. Set to 0 if indestructible.")]
     public float maxHP = 0f;
@@ -58,13 +59,6 @@ public class Unit : MonoBehaviour
 
     public float attackDmg = 0;
     public float attackRange = 0;
-    [Tooltip("How long the attack lasts. The unit cannot move until their attack completes.")]
-    public float attackDuration = 0.25f;
-    float atkDurTmr = 0f;
-    public float attackRate = 0.15f;
-    float atkTmr = 0f;
-    [Tooltip("The range at which this unit will attempt to automatically attack an enemy without the player explicitely commanding it.")]
-    public float detectionRange = 0f;
 
     public GameObject selectionPrefab;
     GameObject selectIcon;
@@ -77,14 +71,9 @@ public class Unit : MonoBehaviour
     bool selected = false;
     float stopCD = 0.2f;
     float stopTmr = 0;
-    bool attacking = false;
     protected Unit followUnit;
-    bool followingCommand = false;
 
-    // This stores the unit's position prior to attempting to attack a hostile w/o being commanded.
-    // The unit returns to this position when the hostile is no longer within its detection radius.
-    Vector3 idlePosition;
-
+    UnitAbility nextAbility;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -105,7 +94,6 @@ public class Unit : MonoBehaviour
         currentHP = maxHP;
         if (currentHP == 0f) immune = true;
         agent = GetComponent<NavMeshAgent>();
-        idlePosition = transform.position;
 
         Vector3 rayStart = transform.position;
         rayStart.y += 100f;
@@ -135,45 +123,10 @@ public class Unit : MonoBehaviour
     protected virtual void Update()
     {
         stopTmr += Time.deltaTime;
-        atkTmr += Time.deltaTime;
-        atkDurTmr += Time.deltaTime;
 
         if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))
         {
             agent.isStopped = true;
-            followingCommand = false;
-        }
-
-        // Update the idle position to return to when no longer attacking a foe w/o being commanded
-        if (unitState == UnitState.Idle || followingCommand)
-            idlePosition = transform.position;
-
-        if (!followingCommand)
-        {
-            // overlap against all enemies in range (Layer 8) or
-            // all friendlies in range (Layer 6), depending on hostility
-            Collider[] inRange = Physics.OverlapSphere(transform.position, detectionRange, hostility == Hostility.Friendly ? 1 << 8 : 1 << 6);
-            if (inRange.Length > 0)
-            {
-                // Find the nearest unit and go after them
-                Unit closest = inRange[0].GetComponent<Unit>();
-                float nearest = (closest.transform.position - transform.position).sqrMagnitude;
-                foreach (Collider c in inRange)
-                {
-                    float dist2 = (c.transform.position - transform.position).sqrMagnitude;
-                    if (dist2 < nearest)
-                    {
-                        nearest = dist2;
-                        closest = c.GetComponent<Unit>();
-                    }
-                }
-                Follow(closest);
-            }
-            else
-            {
-                MoveTo(idlePosition);
-                OnIdleTargetLost?.Invoke();
-            }
         }
 
         // If following a unit, keep updating the destination to move to
@@ -183,14 +136,8 @@ public class Unit : MonoBehaviour
             if ((followUnit.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange)
             {
                 agent.isStopped = true;
-                if (attacking && atkTmr >= attackRate)
-                {
-                    atkTmr = 0f;
-                    atkDurTmr = 0f;
-                    followUnit.TakeDamage(attackDmg);
-                }
             }
-            else if (atkDurTmr >= attackDuration)
+            else
             {
                 agent.isStopped = false;
                 agent.destination = followUnit.transform.position;
@@ -224,7 +171,7 @@ public class Unit : MonoBehaviour
     
     public void SetHostility(Hostility hostility)
     {
-        this.Hostility = hostility;
+        Hostility = hostility;
 
         if (selectIcon)
         {
@@ -314,7 +261,6 @@ public class Unit : MonoBehaviour
         stopTmr = 0f;
         agent.isStopped = false;
         agent.destination = destination;
-        followingCommand = commanded;
     }
 
     /// <summary>
@@ -322,18 +268,13 @@ public class Unit : MonoBehaviour
     /// If the unit's hostility does not match this one, it will attack it.
     /// </summary>
     /// <param name="other">The unit to follow or attack.</param>
-    public void Follow(Unit other, bool commanded = false)
+    public void Follow(Unit other)
     {
         followUnit = other;
-        if (!other)
-        {
-            followingCommand = false;
-            return;
-        }
+        if (!other) return;
+
         unitState = UnitState.Moving;
-        attacking = other.Hostility != hostility && !other.immune;
         stopTmr = 0f;
-        followingCommand = commanded;
     }
 
     protected float FindDistance(Vector2 targetLocation)
@@ -354,5 +295,30 @@ public class Unit : MonoBehaviour
                 return a;
         }
         return null;
+    }
+
+    public void SetQueuedAbility(string abilityName)
+    {
+        SetQueuedAbility(GetAbility(abilityName));
+
+    }
+    public void SetQueuedAbility(UnitAbility ability)
+    {
+        nextAbility = ability;
+    }
+    public UnitAbility GetQueuedAbility()
+    {
+        return nextAbility;
+    }
+
+    public void Focus()
+    {
+        selectIcon.GetComponent<Animator>().Play("UnitFocus");
+        OnFocused?.Invoke(this);
+    }
+    public void Unfocus()
+    {
+        selectIcon.GetComponent<Animator>().StopPlayback();
+        OnUnfocused?.Invoke(this);
     }
 }

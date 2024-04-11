@@ -122,12 +122,12 @@ public class SelectionManager : MonoBehaviour
                 if (hit.collider.TryGetComponent(out Unit target))
                 {
                     foreach (Unit u in selected)
-                        u.Follow(target, true);
+                        u.Follow(target);
                 }
                 else
                 {
                     foreach (Unit u in selected)
-                        u.MoveTo(hit.point, true);
+                        u.MoveTo(hit.point);
                 }
             }
         }

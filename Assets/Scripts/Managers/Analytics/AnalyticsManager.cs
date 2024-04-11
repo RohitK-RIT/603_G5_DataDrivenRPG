@@ -21,7 +21,7 @@ namespace Core.Managers.Analytics
         private readonly List<SessionAnalyticsData> _sessionData = new() { new SessionAnalyticsData() };
         private SessionAnalyticsData CurrentData => _sessionData.Last();
 
-        private const string GameSceneName = "TerrainAndBird";
+        private const string GameSceneName = "GameScene";
 
         public static AnalyticsManager Activate()
         {

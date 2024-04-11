@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Core.Managers;
+using Core.Managers.Analytics;
+using Core.Managers.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,6 +43,9 @@ public class GameManager : MonoBehaviour
             // Prevents duplicate instances of the game manager.
             Destroy(gameObject);
         }
+
+        EventManager.Activate();
+        AnalyticsManager.Activate();
     }
 
     void Update()
@@ -131,4 +137,11 @@ public class GameManager : MonoBehaviour
     {
         GameUI.Instance.SetIsScreenActive("Inventory UI", false);
     }
+}
+
+public sealed class StartSessionEvent : GameEvent
+{
+}
+public sealed class EndSessionEvent : GameEvent
+{
 }

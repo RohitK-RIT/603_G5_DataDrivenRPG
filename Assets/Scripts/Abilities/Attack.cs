@@ -7,12 +7,20 @@ public class Attack : UnitAbility
     public float atkDamage = 25f;
 
     Unit target;
+    FieldOfView FOV;
+
+    private void Start()
+    {
+        FOV = GetComponent<FieldOfView>();
+    }
 
     public override void Execute()
     {
-        if (target)
-            target.TakeDamage(atkDamage);
-
+        if (FOV.canSeePlayer)
+        {
+            if (target)
+                target.TakeDamage(atkDamage);
+        }
         base.Execute();
     }
 

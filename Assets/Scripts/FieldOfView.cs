@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class FieldOfView : MonoBehaviour
     public float radius;
     [Range(0,360)]
     public float angle;
+    [ReadOnly] public float DistanceToEnemy;
 
     public GameObject playerRef;
 
@@ -21,6 +24,10 @@ public class FieldOfView : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FOVRoutine());
+    }
+    private void Update()
+    {
+
     }
 
     private IEnumerator FOVRoutine()
@@ -42,10 +49,11 @@ public class FieldOfView : MonoBehaviour
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
-
+            
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                DistanceToEnemy = distanceToTarget;
 
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {

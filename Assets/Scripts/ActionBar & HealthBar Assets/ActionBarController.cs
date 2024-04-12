@@ -17,9 +17,10 @@ public class ActionBarController : MonoBehaviour
     public Image actionProgressUI = null;
     public CanvasGroup sliderCanvasGroup = null;
 
-    public bool isUseable;
-    bool isFilling;
+    [HideInInspector] public bool isUseable;
+    [HideInInspector] public bool isFilling;
 
+    /*
     private void Start()
     {
         //sliderCanvasGroup.alpha = 1;
@@ -49,4 +50,5 @@ public class ActionBarController : MonoBehaviour
             isUseable = false;
         }
     }
+    */
 }

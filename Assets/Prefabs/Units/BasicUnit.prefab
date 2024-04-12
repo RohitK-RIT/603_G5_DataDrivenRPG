@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3683404910854892366}
   - component: {fileID: 7738742569409711224}
   - component: {fileID: 146705667451509789}
-  - component: {fileID: 1867822416203659506}
+  - component: {fileID: 7892114624545858478}
   m_Layer: 6
   m_Name: BasicUnit
   m_TagString: Untagged
@@ -150,14 +150,12 @@ MonoBehaviour:
   unitName: Testing Unit
   attackDmg: 50
   attackRange: 0
-  attackDuration: 0.25
-  attackRate: 0.15
-  detectionRange: 0
   selectionPrefab: {fileID: 3423735369810992541, guid: ceda65d003dc44143acb3b8c804dc2f0,
     type: 3}
   currentHP: 0
   unitState: 0
---- !u!114 &1867822416203659506
+  actionTime: 10
+--- !u!114 &7892114624545858478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,11 +164,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 642455808376837321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41972319c3cac104881b6bd2de037ebf, type: 3}
+  m_Script: {fileID: 11500000, guid: 144451ac94e0ec94ba0479bdd0511b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 0
-  cooldown: 0
-  abilityName: Cool Ability
-  description: Yurt Skibbidy Bop
+  abilityName: Attack
+  description: Ability Description
   abilitySprite: {fileID: 0}
+  atkDamage: 25

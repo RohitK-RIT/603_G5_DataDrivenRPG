@@ -73,7 +73,9 @@ public class Unit : MonoBehaviour
     float stopTmr = 0;
     protected Unit followUnit;
 
-    UnitAbility nextAbility;
+    UnitAbility queuedAbility;
+    public float actionTime = 10f;
+    float actionTmr = 0f;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -104,7 +106,6 @@ public class Unit : MonoBehaviour
             {
                 Vector3 extents = GetComponent<MeshRenderer>().localBounds.extents;
                 selectIcon = Instantiate(selectionPrefab, transform.position - new Vector3(0, extents.y, 0), Quaternion.Euler(90, 0, 0));
-                selectIcon.SetActive(false);
                 selectIcon.name = $"{gameObject.name} Selection Icon";
                 selectIcon.transform.parent = transform;
 
@@ -123,6 +124,16 @@ public class Unit : MonoBehaviour
     protected virtual void Update()
     {
         stopTmr += Time.deltaTime;
+        actionTmr += Time.deltaTime;
+
+        // Execute the queued ability, if there is one, at the end of the timer
+        if (actionTmr >= actionTime)
+        {
+            actionTmr = 0f;
+            if (queuedAbility)
+                queuedAbility.Execute();
+            queuedAbility = null;
+        }
 
         if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))
         {
@@ -150,7 +161,7 @@ public class Unit : MonoBehaviour
         if (!selected)
         {
             selected = true;
-            SetShowSelection(true);
+            ShowSelection(true);
             OnSelected?.Invoke(this);
         }
     }
@@ -159,63 +170,95 @@ public class Unit : MonoBehaviour
         if (selected)
         {
             selected = false;
-            SetShowSelection(false);
+            ShowSelection(false);
             OnDeselected?.Invoke(this);
         }
     }
-    public void SetShowSelection(bool showSelection)
+
+    /// <summary>
+    /// Displays a faded selection circle on this unit, indicating it is covered by the player's drag-selection
+    /// </summary>
+    /// <param name="showSelection">If the faded circle should be displayed or not.</param>
+    public void ShowSoftSelection(bool showSelection)
     {
         if (selectIcon)
-            selectIcon.SetActive(showSelection);
+        {
+            SpriteRenderer s = selectIcon.GetComponent<SpriteRenderer>();
+            Color c = s.color;
+            c.a = showSelection ? 0.33f : (selected ? 1f : 0f);
+            s.color = c;
+        }
     }
     
+    /// <summary>
+    /// Sets the hostility of this unit.
+    /// - Friendly units can be controlled and have abilities queued by the player.
+    /// - Enemy units cannot be controlled at all, but can still be selected to show their stats.
+    /// </summary>
+    /// <param name="hostility">The new hostility of the unit.</param>
     public void SetHostility(Hostility hostility)
     {
         Hostility = hostility;
 
         if (selectIcon)
         {
+            SpriteRenderer s = selectIcon.GetComponent<SpriteRenderer>();
+            Color c;
             switch (hostility)
             {
                 case Hostility.Friendly:
-                    selectIcon.GetComponent<SpriteRenderer>().color = Color.green;
+                    c = Color.green;
                     break;
                 case Hostility.Neutral:
-                    selectIcon.GetComponent<SpriteRenderer>().color = Color.yellow;
+                    c = Color.yellow;
                     break;
                 case Hostility.Hostile:
-                    selectIcon.GetComponent<SpriteRenderer>().color = Color.red;
+                    c = Color.red;
+                    break;
+                default:
+                    c = Color.white;
                     break;
             }
+            c.a = 0f;
+            s.color = c;
         }
     }
 
+    /// <summary>
+    /// Deals damage to this unit. 
+    /// The unit is killed if their resulting HP <= 0.
+    /// </summary>
+    /// <param name="dmg">The amount of damage to deal.</param>
     public void TakeDamage(float dmg)
     {
         if (immune) return;
         SetCurrentHP(currentHP - dmg);
     }
 
+    /// <summary>
+    /// Sets the unit's HP to an amount.
+    /// The provided value to set to is clamped between 0 and the unit's max HP.
+    /// If the reuslting HP <= 0, the unit dies.
+    /// </summary>
+    /// <param name="hp">The HP to set to. Automatically clamped between 0 and the unit's Max HP</param>
     public void SetCurrentHP(float hp)
     {
         if (hp == currentHP) return;
 
         float oldHP = currentHP;
         currentHP = Mathf.Clamp(hp, 0, maxHP);
+
         if (currentHP <= 0)
-        {
             Destroy();
-        }
         else if (currentHP < oldHP)
-        {
             OnDamageTaken?.Invoke(currentHP);
-        }
         else
-        {
             OnHealed?.Invoke(currentHP);
-        }
     }
 
+    /// <summary>
+    /// Kills this unit.
+    /// </summary>
     public void Destroy()
     {
         RemoveFromUnitList();
@@ -223,9 +266,124 @@ public class Unit : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Heals this unit by a particular amount.
+    /// Can only heal up to its max HP.
+    /// </summary>
+    /// <param name="healAmt">The amount to heal.</param>
+    public void Heal(float healAmt)
+    {
+        currentHP = Mathf.Clamp(currentHP + healAmt, 0, maxHP);
+    }
+
+    /// <summary>
+    /// Sets this unit to move to the given position.
+    /// </summary>
+    /// <param name="destination">The position to move to</param>
+    public void MoveTo(Vector3 destination)
+    {
+        unitState = UnitState.Moving;
+        followUnit = null;
+        stopTmr = 0f;
+        agent.isStopped = false;
+        agent.destination = destination;
+    }
+
+    /// <summary>
+    /// Sets this unit to follow another unit indefinitely.
+    /// </summary>
+    /// <param name="other">The unit to follow.</param>
+    public void Follow(Unit other)
+    {
+        followUnit = other;
+        if (!other) return;
+
+        unitState = UnitState.Moving;
+        stopTmr = 0f;
+    }
+
+    /// <returns>All abilities on this unit.</returns>
+    public UnitAbility[] GetAllAbilities()
+    {
+        return GetComponents<UnitAbility>();
+    }
+
+    /// <param name="abilityName">The name of the ability on this unit</param>
+    /// <returns>The ability on this unit whose name matches the given ability name. Null otherwise.</returns>
+    public UnitAbility GetAbility(string abilityName)
+    {
+        foreach (UnitAbility a in GetComponents<UnitAbility>())
+        {
+            if (a.abilityName == abilityName)
+                return a;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Sets the ability the unit will execute when their action timer fills.
+    /// </summary>
+    /// <param name="abilityName">The name of the ability to set.</param>
+    public void SetQueuedAbility(string abilityName)
+    {
+        SetQueuedAbility(GetAbility(abilityName));
+
+    }
+
+    /// <summary>
+    /// Sets the ability the unit will execute when their action timer fills.
+    /// </summary>
+    /// <param name="ability">The ability to set. This should be a component on this unit.</param>
+    public void SetQueuedAbility(UnitAbility ability)
+    {
+        queuedAbility = ability;
+    }
+
+    /// <returns>The ability currently queued on this unit that will execute when its action bar fills.</returns>
+    public UnitAbility GetQueuedAbility()
+    {
+        return queuedAbility;
+    }
+
+    /// <summary>
+    /// "Focuses" on this unit, animating its selection circle.
+    /// </summary>
+    public void Focus()
+    {
+        selectIcon.GetComponent<Animator>().Play("UnitFocus");
+        OnFocused?.Invoke(this);
+    }
+
+    /// <summary>
+    /// "Unfocuses" this unit, stopping its selection animation.
+    /// </summary>
+    public void Unfocus()
+    {
+        selectIcon.GetComponent<Animator>().Rebind();
+        OnUnfocused?.Invoke(this);
+    }
+
+    /// <summary>
+    /// Sets the unit's selection circle to 100% or 0% opacity, depending on showSelection.
+    /// </summary>
+    /// <param name="showSelection">If the unit's selection circle should be displayed.</param>
+    void ShowSelection(bool showSelection)
+    {
+        if (selectIcon)
+        {
+            SpriteRenderer s = selectIcon.GetComponent<SpriteRenderer>();
+            Color c = s.color;
+            c.a = showSelection ? 1f : 0f;
+            s.color = c;
+        }
+    }
+
+    /// <summary>
+    /// Adds this unit to the list of selectable units corresponding to its hostility.
+    /// </summary>
     void AddToUnitList()
     {
-        // Add this unit to the list ofselectable units
+        
         switch (hostility)
         {
             case Hostility.Friendly:
@@ -237,88 +395,15 @@ public class Unit : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes this unit from the list of selectable units, meaning it can no longer be selected
+    /// or interacted with.
+    /// </summary>
     void RemoveFromUnitList()
     {
         if (hostility == Hostility.Friendly)
-        {
             SelectionManager.allFriendlyUnits.Remove(this);
-        }
         else
-        {
             SelectionManager.allOtherUnits.Remove(this);
-        }
-    }
-
-    public void Heal(float healAmt)
-    {
-        currentHP = Mathf.Clamp(currentHP + healAmt, 0, maxHP);
-    }
-
-    public void MoveTo(Vector3 destination, bool commanded = false)
-    {
-        unitState = UnitState.Moving;
-        followUnit = null;
-        stopTmr = 0f;
-        agent.isStopped = false;
-        agent.destination = destination;
-    }
-
-    /// <summary>
-    /// Sets this unit to follow another unit indefinitely.
-    /// If the unit's hostility does not match this one, it will attack it.
-    /// </summary>
-    /// <param name="other">The unit to follow or attack.</param>
-    public void Follow(Unit other)
-    {
-        followUnit = other;
-        if (!other) return;
-
-        unitState = UnitState.Moving;
-        stopTmr = 0f;
-    }
-
-    protected float FindDistance(Vector2 targetLocation)
-    {
-        return Vector2.Distance(transform.position, targetLocation);
-    }
-
-    public UnitAbility[] GetAllAbilities()
-    {
-        return GetComponents<UnitAbility>();
-    }
-
-    public UnitAbility GetAbility(string abilityName)
-    {
-        foreach (UnitAbility a in GetComponents<UnitAbility>())
-        {
-            if (a.abilityName == abilityName)
-                return a;
-        }
-        return null;
-    }
-
-    public void SetQueuedAbility(string abilityName)
-    {
-        SetQueuedAbility(GetAbility(abilityName));
-
-    }
-    public void SetQueuedAbility(UnitAbility ability)
-    {
-        nextAbility = ability;
-    }
-    public UnitAbility GetQueuedAbility()
-    {
-        return nextAbility;
-    }
-
-    public void Focus()
-    {
-        selectIcon.GetComponent<Animator>().Play("UnitFocus");
-        OnFocused?.Invoke(this);
-    }
-    public void Unfocus()
-    {
-        selectIcon.GetComponent<Animator>().StopPlayback();
-        OnUnfocused?.Invoke(this);
     }
 }

@@ -22,6 +22,7 @@ public class HUDController : MonoBehaviour
     {
         abilityButtons = new(abilitiesBoard.GetComponentsInChildren<Button>(true));
         SelectionManager.OnUnitSelectionChanged += OnUnitsSelected;
+        selectedUnits = new();
     }
 
     // Update is called once per frame
@@ -30,7 +31,6 @@ public class HUDController : MonoBehaviour
         if (selectedUnits.Count > 0 && Input.GetKeyDown(KeyCode.Tab))
         {
             focusedIndex = (focusedIndex + 1) % selectedUnits.Count;
-            focusedUnit = selectedUnits[focusedIndex];
             UpdateFocusedUnit();
         }
     }
@@ -84,10 +84,7 @@ public class HUDController : MonoBehaviour
                     UnitAbility a = abilities[i];
 
                     abilityButtons[i].onClick.RemoveAllListeners();
-                    abilityButtons[i].onClick.AddListener(() =>
-                    {
-                        focusedUnit.SetQueuedAbility(a);
-                    });
+                    abilityButtons[i].onClick.AddListener(() => { a.Queue(); });
                     // Update displays
                     TextMeshProUGUI[] texts = abilityButtons[i].GetComponentsInChildren<TextMeshProUGUI>(true);
                     abilityButtons[i].GetComponent<Image>().sprite = a.abilitySprite;
@@ -112,5 +109,17 @@ public class HUDController : MonoBehaviour
     void UpdateUnitNameDisplay(float newHP)
     {
         unitNameText.text = $"{focusedUnit.name} ({(int)newHP}/{(int)focusedUnit.maxHP} HP)";
+    }
+
+    public static void ShowError(string message)
+    {
+        GameObject hud = GameObject.FindWithTag("HUD");
+        if (!hud)
+        {
+            Debug.LogError("HUDController Error: Cannot find the HUD game object with the HUD tag!");
+            return;
+        }
+        hud.GetComponent<HUDController>().errorText.text = message;
+        hud.GetComponent<Animator>().Play("ErrorFade", -1, 0);
     }
 }

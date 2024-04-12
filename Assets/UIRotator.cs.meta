@@ -1,0 +1,25 @@
+<<<<<<<< HEAD:Assets/UIRotator.cs.meta
+fileFormatVersion: 2
+guid: e43db50a40c9ac84a8407fc0630a250e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+========
+fileFormatVersion: 2
+guid: f14d0608bbbd5fa48aa1115dcad1bab8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>>> dev:Assets/Scripts/ActionBar & HealthBar Assets/ActionBarController.cs.meta

@@ -17,8 +17,8 @@ public class HealthBarController : MonoBehaviour
     public Image healthProgressUI = null;
     public CanvasGroup sliderCanvasGroup = null;
 
-    [SerializeField] FieldOfView fieldOfView;
-    [SerializeField] ActionBarController actionBarController;
+    //[SerializeField] FieldOfView fieldOfView;
+    //[SerializeField] ActionBarController actionBarController;
     
     bool isHit;
     bool isDead;
@@ -50,10 +50,10 @@ public class HealthBarController : MonoBehaviour
         }
         
         // Can be modifed to be integrated with AJs stuff
-        if (Input.GetKeyDown(KeyCode.Space) && fieldOfView.canSeePlayer == true && actionBarController.isUseable == true)
-        {
-            isHit = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && fieldOfView.canSeePlayer == true && actionBarController.isUseable == true)
+        //{
+        //isHit = true;
+        //}
     }
     */
 }

@@ -115,17 +115,3 @@ public sealed class StartSessionEvent : GameEvent
 public sealed class EndSessionEvent : GameEvent
 {
 }
-
-public sealed class StartSessionEvent : GameEvent
-{
-}
-public sealed class EndSessionEvent : GameEvent
-{
-}
-
-public sealed class StartSessionEvent : GameEvent
-{
-}
-public sealed class EndSessionEvent : GameEvent
-{
-}

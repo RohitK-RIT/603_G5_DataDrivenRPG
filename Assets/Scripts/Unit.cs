@@ -75,12 +75,21 @@ public class Unit : MonoBehaviour
 
     UnitAbility queuedAbility;
     public float actionTime = 10f;
-    float actionTmr = 0f;
+    //float actionTmr = 0f;
+
+    //Added by Ty
+    ActionBarController actionActionBarController;
+    HealthBarController healthBarController;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         name = unitName;
+
+        //Added By Ty
+        actionActionBarController = GetComponent<ActionBarController>();
+        healthBarController = GetComponent<HealthBarController>();
 
         // Add this unit to the list ofselectable units
         switch (hostility)
@@ -124,12 +133,18 @@ public class Unit : MonoBehaviour
     protected virtual void Update()
     {
         stopTmr += Time.deltaTime;
-        actionTmr += Time.deltaTime;
+        //actionTmr += Time.deltaTime;
+
+        //Added and modified By Ty
+        actionActionBarController.actionProgressUI.fillAmount = actionActionBarController.actionBar / actionActionBarController.maxActionBar;
+        healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
+        actionActionBarController.actionBar += actionActionBarController.actionRegen * Time.deltaTime;
 
         // Execute the queued ability, if there is one, at the end of the timer
-        if (actionTmr >= actionTime)
+        if (actionActionBarController.actionBar >= actionActionBarController.maxActionBar) //old (actionTmr >= actionTime)
         {
-            actionTmr = 0f;
+            //actionTmr = 0f;
+            actionActionBarController.actionBar = 0f;
             if (queuedAbility)
                 queuedAbility.Execute();
             queuedAbility = null;
@@ -233,6 +248,9 @@ public class Unit : MonoBehaviour
     {
         if (immune) return;
         SetCurrentHP(currentHP - dmg);
+
+        // Added By Ty
+        healthBarController.healthBar -= dmg;
     }
 
     /// <summary>

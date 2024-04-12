@@ -23,12 +23,12 @@ public class HealthBarController : MonoBehaviour
     bool isHit;
     bool isDead;
 
+    /*
     private void Start()
     {
         //sliderCanvasGroup.alpha = 1;
         
     }
-
     private void Update()
     {
         if(healthBar > 0 && isHit == true)
@@ -55,4 +55,5 @@ public class HealthBarController : MonoBehaviour
         //isHit = true;
         //}
     }
+    */
 }

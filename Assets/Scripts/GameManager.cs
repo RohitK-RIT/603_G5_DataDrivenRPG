@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    //Initial Created by Tessla. Modified for this project.
     private static GameManager instance;
     [HideInInspector] public bool isPaused = false;
     
@@ -61,23 +62,6 @@ public class GameManager : MonoBehaviour
         {
             Restart();
         }
-
-        if (!isPaused && !GameUI.Instance.IsScreenActive("Start Screen"))
-        {
-            // Open Inventory -- Rin
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (GameUI.Instance.IsScreenActive("Inventory UI"))
-                {
-                    CloseInventory();
-                }
-                else
-                {
-                    OpenInventory();
-                }
-
-            }
-        }
     }
 
     public void Pause()
@@ -122,20 +106,6 @@ public class GameManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
-    }
-
-
-    //Open Inventory -- Rin
-    public void OpenInventory()
-    {
-        GameUI.Instance.SetIsScreenActive("Inventory UI", true);
-    }
-
-
-    //Close Inventory -- Rin
-    public void CloseInventory()
-    {
-        GameUI.Instance.SetIsScreenActive("Inventory UI", false);
     }
 }
 

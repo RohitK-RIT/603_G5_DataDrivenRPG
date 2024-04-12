@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+[RequireComponent(typeof(Unit))]
 public abstract class UnitAbility : MonoBehaviour
 {
-    public delegate void AbilityExecutedHandler();
-    public event AbilityExecutedHandler OnAbilityExecuted;
+    public delegate void AbilityHandler();
+    public event AbilityHandler OnAbilityExecuted;
+    public event AbilityHandler OnAbilityQueued;
 
     public string abilityName = "Ability";
     public string description = "Ability Description";
@@ -28,19 +30,24 @@ public abstract class UnitAbility : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
-    /// Called when the player clicks on the corresponding Unit Ability button.
+    /// Called when the queued ability is cast.
     /// Make sure to call base.Execute() AT THE END of your implementation
     /// Override this method in your specific ability scripts.
     /// </summary>
     public virtual void Execute()
     {
         OnAbilityExecuted?.Invoke();
+    }
+
+    /// <summary>
+    /// Called when the player queues an ability to be cast when the unit's action timer fills.
+    /// Make sure to call base.Queue() AT THE END of your implementation
+    /// Override this method in your specific ability scripts.
+    /// </summary>
+    public virtual void Queue()
+    {
+        GetComponent<Unit>().SetQueuedAbility(this);
+        OnAbilityQueued?.Invoke();
     }
 }

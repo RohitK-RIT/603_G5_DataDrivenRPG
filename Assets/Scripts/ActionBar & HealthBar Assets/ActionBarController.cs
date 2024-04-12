@@ -17,7 +17,7 @@ public class ActionBarController : MonoBehaviour
     public Image actionProgressUI = null;
     public CanvasGroup sliderCanvasGroup = null;
 
-    bool isUseable;
+    public bool isUseable;
     bool isFilling;
 
     private void Start()

@@ -78,8 +78,9 @@ public class Unit : MonoBehaviour
     //float actionTmr = 0f;
 
     //Added by Ty
-    ActionBarController actionActionBarController;
+    ActionBarController actionBarController;
     HealthBarController healthBarController;
+    [SerializeField] private GameObject CharPortrait;
 
 
     // Start is called before the first frame update
@@ -88,8 +89,8 @@ public class Unit : MonoBehaviour
         name = unitName;
 
         //Added By Ty
-        actionActionBarController = GetComponent<ActionBarController>();
-        healthBarController = GetComponent<HealthBarController>();
+        actionBarController = CharPortrait.GetComponent<ActionBarController>();
+        healthBarController = CharPortrait.GetComponent<HealthBarController>();    
 
         // Add this unit to the list ofselectable units
         switch (hostility)
@@ -136,18 +137,21 @@ public class Unit : MonoBehaviour
         //actionTmr += Time.deltaTime;
 
         //Added and modified By Ty
-        actionActionBarController.actionProgressUI.fillAmount = actionActionBarController.actionBar / actionActionBarController.maxActionBar;
+        actionBarController.actionProgressUI.fillAmount = actionBarController.actionBar / actionBarController.maxActionBar;
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
-        actionActionBarController.actionBar += actionActionBarController.actionRegen * Time.deltaTime;
+        actionBarController.actionBar += actionBarController.actionRegen * Time.deltaTime;
 
         // Execute the queued ability, if there is one, at the end of the timer
-        if (actionActionBarController.actionBar >= actionActionBarController.maxActionBar) //old (actionTmr >= actionTime)
+        if (actionBarController.actionBar >= actionBarController.maxActionBar) //old (actionTmr >= actionTime)
         {
             //actionTmr = 0f;
-            actionActionBarController.actionBar = 0f;
             if (queuedAbility)
+            {
                 queuedAbility.Execute();
+                actionBarController.actionBar = 0f;
+            }
             queuedAbility = null;
+
         }
 
         if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))

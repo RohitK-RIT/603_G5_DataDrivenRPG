@@ -685,11 +685,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597729487216790004, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
-      propertyPath: distance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5597729487216790004, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
       propertyPath: playerRef
       value: 
       objectReference: {fileID: 1227830945}

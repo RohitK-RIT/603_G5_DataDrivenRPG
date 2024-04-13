@@ -78,7 +78,7 @@ public class Unit : MonoBehaviour
     //float actionTmr = 0f;
 
     //Added by Ty
-    ActionBarController actionActionBarController;
+    ActionBarController actionBarController;
     HealthBarController healthBarController;
 
 
@@ -88,7 +88,7 @@ public class Unit : MonoBehaviour
         name = unitName;
 
         //Added By Ty
-        actionActionBarController = GetComponent<ActionBarController>();
+        actionBarController = GetComponent<ActionBarController>();
         healthBarController = GetComponent<HealthBarController>();
 
         // Add this unit to the list ofselectable units
@@ -136,15 +136,15 @@ public class Unit : MonoBehaviour
         //actionTmr += Time.deltaTime;
 
         //Added and modified By Ty
-        actionActionBarController.actionProgressUI.fillAmount = actionActionBarController.actionBar / actionActionBarController.maxActionBar;
+        actionBarController.actionProgressUI.fillAmount = actionBarController.actionBar / actionBarController.maxActionBar;
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
-        actionActionBarController.actionBar += actionActionBarController.actionRegen * Time.deltaTime;
+        actionBarController.actionBar += actionBarController.actionRegen * Time.deltaTime;
 
         // Execute the queued ability, if there is one, at the end of the timer
-        if (actionActionBarController.actionBar >= actionActionBarController.maxActionBar) //old (actionTmr >= actionTime)
+        if (actionBarController.actionBar >= actionBarController.maxActionBar) //old (actionTmr >= actionTime)
         {
             //actionTmr = 0f;
-            actionActionBarController.actionBar = 0f;
+            actionBarController.actionBar = 0f;
             if (queuedAbility)
                 queuedAbility.Execute();
             queuedAbility = null;

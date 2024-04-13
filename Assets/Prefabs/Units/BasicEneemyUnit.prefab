@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 146705667451509789}
   - component: {fileID: 7892114624545858478}
   - component: {fileID: 5597729487216790004}
-  m_Layer: 6
-  m_Name: BasicUnit
+  m_Layer: 7
+  m_Name: BasicEneemyUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,8 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   immune: 0
-  hostility: 0
-  unitName: Testing Unit
+  hostility: 2
+  unitName: Testing Enemy Unit
   attackDmg: 50
   attackRange: 0
   selectionPrefab: {fileID: 3423735369810992541, guid: ceda65d003dc44143acb3b8c804dc2f0,
@@ -156,7 +156,8 @@ MonoBehaviour:
   currentHP: 0
   unitState: 0
   actionTime: 10
-  CharPortrait: {fileID: 0}
+  CharPortrait: {fileID: 7942890330127076134, guid: 8abe7134a0261244fbb1467a7484b2a8,
+    type: 3}
 --- !u!114 &7892114624545858478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,11 +189,11 @@ MonoBehaviour:
   radius: 30
   angle: 50
   DistanceToEnemy: 0
-  playerRef: {fileID: 642455808376837321, guid: 081994a6f2e725c4a88ae3c0d8921c5a,
+  playerRef: {fileID: 642455808376837321, guid: 65797fcb4bffaa648bc150e0f2bd908d,
     type: 3}
   targetMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0

@@ -15,7 +15,7 @@ public class ActionBarController : MonoBehaviour
 
     [Header("ActionBar UI Params")]
     public Image actionProgressUI = null;
-    public CanvasGroup sliderCanvasGroup = null;
+    //public CanvasGroup sliderCanvasGroup = null;
 
     [HideInInspector] public bool isUseable;
     [HideInInspector] public bool isFilling;

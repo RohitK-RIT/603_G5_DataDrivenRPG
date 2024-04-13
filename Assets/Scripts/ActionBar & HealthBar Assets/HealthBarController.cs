@@ -9,13 +9,13 @@ public class HealthBarController : MonoBehaviour
     public float healthBar = 100f;
     public float maxHealthBar = 100f;
 
-    [Header("HealthBar Drain Params")]
-    [Range(0, 50)] public float healthDrain;
+    //[Header("HealthBar Drain Params")]
+    //[Range(0, 50)] public float healthDrain;
     //[Range(0, 50)] public float actionRegen;
 
     [Header("HealthBar UI Params")]
     public Image healthProgressUI = null;
-    public CanvasGroup sliderCanvasGroup = null;
+    //public CanvasGroup sliderCanvasGroup = null;
 
     //[SerializeField] FieldOfView fieldOfView;
     //[SerializeField] ActionBarController actionBarController;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AI.StateMachine
+namespace StateMachine
 {
     public abstract class StateManager<TState> : MonoBehaviour where TState : Enum
     {
@@ -12,7 +12,7 @@ namespace AI.StateMachine
 
         private bool _isTransitioningState;
 
-        private void Start()
+        protected virtual void Start()
         {
             CurrentState.EnterState();
         }
@@ -29,8 +29,6 @@ namespace AI.StateMachine
                     TransitionToState(nextStateKey);
                     break;
             }
-
-            CurrentState.UpdateState();
         }
 
         private void TransitionToState(TState nextStateKey)

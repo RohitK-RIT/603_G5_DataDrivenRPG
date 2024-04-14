@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4457893470198798407}
   - component: {fileID: 4019229519731215570}
   - component: {fileID: 3683404910854892366}
-  - component: {fileID: 7738742569409711224}
   - component: {fileID: 146705667451509789}
   - component: {fileID: 7892114624545858478}
   - component: {fileID: 5597729487216790004}
@@ -111,28 +110,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!195 &7738742569409711224
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 6
-  m_Acceleration: 50
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &146705667451509789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +151,7 @@ MonoBehaviour:
   description: Ability Description
   abilitySprite: {fileID: 0}
   atkDamage: 25
+  atkRange: 50
 --- !u!114 &5597729487216790004
 MonoBehaviour:
   m_ObjectHideFlags: 0

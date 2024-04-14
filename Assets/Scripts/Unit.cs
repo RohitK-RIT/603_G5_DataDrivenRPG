@@ -17,7 +17,7 @@ public enum UnitState
     Moving
 }
 
-[RequireComponent(typeof(Collider), typeof(NavMeshAgent))]
+[RequireComponent(typeof(Collider))]
 public class Unit : MonoBehaviour
 {
     // Event handlers
@@ -151,23 +151,26 @@ public class Unit : MonoBehaviour
 
         }
 
-        if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))
+        if (agent) // stationary units should not be using an agent
         {
-            agent.isStopped = true;
-        }
-
-        // If following a unit, keep updating the destination to move to
-        if (followUnit)
-        {
-            // If the unit to follow should be attacked, stop moving and attack.
-            if ((followUnit.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange)
+            if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))
             {
                 agent.isStopped = true;
             }
-            else
+
+            // If following a unit, keep updating the destination to move to
+            if (followUnit)
             {
-                agent.isStopped = false;
-                agent.destination = followUnit.transform.position;
+                // If the unit to follow should be attacked, stop moving and attack.
+                if ((followUnit.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange)
+                {
+                    agent.isStopped = true;
+                }
+                else
+                {
+                    agent.isStopped = false;
+                    agent.destination = followUnit.transform.position;
+                }
             }
         }
     }
@@ -301,6 +304,8 @@ public class Unit : MonoBehaviour
     /// <param name="destination">The position to move to</param>
     public void MoveTo(Vector3 destination)
     {
+        if (!agent) return;
+
         unitState = UnitState.Moving;
         followUnit = null;
         stopTmr = 0f;

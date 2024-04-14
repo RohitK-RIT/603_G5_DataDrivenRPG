@@ -18,8 +18,16 @@ public abstract class UnitAbility : MonoBehaviour
 
     const string defaultImgPath = "Assets/Art/Sprites/Ability_Default.png";
 
+    KeyCode hotkey;
+    public KeyCode Hotkey
+    {
+        get {  return hotkey; }
+        set { hotkey = value; }
+    }
+
     protected virtual void Awake()
     {
+        enabled = false;
         if (!abilitySprite)
         {
             Texture2D imgTex = new Texture2D(128, 128);
@@ -28,6 +36,12 @@ public abstract class UnitAbility : MonoBehaviour
                 abilitySprite = Sprite.Create(imgTex, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
             }
         }
+    }
+
+    void Update()
+    {
+        if (Input.GetKey(hotkey))
+            Queue();
     }
 
     /// <summary>

@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<<< HEAD:Assets/Prefabs/AI Units/Turret.prefab
   - component: {fileID: 5953886048064918762}
   - component: {fileID: 1159365306716288852}
   - component: {fileID: 2272459530398882184}
@@ -16,6 +17,15 @@ GameObject:
   - component: {fileID: 7583036914056682796}
   - component: {fileID: 3971062894701759433}
   - component: {fileID: 3208420799909690633}
+========
+  - component: {fileID: 6736091198766071087}
+  - component: {fileID: 4457893470198798407}
+  - component: {fileID: 4019229519731215570}
+  - component: {fileID: 3683404910854892366}
+  - component: {fileID: 146705667451509789}
+  - component: {fileID: 7892114624545858478}
+  - component: {fileID: 5597729487216790004}
+>>>>>>>> dev:Assets/Prefabs/Units/BasicEneemyUnit.prefab
   m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
@@ -88,6 +98,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<<< HEAD:Assets/Prefabs/AI Units/Turret.prefab
 --- !u!136 &8395525166391581652
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -112,6 +123,9 @@ CapsuleCollider:
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5251865484847204345
+========
+--- !u!114 &146705667451509789
+>>>>>>>> dev:Assets/Prefabs/Units/BasicEneemyUnit.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,9 +161,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f065d72fc054428a18efdd3acd50a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<<< HEAD:Assets/Prefabs/AI Units/Turret.prefab
   currentStateKey: 0
   perception: {fileID: 3971062894701759433}
 --- !u!114 &3971062894701759433
+========
+  abilityName: Attack
+  description: Ability Description
+  abilitySprite: {fileID: 0}
+  atkDamage: 25
+  atkRange: 50
+--- !u!114 &5597729487216790004
+>>>>>>>> dev:Assets/Prefabs/Units/BasicEneemyUnit.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

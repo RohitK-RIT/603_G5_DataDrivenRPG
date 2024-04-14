@@ -75,7 +75,6 @@ public class Unit : MonoBehaviour
 
     UnitAbility queuedAbility;
     public float actionTime = 10f;
-    //float actionTmr = 0f;
 
     //Added by Ty
     ActionBarController actionBarController;
@@ -134,7 +133,6 @@ public class Unit : MonoBehaviour
     protected virtual void Update()
     {
         stopTmr += Time.deltaTime;
-        //actionTmr += Time.deltaTime;
 
         //Added and modified By Ty
         actionBarController.actionProgressUI.fillAmount = actionBarController.actionBar / actionBarController.maxActionBar;
@@ -144,7 +142,6 @@ public class Unit : MonoBehaviour
         // Execute the queued ability, if there is one, at the end of the timer
         if (actionBarController.actionBar >= actionBarController.maxActionBar) //old (actionTmr >= actionTime)
         {
-            //actionTmr = 0f;
             if (queuedAbility)
             {
                 queuedAbility.Execute();

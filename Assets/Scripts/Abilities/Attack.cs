@@ -32,7 +32,11 @@ public class Attack : UnitAbility
 
     public override void Queue()
     {
-        SelectionManager.RequestCastUnit(Hostility.Hostile, (Unit unit) => { target = unit; });
-        base.Queue();
+        SelectionManager.RequestCastUnit(Hostility.Hostile, (Unit unit) => 
+        {
+            target = unit;
+            base.Queue();
+        });
+        
     }
 }

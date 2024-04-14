@@ -17,7 +17,7 @@ public enum UnitState
     Moving
 }
 
-[RequireComponent(typeof(Collider), typeof(NavMeshAgent))]
+[RequireComponent(typeof(Collider))]
 public class Unit : MonoBehaviour
 {
     // Event handlers
@@ -75,7 +75,6 @@ public class Unit : MonoBehaviour
 
     UnitAbility queuedAbility;
     public float actionTime = 10f;
-    //float actionTmr = 0f;
 
     //Added by Ty
     ActionBarController actionBarController;
@@ -111,14 +110,16 @@ public class Unit : MonoBehaviour
         rayStart.y += 100f;
         if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, 500f, 1 << 0))
         {
-            transform.position = hit.point;
+            Vector3 extents = GetComponent<MeshRenderer>().localBounds.extents;
+            Vector3 pos = hit.point;
+            pos.y += extents.y;
+            transform.position = pos;
+
             if (selectionPrefab)
             {
-                Vector3 extents = GetComponent<MeshRenderer>().localBounds.extents;
                 selectIcon = Instantiate(selectionPrefab, transform.position - new Vector3(0, extents.y, 0), Quaternion.Euler(90, 0, 0));
                 selectIcon.name = $"{gameObject.name} Selection Icon";
                 selectIcon.transform.parent = transform;
-
                 float maxExtent = Mathf.Max(Mathf.Max(extents.x, extents.y), extents.z);
                 selectIcon.transform.localScale = new(maxExtent, maxExtent, maxExtent);
                 SetHostility(hostility);
@@ -134,7 +135,6 @@ public class Unit : MonoBehaviour
     protected virtual void Update()
     {
         stopTmr += Time.deltaTime;
-        //actionTmr += Time.deltaTime;
 
         //Added and modified By Ty
         actionBarController.actionProgressUI.fillAmount = actionBarController.actionBar / actionBarController.maxActionBar;
@@ -144,7 +144,6 @@ public class Unit : MonoBehaviour
         // Execute the queued ability, if there is one, at the end of the timer
         if (actionBarController.actionBar >= actionBarController.maxActionBar) //old (actionTmr >= actionTime)
         {
-            //actionTmr = 0f;
             if (queuedAbility)
             {
                 queuedAbility.Execute();
@@ -154,23 +153,26 @@ public class Unit : MonoBehaviour
 
         }
 
-        if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))
+        if (agent) // stationary units should not be using an agent
         {
-            agent.isStopped = true;
-        }
-
-        // If following a unit, keep updating the destination to move to
-        if (followUnit)
-        {
-            // If the unit to follow should be attacked, stop moving and attack.
-            if ((followUnit.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange)
+            if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))
             {
                 agent.isStopped = true;
             }
-            else
+
+            // If following a unit, keep updating the destination to move to
+            if (followUnit)
             {
-                agent.isStopped = false;
-                agent.destination = followUnit.transform.position;
+                // If the unit to follow should be attacked, stop moving and attack.
+                if ((followUnit.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange)
+                {
+                    agent.isStopped = true;
+                }
+                else
+                {
+                    agent.isStopped = false;
+                    agent.destination = followUnit.transform.position;
+                }
             }
         }
     }
@@ -304,6 +306,8 @@ public class Unit : MonoBehaviour
     /// <param name="destination">The position to move to</param>
     public void MoveTo(Vector3 destination)
     {
+        if (!agent) return;
+
         unitState = UnitState.Moving;
         followUnit = null;
         stopTmr = 0f;
@@ -368,19 +372,31 @@ public class Unit : MonoBehaviour
     }
 
     /// <summary>
-    /// "Focuses" on this unit, animating its selection circle.
+    /// "Focuses" on this unit, animating its selection circle and listening for ability hotkey presses.
     /// </summary>
     public void Focus()
     {
+        //Update the ability hotkey and enable listening for button press
+        UnitAbility[] abilities = GetAllAbilities();
+        for (int i = 0; i < abilities.Length; i++)
+        {
+            abilities[i].Hotkey = (KeyCode)(i + 49);
+            abilities[i].enabled = true;
+        }
+
         selectIcon.GetComponent<Animator>().Play("UnitFocus");
         OnFocused?.Invoke(this);
     }
 
     /// <summary>
-    /// "Unfocuses" this unit, stopping its selection animation.
+    /// "Unfocuses" this unit, stopping its selection animation and listening for its hotkey presses
     /// </summary>
     public void Unfocus()
     {
+        // disable listening for ability hotkey presses
+        foreach (UnitAbility a in GetAllAbilities())
+            a.enabled = false;
+
         selectIcon.GetComponent<Animator>().Rebind();
         OnUnfocused?.Invoke(this);
     }

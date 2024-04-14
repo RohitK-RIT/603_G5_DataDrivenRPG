@@ -71,7 +71,7 @@ public class HUDController : MonoBehaviour
         focusedUnit.OnHealed += UpdateUnitNameDisplay;
         focusedUnit.Focus();
 
-        UnitAbility[] abilities = focusedUnit.GetComponents<UnitAbility>();
+        UnitAbility[] abilities = focusedUnit.GetAllAbilities();
         
         // Set the Ability Buttons; Only show abilities of friendly units
         int i = 0;

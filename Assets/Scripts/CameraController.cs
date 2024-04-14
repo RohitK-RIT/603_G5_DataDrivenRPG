@@ -62,7 +62,7 @@ public class CameraController : MonoBehaviour
 
         // Move the camera
         if (inputDir != Vector3.zero)
-            pos += Time.deltaTime * cameraSpeed * (Quaternion.Euler(0, 45, 0) * inputDir.normalized);
+            pos += Time.deltaTime * cameraSpeed * (Quaternion.Euler(0, orientation.y, 0) * inputDir.normalized);
 
         transform.position = pos;
     }

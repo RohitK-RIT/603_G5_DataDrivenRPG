@@ -1329,6 +1329,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: In-Game UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5564425115381344133, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 407.9202
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564425115381344133, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 425.274
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564425115381344133, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.634
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564425115381344133, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.3423996
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983618286882903233, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 445.6292
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983618286882903233, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470.5719
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983618286882903233, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 733.78174
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983618286882903233, guid: be703b70a5af93944ab132c079c3671f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 164.54541
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

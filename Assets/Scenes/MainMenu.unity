@@ -548,6 +548,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
+    - target: {fileID: 7278898704075072252, guid: 2c3e59597df636b43b9f8332731b055b,
+        type: 3}
+      propertyPath: m_text
+      value: Quit Game
+      objectReference: {fileID: 0}
     - target: {fileID: 8424153418960610537, guid: 2c3e59597df636b43b9f8332731b055b,
         type: 3}
       propertyPath: m_Color.b

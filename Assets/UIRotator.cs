@@ -9,13 +9,13 @@ public class UIRotator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trans = GameObject.Find("Main Camera").GetComponent<Transform>();
+        trans = GameObject.Find("Camera").GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(trans);
+        transform.rotation = trans.rotation; 
         transform.Rotate(offset);
     }
 }

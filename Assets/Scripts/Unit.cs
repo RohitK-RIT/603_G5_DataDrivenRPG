@@ -110,14 +110,16 @@ public class Unit : MonoBehaviour
         rayStart.y += 100f;
         if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, 500f, 1 << 0))
         {
-            transform.position = hit.point;
+            Vector3 extents = GetComponent<MeshRenderer>().localBounds.extents;
+            Vector3 pos = hit.point;
+            pos.y += extents.y;
+            transform.position = pos;
+
             if (selectionPrefab)
             {
-                Vector3 extents = GetComponent<MeshRenderer>().localBounds.extents;
                 selectIcon = Instantiate(selectionPrefab, transform.position - new Vector3(0, extents.y, 0), Quaternion.Euler(90, 0, 0));
                 selectIcon.name = $"{gameObject.name} Selection Icon";
                 selectIcon.transform.parent = transform;
-
                 float maxExtent = Mathf.Max(Mathf.Max(extents.x, extents.y), extents.z);
                 selectIcon.transform.localScale = new(maxExtent, maxExtent, maxExtent);
                 SetHostility(hostility);
@@ -370,19 +372,31 @@ public class Unit : MonoBehaviour
     }
 
     /// <summary>
-    /// "Focuses" on this unit, animating its selection circle.
+    /// "Focuses" on this unit, animating its selection circle and listening for ability hotkey presses.
     /// </summary>
     public void Focus()
     {
+        //Update the ability hotkey and enable listening for button press
+        UnitAbility[] abilities = GetAllAbilities();
+        for (int i = 0; i < abilities.Length; i++)
+        {
+            abilities[i].Hotkey = (KeyCode)(i + 49);
+            abilities[i].enabled = true;
+        }
+
         selectIcon.GetComponent<Animator>().Play("UnitFocus");
         OnFocused?.Invoke(this);
     }
 
     /// <summary>
-    /// "Unfocuses" this unit, stopping its selection animation.
+    /// "Unfocuses" this unit, stopping its selection animation and listening for its hotkey presses
     /// </summary>
     public void Unfocus()
     {
+        // disable listening for ability hotkey presses
+        foreach (UnitAbility a in GetAllAbilities())
+            a.enabled = false;
+
         selectIcon.GetComponent<Animator>().Rebind();
         OnUnfocused?.Invoke(this);
     }

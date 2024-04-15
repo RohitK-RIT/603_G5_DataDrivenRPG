@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &642455808376837321
+--- !u!1 &838606811261842063
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,73 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6736091198766071087}
-  - component: {fileID: 4457893470198798407}
-  - component: {fileID: 4019229519731215570}
-  - component: {fileID: 3683404910854892366}
-  - component: {fileID: 146705667451509789}
-  - component: {fileID: 7892114624545858478}
-  - component: {fileID: 5597729487216790004}
+  - component: {fileID: 5953886048064918762}
+  - component: {fileID: 1159365306716288852}
+  - component: {fileID: 2272459530398882184}
+  - component: {fileID: 8395525166391581652}
+  - component: {fileID: 5251865484847204345}
+  - component: {fileID: 7583036914056682796}
+  - component: {fileID: 3971062894701759433}
+  - component: {fileID: 3208420799909690633}
   m_Layer: 7
-  m_Name: BasicEneemyUnit
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &6736091198766071087
+--- !u!4 &5953886048064918762
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
+  m_GameObject: {fileID: 838606811261842063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -13.61, y: 1.04, z: 2.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4457893470198798407
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &4019229519731215570
+--- !u!33 &1159365306716288852
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
+  m_GameObject: {fileID: 838606811261842063}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3683404910854892366
+--- !u!23 &2272459530398882184
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
+  m_GameObject: {fileID: 838606811261842063}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -88,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,69 +88,104 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &146705667451509789
+--- !u!136 &8395525166391581652
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838606811261842063}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5251865484847204345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
+  m_GameObject: {fileID: 838606811261842063}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bda28730f9e631468c2ff702f92899b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 50
   immune: 0
   hostility: 2
-  unitName: Testing Enemy Unit
-  attackDmg: 50
+  unitName: Turret
+  attackDmg: 0
   attackRange: 0
   selectionPrefab: {fileID: 3423735369810992541, guid: ceda65d003dc44143acb3b8c804dc2f0,
     type: 3}
   currentHP: 0
   unitState: 0
   actionTime: 10
-  CharPortrait: {fileID: 7942890330127076134, guid: 8abe7134a0261244fbb1467a7484b2a8,
-    type: 3}
---- !u!114 &7892114624545858478
+  CharPortrait: {fileID: 0}
+--- !u!114 &7583036914056682796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
+  m_GameObject: {fileID: 838606811261842063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144451ac94e0ec94ba0479bdd0511b76, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f065d72fc054428a18efdd3acd50a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Attack
-  description: Ability Description
-  abilitySprite: {fileID: 0}
-  atkDamage: 25
-  atkRange: 50
---- !u!114 &5597729487216790004
+  currentStateKey: 0
+  perception: {fileID: 3971062894701759433}
+--- !u!114 &3971062894701759433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642455808376837321}
+  m_GameObject: {fileID: 838606811261842063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71472678bb626464b8de7a27544880af, type: 3}
+  m_Script: {fileID: 11500000, guid: 242f3de4921ec1c42b61e0090bbf7d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 30
-  angle: 50
-  DistanceToEnemy: 0
-  playerRef: {fileID: 642455808376837321, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-    type: 3}
-  targetMask:
+  fovAngle: 60.9
+  sightDistance: 10
+  height: 1
+  meshColor: {r: 1, g: 0, b: 0, a: 0.4}
+  scanFrequency: 30
+  targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  obstructionMask:
+  occlusionLayer:
     serializedVersion: 2
-    m_Bits: 0
-  canSeePlayer: 0
+    m_Bits: 183
+  eyeOffset: {x: 0, y: 1, z: 0}
+--- !u!114 &3208420799909690633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838606811261842063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7113c16faf2943fa915be7ec2cf1867e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: AI Attack
+  description: Ability Description
+  abilitySprite: {fileID: 0}
+  atkDamage: 10

@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4986262151709919288
 MonoBehaviour:
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSpeed: 30
   boarderSize: 5
-  groundHeight: 30
-  orientation: {x: 50, y: 45, z: 0}
+  groundHeight: 15
+  orientation: {x: 50, y: 90, z: 0}
 --- !u!114 &2005295642205483177
 MonoBehaviour:
   m_ObjectHideFlags: 0

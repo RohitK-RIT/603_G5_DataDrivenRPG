@@ -8,13 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
-    private GameObject pauseUI;
+    public GameObject pauseUI;
     public bool isPaused;
 
      void Start()
      {
         //game is assumed to start unpaused 
-        pauseUI = GameObject.Find("PauseMenu");
         pauseUI.SetActive(false);
         isPaused = false; 
      }

@@ -34,6 +34,15 @@ public class Unit : MonoBehaviour
     public event FocusedHandler OnFocused;
     public event FocusedHandler OnUnfocused;
 
+
+
+    //attributes
+    public int strength = 1; 
+    public int dexterity = 1;
+    public int agility = 1;
+    public int precision = 1;
+    public int constitution = 1;
+
     [Tooltip("The maximum HP of this unit. Set to 0 if indestructible.")]
     public float maxHP = 0f;
     [Tooltip("If this unit is immune to damage. If Max HP was set to 0, this does not matter.")]
@@ -102,8 +111,30 @@ public class Unit : MonoBehaviour
                 break;
         }
 
+        //add constitution modifier to health
+        if (constitution < 4)
+        {
+            maxHP *= (1f - (.1f * (4 - (constitution - 1))));
+        }
+        else
+        {
+            maxHP *= (1f + (.1f * constitution));
+        }
+
+        //action speed modifiers
+        actionTime *= (1f + .04f * dexterity);
+
+    
+
         currentHP = maxHP;
         if (currentHP == 0f) immune = true;
+
+        //copy modifiers to the healthbar and actionbar
+        healthBarController.maxHealthBar = maxHP;
+        healthBarController.healthBar = currentHP;
+        actionBarController.actionRegen = actionTime;
+
+
         agent = GetComponent<NavMeshAgent>();
 
         Vector3 rayStart = transform.position;

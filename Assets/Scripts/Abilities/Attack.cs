@@ -20,8 +20,9 @@ public class Attack : UnitAbility
         Line.enabled = false;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         Line.SetPosition(0, LineOrigin.position);
     }
 

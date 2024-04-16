@@ -146,6 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bda28730f9e631468c2ff702f92899b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strength: 1
+  dexterity: 1
+  agility: 1
+  precision: 1
+  constitution: 1
   maxHP: 100
   immune: 0
   hostility: 2
@@ -158,6 +163,7 @@ MonoBehaviour:
   unitState: 0
   actionTime: 10
   CharPortrait: {fileID: 2347300628807073429}
+  CursorTexture: {fileID: 0}
 --- !u!114 &7892114624545858478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +180,7 @@ MonoBehaviour:
   description: Ability Description
   abilitySprite: {fileID: 0}
   atkDamage: 25
+  atkRange: 50
 --- !u!114 &5597729487216790004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +188,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642455808376837321}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71472678bb626464b8de7a27544880af, type: 3}
   m_Name: 

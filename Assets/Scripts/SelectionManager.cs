@@ -189,7 +189,10 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
+                {
+                    Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
                     selectState = SelectionState.Normal;
+                }
                 break;
 
             // -- SELECTING A TARGET FRIENDLY UNIT ON THE MAP -- \\
@@ -204,6 +207,7 @@ public class SelectionManager : MonoBehaviour
                             OnTargetUnitRequested?.Invoke(u);
                             OnTargetUnitRequested = null;
                             selectState = SelectionState.Normal;
+                            Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
                         }
                     }
                     else
@@ -212,7 +216,10 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
+                {
+                    Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
                     selectState = SelectionState.Normal;
+                }
                 break;
 
             // -- SELECTING A TARGET ENEMY UNIT ON THE MAP -- \\
@@ -227,6 +234,7 @@ public class SelectionManager : MonoBehaviour
                             OnTargetUnitRequested?.Invoke(u);
                             OnTargetUnitRequested = null;
                             selectState = SelectionState.Normal;
+                            Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
                         }
                     }
                     else
@@ -235,7 +243,10 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
+                {
+                    Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
                     selectState = SelectionState.Normal;
+                }
                 break;
         }
     }

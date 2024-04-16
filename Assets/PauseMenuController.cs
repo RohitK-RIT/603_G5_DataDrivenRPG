@@ -38,6 +38,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void ResetGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("LevelPrototype");
     }
 
@@ -48,6 +49,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void QuitGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 

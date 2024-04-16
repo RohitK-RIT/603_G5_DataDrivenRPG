@@ -1,4 +1,7 @@
-﻿namespace AI.Turret
+﻿using System.Collections;
+using UnityEngine;
+
+namespace AI.Turret
 {
     public class AIAttack : UnitAbility
     {
@@ -12,11 +15,13 @@
                 return;
             
             if (target)
+            {
                 target.TakeDamage(atkDamage);
+            }
 
             base.Execute();
         }
-        
+
         public void Queue(Unit unit)
         {
             target = unit;

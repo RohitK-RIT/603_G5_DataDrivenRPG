@@ -321,6 +321,7 @@ public class Unit : MonoBehaviour
         RemoveFromUnitList();
         OnKilled?.Invoke(this);
         Destroy(gameObject);
+        healthBarController.healthProgressUI.fillAmount = 0;
     }
 
     /// <summary>

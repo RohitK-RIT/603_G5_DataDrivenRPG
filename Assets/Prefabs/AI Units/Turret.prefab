@@ -244,7 +244,6 @@ MonoBehaviour:
   unitState: 0
   actionTime: 10
   CharPortrait: {fileID: 8547787947617653108}
-  CursorTexture: {fileID: 2800000, guid: 61e87d7672c71ec418650c1d490d7c94, type: 3}
 --- !u!114 &7583036914056682796
 MonoBehaviour:
   m_ObjectHideFlags: 0

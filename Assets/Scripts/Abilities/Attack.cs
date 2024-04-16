@@ -9,9 +9,20 @@ public class Attack : UnitAbility
 
     Unit target;
 
+    //Added by Ty
+    LineRenderer Line;
+    Transform LineOrigin;
+
     private void Start()
     {
-        
+        Line = GetComponent<LineRenderer>();
+        LineOrigin = GetComponent<Transform>();
+        Line.enabled = false;
+    }
+
+    private void Update()
+    {
+        Line.SetPosition(0, LineOrigin.position);
     }
 
     public override void Execute()
@@ -24,10 +35,19 @@ public class Attack : UnitAbility
                 if (hit.collider.TryGetComponent(out Unit u))
                 {
                     u.TakeDamage(atkDamage);
+                    Line.SetPosition(1, hit.collider.transform.position);
+                    StartCoroutine(shootLine());
                 }
             }
         }
         base.Execute();
+    }
+
+    IEnumerator shootLine()
+    {
+        Line.enabled = true;
+        yield return new WaitForSeconds(.5f);
+        Line.enabled = false;
     }
 
     public override void Queue()

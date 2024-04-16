@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/MainMenu.cs.meta
+guid: 1333ce2d08ba97c4c8868e337e4e536d
+========
+guid: 144451ac94e0ec94ba0479bdd0511b76
+>>>>>>>> a4cb938 (Resolved conflict on Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF - Fallback.asset using theirs):Assets/Scripts/Abilities/Attack.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

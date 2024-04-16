@@ -227,6 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bda28730f9e631468c2ff702f92899b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strength: 1
+  dexterity: 1
+  agility: 1
+  precision: 1
+  constitution: 1
   maxHP: 50
   immune: 0
   hostility: 2
@@ -292,7 +297,7 @@ MonoBehaviour:
   abilityName: AI Attack
   description: Ability Description
   abilitySprite: {fileID: 0}
-  atkDamage: 10
+  atkDamage: 100
 --- !u!1001 &1775833829844556370
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -189,10 +189,7 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
-                {
-                    Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
-                    selectState = SelectionState.Normal;
-                }
+                    CancelTargetSelection();
                 break;
 
             // -- SELECTING A TARGET FRIENDLY UNIT ON THE MAP -- \\
@@ -216,10 +213,7 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
-                {
-                    Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
-                    selectState = SelectionState.Normal;
-                }
+                    CancelTargetSelection();
                 break;
 
             // -- SELECTING A TARGET ENEMY UNIT ON THE MAP -- \\
@@ -243,12 +237,17 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
-                {
-                    Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
-                    selectState = SelectionState.Normal;
-                }
+                    CancelTargetSelection();
                 break;
         }
+    }
+
+    void CancelTargetSelection()
+    {
+        Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
+        OnTargetPositionRequested = null;
+        OnTargetUnitRequested = null;
+        selectState = SelectionState.Normal;
     }
 
     /// <summary>

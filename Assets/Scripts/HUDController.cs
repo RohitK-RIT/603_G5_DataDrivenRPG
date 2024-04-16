@@ -5,10 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class HUDController : MonoBehaviour
 {
     public GameObject abilitiesBoard;
+    public GameObject hoverTip;
     public TextMeshProUGUI errorText;
     public TextMeshProUGUI unitNameText;
     Unit focusedUnit;
@@ -21,6 +24,10 @@ public class HUDController : MonoBehaviour
     void Start()
     {
         abilityButtons = new(abilitiesBoard.GetComponentsInChildren<Button>(true));
+        foreach (Button button in abilityButtons)
+        { 
+            button.GetComponent<ButtonHandler>().OnUnhover.AddListener(() => hoverTip.SetActive(false));
+        }
         SelectionManager.OnUnitSelectionChanged += OnUnitsSelected;
         selectedUnits = new();
     }
@@ -33,6 +40,8 @@ public class HUDController : MonoBehaviour
             focusedIndex = (focusedIndex + 1) % selectedUnits.Count;
             UpdateFocusedUnit();
         }
+        if (hoverTip.activeSelf)
+            hoverTip.transform.position = Input.mousePosition;
     }
 
     void OnUnitsSelected(List<Unit> units)
@@ -52,6 +61,7 @@ public class HUDController : MonoBehaviour
             foreach (Button b in abilityButtons)
             {
                 b.onClick.RemoveAllListeners();
+                b.GetComponent<ButtonHandler>().OnHover.RemoveAllListeners();
                 b.gameObject.SetActive(false);
             }
         }
@@ -82,13 +92,21 @@ public class HUDController : MonoBehaviour
                 if (i < abilityButtons.Count)
                 {
                     UnitAbility a = abilities[i];
+                    ButtonHandler b = abilityButtons[i].GetComponent<ButtonHandler>();
 
                     abilityButtons[i].onClick.RemoveAllListeners();
-                    abilityButtons[i].onClick.AddListener(() => { a.Queue(); });
+                    abilityButtons[i].onClick.AddListener(() => a.Queue());
+                    b.OnHover.RemoveAllListeners();
+                    b.OnHover.AddListener(() => 
+                    {
+                        TextMeshProUGUI[] texts = hoverTip.GetComponentsInChildren<TextMeshProUGUI>();
+                        texts[0].text = a.abilityName;
+                        texts[1].text = a.description;
+                        hoverTip.SetActive(true);
+                        hoverTip.GetComponentInChildren<Image>().rectTransform.sizeDelta = new(Mathf.Max(texts[0].rectTransform.sizeDelta.x, texts[1].rectTransform.sizeDelta.x), texts[0].rectTransform.sizeDelta.y + texts[1].rectTransform.sizeDelta.y);
+                    });
                     // Update displays
-                    TextMeshProUGUI[] texts = abilityButtons[i].GetComponentsInChildren<TextMeshProUGUI>(true);
                     abilityButtons[i].GetComponent<Image>().sprite = a.abilitySprite;
-                    texts[0].text = a.abilityName;
                     abilityButtons[i].gameObject.SetActive(true);
                 }
                 else

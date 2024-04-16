@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public enum Hostility
 {
@@ -179,6 +180,7 @@ public class Unit : MonoBehaviour
             {
                 queuedAbility.Execute();
                 actionBarController.actionBar = 0f;
+                GetComponentInChildren<Image>().color = new(1, 1, 1, 0);
             }
             queuedAbility = null;
 
@@ -393,7 +395,10 @@ public class Unit : MonoBehaviour
     /// <param name="ability">The ability to set. This should be a component on this unit.</param>
     public void SetQueuedAbility(UnitAbility ability)
     {
+        Image abilityImg = GetComponentInChildren<Image>();
         queuedAbility = ability;
+        abilityImg.sprite = ability.abilitySprite;
+        abilityImg.color = new(1, 1, 1, 1);
     }
 
     /// <returns>The ability currently queued on this unit that will execute when its action bar fills.</returns>

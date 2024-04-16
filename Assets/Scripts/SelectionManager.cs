@@ -33,6 +33,10 @@ public class SelectionManager : MonoBehaviour
     Camera cam;
     bool selecting;
 
+    //Added by Ty
+    [SerializeField] Texture2D NormalCursor;
+    [SerializeField] Texture2D SelectionCursor;
+
     int unitMask = (1 << 6) | (1 << 7);
     SelectionState selectState;
 
@@ -84,6 +88,7 @@ public class SelectionManager : MonoBehaviour
                 // Begin the selection
                 if (Input.GetMouseButtonDown(0))
                 {
+                    Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
                     selecting = true;
                     selectBox.gameObject.SetActive(true);
                     selectBox.sizeDelta = Vector3.zero;
@@ -306,6 +311,8 @@ public class SelectionManager : MonoBehaviour
         Instance.selectState = SelectionState.TargetPosition;
         Instance.selecting = false;
         OnTargetPositionRequested += callback;
+
+        Cursor.SetCursor(Instance.SelectionCursor, Vector2.zero, CursorMode.Auto);
     }
 
     /// <summary>
@@ -320,5 +327,7 @@ public class SelectionManager : MonoBehaviour
         Instance.selectState = unitHosility == Hostility.Friendly ? SelectionState.TargetFriendlyUnit : SelectionState.TargetEnemyUnit;
         Instance.selecting = false;
         OnTargetUnitRequested += callback;
+
+        Cursor.SetCursor(Instance.SelectionCursor, Vector2.zero, CursorMode.Auto);
     }
 }

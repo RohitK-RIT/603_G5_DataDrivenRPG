@@ -38,7 +38,7 @@ public abstract class UnitAbility : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (Input.GetKey(hotkey))
             Queue();

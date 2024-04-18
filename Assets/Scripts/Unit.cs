@@ -99,7 +99,8 @@ public class Unit : MonoBehaviour
 
         //Added By Ty
         actionBarController = CharPortrait.GetComponent<ActionBarController>();
-        healthBarController = CharPortrait.GetComponent<HealthBarController>();    
+        healthBarController = CharPortrait.GetComponent<HealthBarController>();
+        CharPortrait.GetComponent<CharacterPortrait>()?.SetOwner(this);
 
         // Add this unit to the list ofselectable units
         switch (hostility)
@@ -169,7 +170,7 @@ public class Unit : MonoBehaviour
         stopTmr += Time.deltaTime;
 
         //Added and modified By Ty
-        actionBarController.actionProgressUI.fillAmount = actionBarController.actionBar / actionBarController.maxActionBar;
+        actionBarController.actionProgressUI.fillAmount = 1f - (actionBarController.actionBar / actionBarController.maxActionBar);
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
         actionBarController.actionBar += actionBarController.actionRegen * Time.deltaTime;
 

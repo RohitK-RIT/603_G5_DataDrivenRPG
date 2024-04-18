@@ -10,6 +10,7 @@ public class Attack : UnitAbility
     Unit target;
 
     //Added by Ty
+    CoverTrigger Cover;
     LineRenderer Line;
     Transform LineOrigin;
 

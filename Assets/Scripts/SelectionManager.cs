@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,11 +16,15 @@ public class SelectionManager : MonoBehaviour
 
     // Events
     public delegate void SelectionEventHandler(List<Unit> units);
+
     public static event SelectionEventHandler OnUnitSelectionChanged;
 
     public delegate void TargetPosCastHandler(Vector3 position);
+
     public static event TargetPosCastHandler OnTargetPositionRequested;
+
     public delegate void TargetUnitCastHandler(Unit unit);
+
     public static event TargetUnitCastHandler OnTargetUnitRequested;
 
     static SelectionManager Instance;
@@ -59,6 +64,7 @@ public class SelectionManager : MonoBehaviour
             Debug.LogWarning("Detected multiple Selection Managers present. Only the first one found will be used.");
         }
     }
+
     private void OnDestroy()
     {
         // clear all unit lists
@@ -72,9 +78,7 @@ public class SelectionManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-    }
+    void Start() { }
 
     // Update is called once per frame
     void Update()
@@ -99,30 +103,9 @@ public class SelectionManager : MonoBehaviour
                 else if (Input.GetMouseButtonUp(0))
                 {
                     selecting = false;
-                    if (pending.Count > 0)
+                    if (SetSelectedUnits(pending))
                     {
-                        // Deselect all old units
-                        foreach (Unit u in selected)
-                        {
-                            if (u)
-                            {
-                                u.Deselect();
-                                u.OnKilled -= RemoveFromSelection;
-                            }
-                        }
-
-                        selected = new(pending);
                         pending.Clear();
-
-                        // Select the new units
-                        foreach (Unit u in selected)
-                        {
-                            u.Select();
-                            u.OnKilled += RemoveFromSelection;
-                        }
-
-                        // Notify selection listeners
-                        OnUnitSelectionChanged?.Invoke(selected);
                     }
 
                     selectBox.gameObject.SetActive(false);
@@ -146,6 +129,7 @@ public class SelectionManager : MonoBehaviour
                     {
                         if (u) u.ShowSoftSelection(false);
                     }
+
                     pending = newPending;
                     foreach (Unit u in pending)
                         u.ShowSoftSelection(true);
@@ -170,6 +154,7 @@ public class SelectionManager : MonoBehaviour
                         }
                     }
                 }
+
                 break;
 
             // -- SELECTING A TARGET POSITION ON THE MAP -- \\
@@ -190,6 +175,7 @@ public class SelectionManager : MonoBehaviour
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
                     CancelTargetSelection();
+
                 break;
 
             // -- SELECTING A TARGET FRIENDLY UNIT ON THE MAP -- \\
@@ -214,6 +200,7 @@ public class SelectionManager : MonoBehaviour
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
                     CancelTargetSelection();
+
                 break;
 
             // -- SELECTING A TARGET ENEMY UNIT ON THE MAP -- \\
@@ -238,6 +225,7 @@ public class SelectionManager : MonoBehaviour
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
                     CancelTargetSelection();
+
                 break;
         }
     }
@@ -278,6 +266,7 @@ public class SelectionManager : MonoBehaviour
                 if (oneUnitOnly) break;
             }
         }
+
         return selectedUnits;
     }
 
@@ -339,5 +328,33 @@ public class SelectionManager : MonoBehaviour
         OnTargetUnitRequested += callback;
 
         Cursor.SetCursor(Instance.SelectionCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    public static bool SetSelectedUnits(List<Unit> units)
+    {
+        // If no units are provided, return false.
+        if (units.Count <= 0)
+            return false;
+
+        // Deselect all old units
+        foreach (var u in Instance.selected.Where(u => u))
+        {
+            u.Deselect();
+            u.OnKilled -= Instance.RemoveFromSelection;
+        }
+
+        Instance.selected = new List<Unit>(units);
+
+        // Select the new units
+        foreach (var u in Instance.selected)
+        {
+            u.Select();
+            u.OnKilled += Instance.RemoveFromSelection;
+        }
+
+        // Notify selection listeners
+        OnUnitSelectionChanged?.Invoke(Instance.selected);
+
+        return true;
     }
 }

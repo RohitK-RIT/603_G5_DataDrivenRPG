@@ -91,6 +91,7 @@ public class Unit : MonoBehaviour
     HealthBarController healthBarController;
     [SerializeField] private GameObject CharPortrait;
 
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -99,7 +100,7 @@ public class Unit : MonoBehaviour
         //Added By Ty
         actionBarController = CharPortrait.GetComponent<ActionBarController>();
         healthBarController = CharPortrait.GetComponent<HealthBarController>();
-        
+        CharPortrait.GetComponent<CharacterPortrait>()?.SetOwner(this);
 
         // Add this unit to the list ofselectable units
         switch (hostility)
@@ -134,7 +135,6 @@ public class Unit : MonoBehaviour
         healthBarController.maxHealthBar = maxHP;
         healthBarController.healthBar = currentHP;
         actionBarController.actionRegen = actionTime;
-  
 
 
         agent = GetComponent<NavMeshAgent>();

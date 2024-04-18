@@ -38,6 +38,11 @@ public class Attack : UnitAbility
                     Line.SetPosition(1, hit.collider.transform.position);
                     StartCoroutine(shootLine());
                 }
+                else
+                {
+                    Line.SetPosition(1, hit.point);
+                    StartCoroutine(shootLine());
+                }
             }
         }
         base.Execute();

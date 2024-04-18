@@ -99,7 +99,8 @@ public class Unit : MonoBehaviour
 
         //Added By Ty
         actionBarController = CharPortrait.GetComponent<ActionBarController>();
-        healthBarController = CharPortrait.GetComponent<HealthBarController>();    
+        healthBarController = CharPortrait.GetComponent<HealthBarController>();
+        CharPortrait.GetComponent<CharacterPortrait>()?.SetOwner(this);
 
         // Add this unit to the list ofselectable units
         switch (hostility)

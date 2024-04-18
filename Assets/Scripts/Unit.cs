@@ -169,7 +169,7 @@ public class Unit : MonoBehaviour
         stopTmr += Time.deltaTime;
 
         //Added and modified By Ty
-        actionBarController.actionProgressUI.fillAmount = actionBarController.actionBar / actionBarController.maxActionBar;
+        actionBarController.actionProgressUI.fillAmount = 1f - (actionBarController.actionBar / actionBarController.maxActionBar);
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
         actionBarController.actionBar += actionBarController.actionRegen * Time.deltaTime;
 

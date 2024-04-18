@@ -11,39 +11,32 @@ public class Attack : UnitAbility
 
     //Added by Ty
     LineRenderer Line;
-    Transform LineOrigin;
 
     private void Start()
     {
         Line = GetComponent<LineRenderer>();
-        LineOrigin = GetComponent<Transform>();
         Line.enabled = false;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        Line.SetPosition(0, LineOrigin.position);
     }
 
     public override void Execute()
     {
         if (target)
         {
+            target.OnKilled -= Dequeue;
+
+            Vector3 origin = transform.position;
+            origin.y += 0.5f;
+            Vector3 dest = target.transform.position;
+            dest.y += 0.5f;
             // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
-            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out RaycastHit hit, atkRange, ~(1 << 6)))
+            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6)))
             {
+                Line.SetPosition(0, origin);
+                Line.SetPosition(1, hit.point);
+                StartCoroutine(shootLine());
+
                 if (hit.collider.TryGetComponent(out Unit u))
-                {
                     u.TakeDamage(atkDamage);
-                    Line.SetPosition(1, hit.collider.transform.position);
-                    StartCoroutine(shootLine());
-                }
-                else
-                {
-                    Line.SetPosition(1, hit.point);
-                    StartCoroutine(shootLine());
-                }
             }
         }
         base.Execute();
@@ -61,8 +54,14 @@ public class Attack : UnitAbility
         SelectionManager.RequestCastUnit(Hostility.Hostile, (Unit unit) => 
         {
             target = unit;
+            target.OnKilled += Dequeue;
             base.Queue();
         });
-        
+    }
+
+    void Dequeue(Unit u)
+    {
+        if (base.Cancel())
+            target = null;
     }
 }

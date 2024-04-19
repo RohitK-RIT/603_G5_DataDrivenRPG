@@ -28,16 +28,27 @@ public class Attack : UnitAbility
             origin.y += 0.5f;
             Vector3 dest = target.transform.position;
             dest.y += 0.5f;
-            // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
-            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6)))
-            {
-                Line.SetPosition(0, origin);
-                Line.SetPosition(1, hit.point);
-                StartCoroutine(shootLine());
 
+            Line.SetPosition(0, origin);
+            Line.startColor = Color.red;
+            Line.endColor = Color.red;
+
+            // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
+            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
+            {
+                Line.SetPosition(1, hit.point);
                 if (hit.collider.TryGetComponent(out Unit u))
+                {
+                    Line.startColor = Color.green;
+                    Line.endColor = Color.green;
                     u.TakeDamage(atkDamage);
+                }
             }
+            else
+            {
+                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
+            }
+            StartCoroutine(shootLine());
         }
         base.Execute();
     }

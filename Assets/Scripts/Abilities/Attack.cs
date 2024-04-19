@@ -6,6 +6,7 @@ public class Attack : UnitAbility
 {
     public float atkDamage = 25f;
     public float atkRange = 50f;
+    public float accuracy = 50f;
 
     Unit target;
 

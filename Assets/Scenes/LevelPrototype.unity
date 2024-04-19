@@ -835,6 +835,12 @@ PrefabInstance:
       propertyPath: CharPortrait
       value: 
       objectReference: {fileID: 164117475}
+    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: a7fc23ce51622b949b7c3a4aefc0b0ab,
+        type: 2}
     - target: {fileID: 642455808376837321, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_Name
@@ -1496,6 +1502,12 @@ PrefabInstance:
       propertyPath: constitution
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d455c4237a4d6c448a8d2c5274818bd,
+        type: 2}
     - target: {fileID: 642455808376837321, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_Name
@@ -1565,16 +1577,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7892114624545858478, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: atkRange
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7892114624545858478, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: atkDamage
-      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2167,6 +2169,12 @@ PrefabInstance:
       propertyPath: constitution
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d8516a4d5ca89940a74cd6b2865a1df,
+        type: 2}
     - target: {fileID: 642455808376837321, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_Name
@@ -3101,6 +3109,12 @@ PrefabInstance:
       propertyPath: constitution
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: e9a94bf57aa72314da2ceb90c3a1dff0,
+        type: 2}
     - target: {fileID: 642455808376837321, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_Name

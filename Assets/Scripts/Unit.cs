@@ -111,13 +111,16 @@ public class Unit : MonoBehaviour
         //modify the attack action on this unit to account for equipped weapon
         Attack attackAction = this.GetAbility("Attack") as Attack;
 
-        attackAction.atkDamage = equippedWeapon.damage_per_shot;
-        attackAction.atkRange = equippedWeapon.range;
-        //Add Precision bonus here
-        //1% per Precision point
-        attackAction.accuracy = equippedWeapon.baseAccuracy + (precision / 100f);
-        
+        if(attackAction != null)
+        {
+            attackAction.atkDamage = equippedWeapon.damage_per_shot;
+            attackAction.atkRange = equippedWeapon.range;
+            //Add Precision bonus here
+            //1% per Precision point
+            attackAction.accuracy = equippedWeapon.baseAccuracy + (precision / 100f);
+            attackAction.description = equippedWeapon.ParsedDescription();
 
+        }
         // Add this unit to the list ofselectable units
         switch (hostility)
         {
@@ -138,6 +141,15 @@ public class Unit : MonoBehaviour
         {
             maxHP *= (1f + (.1f * constitution));
         }
+
+        //move speed modifiers
+        NavMeshAgent agentComponent = GetComponent<NavMeshAgent>();
+
+        if(agentComponent != null)
+        {
+            agentComponent.speed += (.5f * agility);
+        }
+
 
         //action speed modifiers
         actionTime *= (1f + .04f * dexterity);

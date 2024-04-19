@@ -123,7 +123,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6
+  m_Speed: 5
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -152,6 +152,7 @@ MonoBehaviour:
   agility: 3
   precision: 5
   constitution: 15
+  equippedWeapon: {fileID: 0}
   maxHP: 200
   immune: 0
   hostility: 0
@@ -181,6 +182,7 @@ MonoBehaviour:
   abilitySprite: {fileID: 21300000, guid: decd16f2bc44e624f99e9ae249a06695, type: 3}
   atkDamage: 40
   atkRange: 15
+  accuracy: 50
 --- !u!54 &3803796620225765806
 Rigidbody:
   m_ObjectHideFlags: 0

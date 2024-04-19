@@ -126,8 +126,9 @@ public class HUDController : MonoBehaviour
 
     void UpdateUnitNameDisplay(float newHP)
     {
-        unitNameText.text = $"{focusedUnit.name} ({(int)newHP}/{(int)focusedUnit.maxHP} HP)";
+        unitNameText.text = $"{focusedUnit.name} - ({(int)newHP}/{(int)focusedUnit.maxHP} HP) - {focusedUnit.equippedWeapon.weapon_name}";
     }
+
 
     public static void ShowError(string message)
     {

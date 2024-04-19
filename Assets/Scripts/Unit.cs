@@ -44,6 +44,10 @@ public class Unit : MonoBehaviour
     public int precision = 1;
     public int constitution = 1;
 
+    //equipped weapon (a Scriptable Object)
+    //added by Taode
+    public Weapon equippedWeapon; 
+
     [Tooltip("The maximum HP of this unit. Set to 0 if indestructible.")]
     public float maxHP = 0f;
     [Tooltip("If this unit is immune to damage. If Max HP was set to 0, this does not matter.")]
@@ -102,6 +106,21 @@ public class Unit : MonoBehaviour
         healthBarController = CharPortrait.GetComponent<HealthBarController>();
         CharPortrait.GetComponent<CharacterPortrait>()?.SetOwner(this);
 
+
+        //added by Taode
+        //modify the attack action on this unit to account for equipped weapon
+        Attack attackAction = this.GetAbility("Attack") as Attack;
+
+        if(attackAction != null)
+        {
+            attackAction.atkDamage = equippedWeapon.damage_per_shot;
+            attackAction.atkRange = equippedWeapon.range;
+            //Add Precision bonus here
+            //1% per Precision point
+            attackAction.accuracy = equippedWeapon.baseAccuracy + (precision / 100f);
+            attackAction.description = equippedWeapon.ParsedDescription();
+
+        }
         // Add this unit to the list ofselectable units
         switch (hostility)
         {
@@ -123,10 +142,26 @@ public class Unit : MonoBehaviour
             maxHP *= (1f + (.1f * constitution));
         }
 
+        //move speed modifiers
+        NavMeshAgent agentComponent = GetComponent<NavMeshAgent>();
+
+        if(agentComponent != null)
+        {
+            agentComponent.speed += (.5f * agility);
+        }
+
+
         //action speed modifiers
         actionTime *= (1f + .04f * dexterity);
 
-    
+        //account in weight
+        float wt_str_difference = strength - equippedWeapon.weight;
+
+        if(wt_str_difference < 0)
+        {
+            actionTime *= (1f + (.05f*wt_str_difference));
+        }
+
 
         currentHP = maxHP;
         if (currentHP == 0f) immune = true;
@@ -181,10 +216,8 @@ public class Unit : MonoBehaviour
             {
                 queuedAbility.Execute();
                 actionBarController.actionBar = 0f;
-                GetComponentInChildren<Image>().color = new(1, 1, 1, 0);
+                SetQueuedAbility((UnitAbility)null);
             }
-            queuedAbility = null;
-
         }
 
         if (agent) // stationary units should not be using an agent
@@ -388,7 +421,6 @@ public class Unit : MonoBehaviour
     public void SetQueuedAbility(string abilityName)
     {
         SetQueuedAbility(GetAbility(abilityName));
-
     }
 
     /// <summary>
@@ -399,8 +431,15 @@ public class Unit : MonoBehaviour
     {
         Image abilityImg = GetComponentInChildren<Image>();
         queuedAbility = ability;
-        abilityImg.sprite = ability.abilitySprite;
-        abilityImg.color = new(1, 1, 1, 1);
+        if (queuedAbility)
+        {
+            abilityImg.sprite = ability.abilitySprite;
+            abilityImg.color = new(1, 1, 1, 1);
+        }
+        else
+        {
+            abilityImg.color = new(1, 1, 1, 0);
+        }
     }
 
     /// <returns>The ability currently queued on this unit that will execute when its action bar fills.</returns>

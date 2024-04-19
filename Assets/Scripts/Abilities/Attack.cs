@@ -6,46 +6,51 @@ public class Attack : UnitAbility
 {
     public float atkDamage = 25f;
     public float atkRange = 50f;
+    public float accuracy = 50f;
 
     Unit target;
 
     //Added by Ty
     CoverTrigger Cover;
     LineRenderer Line;
-    Transform LineOrigin;
 
     private void Start()
     {
         Line = GetComponent<LineRenderer>();
-        LineOrigin = GetComponent<Transform>();
         Line.enabled = false;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        Line.SetPosition(0, LineOrigin.position);
     }
 
     public override void Execute()
     {
         if (target)
         {
+            target.OnKilled -= Dequeue;
+
+            Vector3 origin = transform.position;
+            origin.y += 0.5f;
+            Vector3 dest = target.transform.position;
+            dest.y += 0.5f;
+
+            Line.SetPosition(0, origin);
+            Line.startColor = Color.red;
+            Line.endColor = Color.red;
+
             // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
-            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out RaycastHit hit, atkRange, ~(1 << 6)))
+            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
             {
+                Line.SetPosition(1, hit.point);
                 if (hit.collider.TryGetComponent(out Unit u))
                 {
+                    Line.startColor = Color.green;
+                    Line.endColor = Color.green;
                     u.TakeDamage(atkDamage);
-                    Line.SetPosition(1, hit.collider.transform.position);
-                    StartCoroutine(shootLine());
-                }
-                else
-                {
-                    Line.SetPosition(1, hit.point);
-                    StartCoroutine(shootLine());
                 }
             }
+            else
+            {
+                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
+            }
+            StartCoroutine(shootLine());
         }
         base.Execute();
     }
@@ -62,8 +67,14 @@ public class Attack : UnitAbility
         SelectionManager.RequestCastUnit(Hostility.Hostile, (Unit unit) => 
         {
             target = unit;
+            target.OnKilled += Dequeue;
             base.Queue();
         });
-        
+    }
+
+    void Dequeue(Unit u)
+    {
+        if (base.Cancel())
+            target = null;
     }
 }

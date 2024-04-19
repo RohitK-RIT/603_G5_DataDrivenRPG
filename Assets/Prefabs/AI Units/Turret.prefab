@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 231416856744006721}
   - component: {fileID: 2668946686573167542}
   - component: {fileID: 6620638852588068180}
+  - component: {fileID: 1880757727947904893}
   m_Layer: 5
   m_Name: HealthCanvas
   m_TagString: Untagged
@@ -103,6 +104,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1880757727947904893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5274665492584367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43db50a40c9ac84a8407fc0630a250e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trans: {fileID: 0}
 --- !u!1 &838606811261842063
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +154,7 @@ Transform:
   m_Children:
   - {fileID: 2704055251100190590}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1159365306716288852
 MeshFilter:
@@ -227,11 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bda28730f9e631468c2ff702f92899b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 1
-  dexterity: 1
-  agility: 1
-  precision: 1
-  constitution: 1
+  strength: 5
+  dexterity: 5
+  agility: 5
+  precision: 5
+  constitution: 5
   maxHP: 50
   immune: 0
   hostility: 2
@@ -297,7 +311,7 @@ MonoBehaviour:
   abilityName: AI Attack
   description: Ability Description
   abilitySprite: {fileID: 0}
-  atkDamage: 100
+  atkDamage: 75
 --- !u!1001 &1775833829844556370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,10 +320,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2704055251100190590}
     m_Modifications:
+    - target: {fileID: 969454309645704567, guid: 8abe7134a0261244fbb1467a7484b2a8,
+        type: 3}
+      propertyPath: healthBar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 969454309645704567, guid: 8abe7134a0261244fbb1467a7484b2a8,
+        type: 3}
+      propertyPath: maxHealthBar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307103605288439590, guid: 8abe7134a0261244fbb1467a7484b2a8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.013943187
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307103605288439590, guid: 8abe7134a0261244fbb1467a7484b2a8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.18808064
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307103605288439590, guid: 8abe7134a0261244fbb1467a7484b2a8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8867924
+      objectReference: {fileID: 0}
     - target: {fileID: 4307103605288439590, guid: 8abe7134a0261244fbb1467a7484b2a8,
         type: 3}
       propertyPath: m_FillOrigin
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918303604468370225, guid: 8abe7134a0261244fbb1467a7484b2a8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918303604468370225, guid: 8abe7134a0261244fbb1467a7484b2a8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5977642242353768906, guid: 8abe7134a0261244fbb1467a7484b2a8,
         type: 3}

@@ -204,10 +204,8 @@ public class Unit : MonoBehaviour
             {
                 queuedAbility.Execute();
                 actionBarController.actionBar = 0f;
-                GetComponentInChildren<Image>().color = new(1, 1, 1, 0);
+                SetQueuedAbility((UnitAbility)null);
             }
-            queuedAbility = null;
-
         }
 
         if (agent) // stationary units should not be using an agent
@@ -411,7 +409,6 @@ public class Unit : MonoBehaviour
     public void SetQueuedAbility(string abilityName)
     {
         SetQueuedAbility(GetAbility(abilityName));
-
     }
 
     /// <summary>
@@ -422,8 +419,15 @@ public class Unit : MonoBehaviour
     {
         Image abilityImg = GetComponentInChildren<Image>();
         queuedAbility = ability;
-        abilityImg.sprite = ability.abilitySprite;
-        abilityImg.color = new(1, 1, 1, 1);
+        if (queuedAbility)
+        {
+            abilityImg.sprite = ability.abilitySprite;
+            abilityImg.color = new(1, 1, 1, 1);
+        }
+        else
+        {
+            abilityImg.color = new(1, 1, 1, 0);
+        }
     }
 
     /// <returns>The ability currently queued on this unit that will execute when its action bar fills.</returns>

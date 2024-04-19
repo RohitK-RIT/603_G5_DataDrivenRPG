@@ -57,7 +57,7 @@ public class SelectionManager : MonoBehaviour
             pending = new();
             allFriendlyUnits = new();
             allOtherUnits = new();
-            cam = GetComponent<Camera>();
+            cam = GetComponentInChildren<Camera>();
         }
         else
         {
@@ -140,7 +140,7 @@ public class SelectionManager : MonoBehaviour
                     Vector3 mousePos = Input.mousePosition;
                     mousePos.z = cam.nearClipPlane;
                     // Raycast against the environment or other units
-                    if (Physics.Raycast(transform.position, cam.ScreenToWorldPoint(mousePos) - transform.position, out RaycastHit hit, 500f, (1 << 0) | unitMask))
+                    if (Physics.Raycast(cam.transform.position, cam.ScreenToWorldPoint(mousePos) - cam.transform.position, out RaycastHit hit, 500f, (1 << 0) | unitMask))
                     {
                         if (hit.collider.TryGetComponent(out Unit target))
                         {
@@ -280,7 +280,7 @@ public class SelectionManager : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = cam.nearClipPlane;
-        return Physics.Raycast(transform.position, cam.ScreenToWorldPoint(mousePos) - transform.position, out hit, 500f, layers);
+        return Physics.Raycast(cam.transform.position, cam.ScreenToWorldPoint(mousePos) - cam.transform.position, out hit, 500f, layers);
     }
 
     /// <summary>

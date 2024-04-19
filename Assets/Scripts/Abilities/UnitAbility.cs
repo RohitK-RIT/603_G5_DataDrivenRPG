@@ -9,6 +9,7 @@ public abstract class UnitAbility : MonoBehaviour
     public delegate void AbilityHandler();
     public event AbilityHandler OnAbilityExecuted;
     public event AbilityHandler OnAbilityQueued;
+    public event AbilityHandler OnAbilityCancelled;
 
     public string abilityName = "Ability";
     public string description = "Ability Description";
@@ -63,5 +64,25 @@ public abstract class UnitAbility : MonoBehaviour
     {
         GetComponent<Unit>().SetQueuedAbility(this);
         OnAbilityQueued?.Invoke();
+    }
+
+    /// <summary>
+    /// Called when the ability is cancelled, removing it from the unit's queued ability.
+    /// A cancelled ability does not reset the unit's attack bar.
+    /// </summary>
+    /// <returns>
+    /// If the ability was cancelled. This returns false if the ability was 
+    /// never queued to begin with, or was already executed.
+    /// </returns>
+    public virtual bool Cancel()
+    {
+        Unit u = GetComponent<Unit>();
+        if (u.GetQueuedAbility() == this)
+        {
+            u.SetQueuedAbility((UnitAbility)null);
+            OnAbilityCancelled?.Invoke();
+            return true;
+        }
+        return false;
     }
 }

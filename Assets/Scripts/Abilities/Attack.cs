@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Attack : UnitAbility
 {
@@ -14,17 +12,11 @@ public class Attack : UnitAbility
     Unit target;
 
     //Added by Ty
-    CoverTrigger Cover;
     LineRenderer Line;
-    Vector3 origin;
-    Vector3 dest;
-    Ray ray;
-    RaycastHit[] hits = new RaycastHit[2];
 
     private void Start()
     {
         Line = GetComponent<LineRenderer>();
-        Cover = GetComponent<CoverTrigger>();
         Line.enabled = false;
     }
 
@@ -49,21 +41,8 @@ public class Attack : UnitAbility
                 Line.SetPosition(1, hit.point);
                 if (hit.collider.gameObject == target.gameObject)
                 {
-                
-
-                    //now factor in accuracy
-                    float hitRoll = Random.Range(0, 1f);
-                    float hitChance = accuracy;
-                    Debug.Log(hitRoll);
-
-                    if (hitRoll < accuracy)
-                    {
-                        target.TakeDamage(atkDamage);
-                        Line.startColor = Color.green;
-                        Line.endColor = Color.green;
-                    }
-
-                 
+                    Line.startColor = Color.green;
+                    Line.endColor = Color.green;
                 }
             }
             else
@@ -73,7 +52,45 @@ public class Attack : UnitAbility
         }
     }
 
-   
+    public override void Execute()
+    {
+        if (target)
+        {
+            target.OnKilled -= Cancel;
+
+            Vector3 origin = transform.position;
+            origin.y += 0.5f;
+            Vector3 dest = target.transform.position;
+            dest.y += 0.5f;
+
+            Line.SetPosition(0, origin);
+            Line.startColor = Color.red;
+            Line.endColor = Color.red;
+            Line.widthMultiplier = 0.75f;
+
+            // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
+            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
+            {
+                Line.SetPosition(1, hit.point);
+                if (hit.collider.TryGetComponent(out Unit u))
+                {
+                    u.TakeDamage(atkDamage);
+                    if (u == target)
+                    {
+                        Line.startColor = Color.green;
+                        Line.endColor = Color.green;
+                    }
+                }
+            }
+            else
+            {
+                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
+            }
+            target = null;
+            StartCoroutine(shootLine());
+        }
+        base.Execute();
+    }
 
     IEnumerator shootLine()
     {
@@ -84,7 +101,7 @@ public class Attack : UnitAbility
 
     public override void Queue()
     {
-        SelectionManager.RequestCastUnit(SelectionCursor, Hostility.Hostile, (Unit unit) => 
+        SelectionManager.RequestCastUnit(SelectionCursor, Hostility.Hostile, (Unit unit) =>
         {
             Line.enabled = true;
             if (target) target.OnKilled -= Cancel;

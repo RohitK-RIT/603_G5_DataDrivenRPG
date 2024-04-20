@@ -71,9 +71,6 @@ public class Unit : MonoBehaviour
     
     public string unitName = "";
 
-    public float attackDmg = 0;
-    public float attackRange = 0;
-
     public GameObject selectionPrefab;
     GameObject selectIcon;
     NavMeshAgent agent;
@@ -88,7 +85,7 @@ public class Unit : MonoBehaviour
     protected Unit followUnit;
 
     UnitAbility queuedAbility;
-    public float actionTime = 10f;
+    public float actionTime = 0.800f; //adjusted by QP to bring in line with balance sheet
 
     //Added by Ty
     ActionBarController actionBarController;
@@ -133,35 +130,40 @@ public class Unit : MonoBehaviour
         }
 
         //add constitution modifier to health
-        if (constitution < 4)
-        {
-            maxHP *= (1f - (.1f * (4 - (constitution - 1))));
-        }
-        else
-        {
-            maxHP *= (1f + (.1f * constitution));
-        }
+        maxHP *= 1.0f + ((constitution - 5) * 0.1f); //much simpler ~QP
+        //old:
+        //if (constitution < 4)
+        //{
+        //    maxHP *= (1f - (.1f * (4 - (constitution - 1))));
+        //}
+        //else
+        //{
+        //    maxHP *= (1f + (.1f * constitution));
+        //}
 
-        //move speed modifiers
+
+        //move speed modifiers ~weight factoring added by QP
         NavMeshAgent agentComponent = GetComponent<NavMeshAgent>();
 
         if(agentComponent != null)
         {
-            agentComponent.speed += (.5f * agility);
+            agentComponent.speed += (.5f * (agility - 1.0f))*(2.0f / MathF.Max(equippedWeapon.weight-strength, 2));
         }
 
+        //action speed modifiers ~balance sheet calcs adjusted by QP
+        //string debugmsg = "";
+        //debugmsg += $"Unit: {gameObject.name}\nWeapon: {equippedWeapon.name}\nWeapon DMG: {equippedWeapon.damage_per_shot}\nBASE Action time: {actionTime}\n";
 
-        //action speed modifiers
-        actionTime *= (1f + .04f * dexterity);
+        actionTime = (2.0f*actionTime) - (float)(actionTime*Math.Pow(Math.E,0.02f*(dexterity-1)));
+        //debugmsg += $"DEX-SCALED Action time: {actionTime}\n";
 
         //account in weight
-        float wt_str_difference = strength - equippedWeapon.weight;
+        float wt_str_difference = MathF.Pow(MathF.Max(equippedWeapon.weight - strength, 0), 3.0f);
+        //debugmsg += $"Wt-str factor: {1.0f + (.05f * wt_str_difference)}\n";
 
-        if(wt_str_difference < 0)
-        {
-            actionTime *= (1f + (.05f*wt_str_difference));
-        }
-
+        actionTime = MathF.Max(actionTime*(1.0f + (.05f*wt_str_difference)), actionTime/2.0f);
+        //debugmsg += $"NET Action time: {actionTime}";
+        //Debug.Log(debugmsg);
 
         currentHP = maxHP;
         if (currentHP == 0f) immune = true;
@@ -174,6 +176,7 @@ public class Unit : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
+        // Add the selection icon to this unit
         Vector3 rayStart = transform.position;
         rayStart.y += 100f;
         if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, 500f, 1 << 0))
@@ -185,7 +188,7 @@ public class Unit : MonoBehaviour
 
             if (selectionPrefab)
             {
-                selectIcon = Instantiate(selectionPrefab, transform.position - new Vector3(0, extents.y, 0), Quaternion.Euler(90, 0, 0));
+                selectIcon = Instantiate(selectionPrefab, transform.position - new Vector3(0, extents.y - 0.01f, 0), Quaternion.Euler(90, 0, 0));
                 selectIcon.name = $"{gameObject.name} Selection Icon";
                 selectIcon.transform.parent = transform;
                 float maxExtent = Mathf.Max(Mathf.Max(extents.x, extents.y), extents.z);
@@ -207,7 +210,9 @@ public class Unit : MonoBehaviour
         //Added and modified By Ty
         actionBarController.actionProgressUI.fillAmount = 1f - (actionBarController.actionBar / actionBarController.maxActionBar);
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
-        actionBarController.actionBar += actionBarController.actionRegen * Time.deltaTime;
+
+        //modified by QP: actionRegen represents the actual time (ms) for the bar to fill, while maxActionBar is the base action speed
+        actionBarController.actionBar += (actionBarController.maxActionBar / actionBarController.actionRegen) * Time.deltaTime;
 
         // Execute the queued ability, if there is one, at the end of the timer
         if (actionBarController.actionBar >= actionBarController.maxActionBar) //old (actionTmr >= actionTime)
@@ -228,18 +233,9 @@ public class Unit : MonoBehaviour
             }
 
             // If following a unit, keep updating the destination to move to
-            if (followUnit)
+            if (followUnit && !agent.isStopped)
             {
-                // If the unit to follow should be attacked, stop moving and attack.
-                if ((followUnit.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange)
-                {
-                    agent.isStopped = true;
-                }
-                else
-                {
-                    agent.isStopped = false;
-                    agent.destination = followUnit.transform.position;
-                }
+                agent.destination = followUnit.transform.position;
             }
         }
     }
@@ -458,10 +454,12 @@ public class Unit : MonoBehaviour
         for (int i = 0; i < abilities.Length; i++)
         {
             abilities[i].Hotkey = (KeyCode)(i + 49);
-            abilities[i].enabled = true;
         }
 
-        selectIcon.GetComponent<Animator>().Play("UnitFocus");
+        if (Hostility == Hostility.Friendly)
+        {
+            selectIcon.GetComponent<Animator>().Play("UnitFocus");
+        }
         OnFocused?.Invoke(this);
     }
 
@@ -470,10 +468,6 @@ public class Unit : MonoBehaviour
     /// </summary>
     public void Unfocus()
     {
-        // disable listening for ability hotkey presses
-        foreach (UnitAbility a in GetAllAbilities())
-            a.enabled = false;
-
         selectIcon.GetComponent<Animator>().Rebind();
         OnUnfocused?.Invoke(this);
     }

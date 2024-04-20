@@ -154,7 +154,7 @@ Transform:
   m_Children:
   - {fileID: 2704055251100190590}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1159365306716288852
 MeshFilter:
@@ -246,6 +246,7 @@ MonoBehaviour:
   agility: 5
   precision: 5
   constitution: 5
+  equippedWeapon: {fileID: 0}
   maxHP: 50
   immune: 0
   hostility: 2
@@ -256,7 +257,7 @@ MonoBehaviour:
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 10
+  actionTime: 0.8
   CharPortrait: {fileID: 8547787947617653108}
 --- !u!114 &7583036914056682796
 MonoBehaviour:

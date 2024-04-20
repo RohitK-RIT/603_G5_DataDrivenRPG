@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Suppressor
   m_EditorClassIdentifier: 
   weapon_name: 'Suppressor '
-  damage_per_shot: 100
+  damage_per_shot: 35
   shots_per_attack: 1
-  baseAccuracy: 1
+  baseAccuracy: 0.55
   range: 40
   weight: 1

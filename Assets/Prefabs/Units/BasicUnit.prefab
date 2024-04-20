@@ -157,13 +157,11 @@ MonoBehaviour:
   immune: 0
   hostility: 0
   unitName: Breacher
-  attackDmg: 40
-  attackRange: 15
   selectionPrefab: {fileID: 3423735369810992541, guid: ceda65d003dc44143acb3b8c804dc2f0,
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 8
+  actionTime: 0.8
   CharPortrait: {fileID: 0}
 --- !u!114 &7892114624545858478
 MonoBehaviour:
@@ -183,6 +181,7 @@ MonoBehaviour:
   atkDamage: 40
   atkRange: 15
   accuracy: 50
+  SelectionCursor: {fileID: 2800000, guid: 61e87d7672c71ec418650c1d490d7c94, type: 3}
 --- !u!54 &3803796620225765806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219,7 +218,7 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642455808376837321}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -231,7 +230,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6cb2fe0c1d34ee44a970bef039b91a2b, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -254,7 +253,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.2
@@ -299,7 +298,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2

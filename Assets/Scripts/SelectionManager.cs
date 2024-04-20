@@ -40,7 +40,6 @@ public class SelectionManager : MonoBehaviour
 
     //Added by Ty
     [SerializeField] Texture2D NormalCursor;
-    [SerializeField] Texture2D SelectionCursor;
 
     int unitMask = (1 << 6) | (1 << 7);
     SelectionState selectState;
@@ -73,8 +72,7 @@ public class SelectionManager : MonoBehaviour
 
         // nullify all event listeners
         OnUnitSelectionChanged = null;
-        OnTargetPositionRequested = null;
-        OnTargetUnitRequested = null;
+        StopTargetSelection();
     }
 
     // Start is called before the first frame update
@@ -123,7 +121,7 @@ public class SelectionManager : MonoBehaviour
                     Bounds bounds = new(selectBox.anchoredPosition, selectBox.sizeDelta);
                     List<Unit> newPending = GetUnitsInSelectionBox(allFriendlyUnits, 1 << 6, bounds);
                     if (newPending.Count == 0)
-                        newPending = GetUnitsInSelectionBox(allOtherUnits, 1 << 7, bounds);
+                        newPending = GetUnitsInSelectionBox(allOtherUnits, 1 << 7, bounds, true);
 
                     foreach (Unit u in pending)
                     {
@@ -165,8 +163,7 @@ public class SelectionManager : MonoBehaviour
                     if (RaycastMouse(out RaycastHit posHit))
                     {
                         OnTargetPositionRequested?.Invoke(posHit.point);
-                        OnTargetPositionRequested = null;
-                        selectState = SelectionState.Normal;
+                        StopTargetSelection();
                     }
                     else
                     {
@@ -174,7 +171,7 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
-                    CancelTargetSelection();
+                    StopTargetSelection();
 
                 break;
 
@@ -188,9 +185,7 @@ public class SelectionManager : MonoBehaviour
                         if (unitHit.collider.TryGetComponent(out Unit u))
                         {
                             OnTargetUnitRequested?.Invoke(u);
-                            OnTargetUnitRequested = null;
-                            selectState = SelectionState.Normal;
-                            Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
+                            StopTargetSelection();
                         }
                     }
                     else
@@ -199,7 +194,7 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
-                    CancelTargetSelection();
+                    StopTargetSelection();
 
                 break;
 
@@ -213,9 +208,7 @@ public class SelectionManager : MonoBehaviour
                         if (unitHit.collider.TryGetComponent(out Unit u))
                         {
                             OnTargetUnitRequested?.Invoke(u);
-                            OnTargetUnitRequested = null;
-                            selectState = SelectionState.Normal;
-                            Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
+                            StopTargetSelection();
                         }
                     }
                     else
@@ -224,14 +217,15 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
                 else if (Input.GetMouseButtonDown(1)) // cancel
-                    CancelTargetSelection();
+                    StopTargetSelection();
 
                 break;
         }
     }
 
-    void CancelTargetSelection()
+    void StopTargetSelection()
     {
+        Cursor.visible = true;
         Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
         OnTargetPositionRequested = null;
         OnTargetUnitRequested = null;
@@ -251,7 +245,11 @@ public class SelectionManager : MonoBehaviour
         // For a single click and no drag, raycast against Unit layer
         if (RaycastMouse(out RaycastHit hit, unitLayer))
         {
-            selectedUnits.Add(hit.collider.GetComponent<Unit>());
+            if (hit.collider.TryGetComponent(out Unit u))
+                selectedUnits.Add(u);
+            else
+                Debug.LogWarning($"WARNING: Attempted to select GameObject {hit.collider.gameObject.name} on a Unit collision layer, but it does not have a Unit component! " +
+                    $"This could have unintended side affects, either change this object's collision layer or add a Unit component to it.");
             if (oneUnitOnly)
                 return selectedUnits;
         }
@@ -305,13 +303,13 @@ public class SelectionManager : MonoBehaviour
     ///     for use in the provided callback function.
     /// </summary>
     /// <param name="callback">The callback to invoke upon selecting a position in the level</param>
-    public static void RequestCastPosition(TargetPosCastHandler callback)
+    public static void RequestCastPosition(Texture2D aoeVisual, float radius, TargetPosCastHandler callback)
     {
         Instance.selectState = SelectionState.TargetPosition;
         Instance.selecting = false;
         OnTargetPositionRequested += callback;
 
-        Cursor.SetCursor(Instance.SelectionCursor, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = false;
     }
 
     /// <summary>
@@ -321,13 +319,14 @@ public class SelectionManager : MonoBehaviour
     /// </summary>
     /// <param name="callback">The callback to invoke upon selecting a unit in the level</param>
     /// <param name="unitHostility">The hostility of the units that can be selected for casting.</param>
-    public static void RequestCastUnit(Hostility unitHosility, TargetUnitCastHandler callback)
+    public static void RequestCastUnit(Texture2D cursorVisual, Hostility unitHosility, TargetUnitCastHandler callback)
     {
         Instance.selectState = unitHosility == Hostility.Friendly ? SelectionState.TargetFriendlyUnit : SelectionState.TargetEnemyUnit;
         Instance.selecting = false;
         OnTargetUnitRequested += callback;
 
-        Cursor.SetCursor(Instance.SelectionCursor, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = true;
+        Cursor.SetCursor(cursorVisual, Vector2.zero, CursorMode.Auto);
     }
 
     public static bool SetSelectedUnits(List<Unit> units)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +14,15 @@ public class Attack : UnitAbility
     //Added by Ty
     CoverTrigger Cover;
     LineRenderer Line;
+    Vector3 origin;
+    Vector3 dest;
+    Ray ray;
+    RaycastHit[] hits = new RaycastHit[2];
 
     private void Start()
     {
         Line = GetComponent<LineRenderer>();
+        Cover = GetComponent<CoverTrigger>();
         Line.enabled = false;
     }
 
@@ -26,23 +32,74 @@ public class Attack : UnitAbility
         {
             target.OnKilled -= Dequeue;
 
-            Vector3 origin = transform.position;
-            origin.y += 0.5f;
-            Vector3 dest = target.transform.position;
-            dest.y += 0.5f;
+            if (Cover.isBehindCover == true)
+            {
+                origin = transform.position;
+                origin.y += 0.5f;
+                dest = target.transform.position;
+                dest.y += 0.5f;
+            }
+            else
+            {
+                origin = transform.position;
+                dest = target.transform.position;
+            }
 
+            ray = new Ray(origin, (dest - origin));
             Line.SetPosition(0, origin);
-            Line.startColor = Color.red;
-            Line.endColor = Color.red;
+            Line.material.color = Color.red;
 
-            // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
+            int numHits = Physics.RaycastNonAlloc(ray, hits, atkRange, ~(1 << 6), QueryTriggerInteraction.Ignore);
+
+            if (numHits > 0)
+            {
+                Array.Sort(hits, (RaycastHit x, RaycastHit y) => x.distance.CompareTo(y.distance));
+
+                for (int i = 0; i < numHits; i++)
+                {
+                    Line.SetPosition(1, hits[i].point);
+                    if (hits[0].collider.gameObject.layer == 8 && hits[1].collider.gameObject.layer == 7)
+                    {
+                        if (hits[i].collider.TryGetComponent(out Unit u))
+                        {
+                            Line.material.color = Color.green;
+                            u.TakeDamage(atkDamage / 2);
+                        }
+                    }
+                    else
+                    {
+                        if (hits[i].collider.TryGetComponent(out Unit u))
+                        {
+                            Line.material.color = Color.green;
+                            u.TakeDamage(atkDamage);
+                        }
+                    }
+                    Debug.Log(hits[i].collider.gameObject.layer);
+                }
+            }
+            else
+            {
+                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            /*/ Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
             if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
             {
                 Line.SetPosition(1, hit.point);
                 if (hit.collider.TryGetComponent(out Unit u))
                 {
-                    Line.startColor = Color.green;
-                    Line.endColor = Color.green;
+                    Line.material.color = Color.green;
                     u.TakeDamage(atkDamage);
                 }
             }
@@ -50,6 +107,7 @@ public class Attack : UnitAbility
             {
                 Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
             }
+            */
             StartCoroutine(shootLine());
         }
         base.Execute();

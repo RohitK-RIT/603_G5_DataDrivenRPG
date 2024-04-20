@@ -85,7 +85,7 @@ public class Unit : MonoBehaviour
     protected Unit followUnit;
 
     UnitAbility queuedAbility;
-    public float actionTime = 10f;
+    public float actionTime = 0.800f;
 
     //Added by Ty
     ActionBarController actionBarController;
@@ -130,35 +130,40 @@ public class Unit : MonoBehaviour
         }
 
         //add constitution modifier to health
-        if (constitution < 4)
-        {
-            maxHP *= (1f - (.1f * (4 - (constitution - 1))));
-        }
-        else
-        {
-            maxHP *= (1f + (.1f * constitution));
-        }
+        maxHP *= 1.0f + ((constitution - 5) * 0.1f); //much simpler
+        //old:
+        //if (constitution < 4)
+        //{
+        //    maxHP *= (1f - (.1f * (4 - (constitution - 1))));
+        //}
+        //else
+        //{
+        //    maxHP *= (1f + (.1f * constitution));
+        //}
+
 
         //move speed modifiers
         NavMeshAgent agentComponent = GetComponent<NavMeshAgent>();
 
         if(agentComponent != null)
         {
-            agentComponent.speed += (.5f * agility);
+            agentComponent.speed += (.5f * (agility - 1.0f))*(2.0f / MathF.Max(equippedWeapon.weight-strength, 2));
         }
 
+        //string debugmsg = "";
+        //debugmsg += $"Unit: {gameObject.name}\nBASE Action time: {actionTime}\n";
 
         //action speed modifiers
-        actionTime *= (1f + .04f * dexterity);
+        actionTime = (2.0f*actionTime) - (float)(actionTime*Math.Pow(Math.E,0.02f*(dexterity-1)));
+        //debugmsg += $"DEX-SCALED Action time: {actionTime}\n";
 
         //account in weight
-        float wt_str_difference = strength - equippedWeapon.weight;
+        float wt_str_difference = MathF.Pow(MathF.Max(equippedWeapon.weight - strength, 0), 3.0f);
+        //debugmsg += $"Wt-str factor: {1.0f + (.05f * wt_str_difference)}\n";
 
-        if(wt_str_difference < 0)
-        {
-            actionTime *= (1f + (.05f*wt_str_difference));
-        }
-
+        actionTime = MathF.Max(actionTime*(1.0f + (.05f*wt_str_difference)), actionTime/2.0f);
+        //debugmsg += $"NET Action time: {actionTime}";
+        //Debug.Log(debugmsg);
 
         currentHP = maxHP;
         if (currentHP == 0f) immune = true;
@@ -205,7 +210,8 @@ public class Unit : MonoBehaviour
         //Added and modified By Ty
         actionBarController.actionProgressUI.fillAmount = 1f - (actionBarController.actionBar / actionBarController.maxActionBar);
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
-        actionBarController.actionBar += actionBarController.actionRegen * Time.deltaTime;
+        //modified by QP: actionRegen represents the actual time (ms) for the bar to fill, while maxActionBar is the base action speed
+        actionBarController.actionBar += (actionBarController.maxActionBar / actionBarController.actionRegen) * Time.deltaTime;
 
         // Execute the queued ability, if there is one, at the end of the timer
         if (actionBarController.actionBar >= actionBarController.maxActionBar) //old (actionTmr >= actionTime)

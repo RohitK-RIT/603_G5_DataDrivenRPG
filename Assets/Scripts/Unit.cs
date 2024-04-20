@@ -85,7 +85,7 @@ public class Unit : MonoBehaviour
     protected Unit followUnit;
 
     UnitAbility queuedAbility;
-    public float actionTime = 0.800f;
+    public float actionTime = 0.800f; //adjusted by QP to bring in line with balance sheet
 
     //Added by Ty
     ActionBarController actionBarController;
@@ -130,7 +130,7 @@ public class Unit : MonoBehaviour
         }
 
         //add constitution modifier to health
-        maxHP *= 1.0f + ((constitution - 5) * 0.1f); //much simpler
+        maxHP *= 1.0f + ((constitution - 5) * 0.1f); //much simpler ~QP
         //old:
         //if (constitution < 4)
         //{
@@ -142,7 +142,7 @@ public class Unit : MonoBehaviour
         //}
 
 
-        //move speed modifiers
+        //move speed modifiers ~weight factoring added by QP
         NavMeshAgent agentComponent = GetComponent<NavMeshAgent>();
 
         if(agentComponent != null)
@@ -150,10 +150,10 @@ public class Unit : MonoBehaviour
             agentComponent.speed += (.5f * (agility - 1.0f))*(2.0f / MathF.Max(equippedWeapon.weight-strength, 2));
         }
 
+        //action speed modifiers ~balance sheet calcs adjusted by QP
         //string debugmsg = "";
-        //debugmsg += $"Unit: {gameObject.name}\nBASE Action time: {actionTime}\n";
+        //debugmsg += $"Unit: {gameObject.name}\nWeapon: {equippedWeapon.name}\nWeapon DMG: {equippedWeapon.damage_per_shot}\nBASE Action time: {actionTime}\n";
 
-        //action speed modifiers
         actionTime = (2.0f*actionTime) - (float)(actionTime*Math.Pow(Math.E,0.02f*(dexterity-1)));
         //debugmsg += $"DEX-SCALED Action time: {actionTime}\n";
 
@@ -210,6 +210,7 @@ public class Unit : MonoBehaviour
         //Added and modified By Ty
         actionBarController.actionProgressUI.fillAmount = 1f - (actionBarController.actionBar / actionBarController.maxActionBar);
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
+
         //modified by QP: actionRegen represents the actual time (ms) for the bar to fill, while maxActionBar is the base action speed
         actionBarController.actionBar += (actionBarController.maxActionBar / actionBarController.actionRegen) * Time.deltaTime;
 

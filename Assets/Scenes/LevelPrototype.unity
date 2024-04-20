@@ -460,6 +460,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
+      propertyPath: agility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: strength
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Headsman Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: dexterity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: precision
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: constitution
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
       propertyPath: equippedWeapon
       value: 
       objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
@@ -836,11 +866,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: actionTime
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: CharPortrait
@@ -1390,8 +1415,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
-      propertyPath: actionTime
-      value: 10
+      propertyPath: precision
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -1419,11 +1444,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 88d117937a7e5d145983de40f85f34f1, type: 2}
-    - target: {fileID: 4457893470198798407, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_RootOrder
@@ -1478,11 +1498,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738742569409711224, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: m_Speed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2007,6 +2022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
+      propertyPath: strength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
+        type: 3}
       propertyPath: unitName
       value: Tactician
       objectReference: {fileID: 0}
@@ -2019,11 +2039,6 @@ PrefabInstance:
         type: 3}
       propertyPath: precision
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: actionTime
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -2051,11 +2066,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 03ce528c060bdaf49a9b3e0ad58399e2, type: 2}
-    - target: {fileID: 4457893470198798407, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_RootOrder
@@ -2110,11 +2120,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738742569409711224, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: m_Speed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7892114624545858478, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -2529,12 +2534,17 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: agility
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: strength
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -2544,12 +2554,12 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: precision
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: constitution
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -2953,6 +2963,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
+      propertyPath: agility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
+        type: 3}
       propertyPath: strength
       value: 10
       objectReference: {fileID: 0}
@@ -2964,17 +2979,12 @@ PrefabInstance:
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: dexterity
-      value: 15
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: precision
       value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: actionTime
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -2984,7 +2994,7 @@ PrefabInstance:
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: constitution
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 146705667451509789, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -3002,11 +3012,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6ef9b7c38e60d8548a235c9724b995bd, type: 2}
-    - target: {fileID: 4457893470198798407, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_RootOrder
@@ -3061,11 +3066,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738742569409711224, guid: 65797fcb4bffaa648bc150e0f2bd908d,
-        type: 3}
-      propertyPath: m_Speed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7892114624545858478, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -3473,9 +3473,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
+      propertyPath: agility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: strength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: precision
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: constitution
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
       propertyPath: equippedWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: a7fc23ce51622b949b7c3a4aefc0b0ab,
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
         type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -3779,12 +3804,17 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: agility
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: strength
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -3794,12 +3824,12 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: precision
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: constitution
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -4514,6 +4544,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: agility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: strength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Suppressor Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: dexterity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: precision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: constitution
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}

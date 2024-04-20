@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Headsman
   m_EditorClassIdentifier: 
   weapon_name: Headsman
-  damage_per_shot: 50
+  damage_per_shot: 100
   shots_per_attack: 1
   baseAccuracy: 0.7
   range: 10
-  weight: 0
+  weight: 10

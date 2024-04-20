@@ -16,5 +16,5 @@ MonoBehaviour:
   damage_per_shot: 30
   shots_per_attack: 1
   baseAccuracy: 1.5
-  range: 12
+  range: 40
   weight: 12

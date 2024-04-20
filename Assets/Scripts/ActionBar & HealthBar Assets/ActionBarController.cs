@@ -7,7 +7,7 @@ public class ActionBarController : MonoBehaviour
 {
     [Header("ActionBar Main Params")]
     public float actionBar = 0f;
-    public float maxActionBar = 100f;
+    public float maxActionBar = 0.800f;
 
     [Header("ActionBar Regen Params")]
     //[Range(0, 50)] public float actionDrain;

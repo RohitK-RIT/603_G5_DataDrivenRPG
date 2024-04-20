@@ -48,8 +48,21 @@ public class Attack : UnitAbility
                 Line.SetPosition(1, hit.point);
                 if (hit.collider.gameObject == target.gameObject)
                 {
-                    Line.startColor = Color.green;
-                    Line.endColor = Color.green;
+                
+
+                    //now factor in accuracy
+                    float hitRoll = Random.RandomRange(0, 1f);
+                    float hitChance = accuracy;
+                    Debug.Log(hitRoll);
+
+                    if (hitRoll < accuracy)
+                    {
+                        u.TakeDamage(atkDamage);
+                        Line.startColor = Color.green;
+                        Line.endColor = Color.green;
+                    }
+
+                 
                 }
             }
             else

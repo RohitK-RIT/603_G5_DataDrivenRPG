@@ -16,6 +16,7 @@ public abstract class UnitAbility : MonoBehaviour
     public Sprite abilitySprite;
 
     protected float timer = 0f;
+    protected bool focused = false;
 
     const string defaultImgPath = "Assets/Art/Sprites/Ability_Default.png";
 
@@ -28,7 +29,9 @@ public abstract class UnitAbility : MonoBehaviour
 
     protected virtual void Awake()
     {
-        enabled = false;
+        GetComponent<Unit>().OnFocused += (Unit u) => focused = true;
+        GetComponent<Unit>().OnUnfocused += (Unit u) => focused = false;
+
         if (!abilitySprite)
         {
             Texture2D imgTex = new Texture2D(128, 128);
@@ -41,7 +44,7 @@ public abstract class UnitAbility : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetKey(hotkey))
+        if (focused && Input.GetKey(hotkey))
             Queue();
     }
 

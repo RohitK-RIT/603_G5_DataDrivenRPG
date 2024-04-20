@@ -71,9 +71,6 @@ public class Unit : MonoBehaviour
     
     public string unitName = "";
 
-    public float attackDmg = 0;
-    public float attackRange = 0;
-
     public GameObject selectionPrefab;
     GameObject selectIcon;
     NavMeshAgent agent;
@@ -174,6 +171,7 @@ public class Unit : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
+        // Add the selection icon to this unit
         Vector3 rayStart = transform.position;
         rayStart.y += 100f;
         if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, 500f, 1 << 0))
@@ -185,7 +183,7 @@ public class Unit : MonoBehaviour
 
             if (selectionPrefab)
             {
-                selectIcon = Instantiate(selectionPrefab, transform.position - new Vector3(0, extents.y, 0), Quaternion.Euler(90, 0, 0));
+                selectIcon = Instantiate(selectionPrefab, transform.position - new Vector3(0, extents.y - 0.01f, 0), Quaternion.Euler(90, 0, 0));
                 selectIcon.name = $"{gameObject.name} Selection Icon";
                 selectIcon.transform.parent = transform;
                 float maxExtent = Mathf.Max(Mathf.Max(extents.x, extents.y), extents.z);
@@ -228,18 +226,9 @@ public class Unit : MonoBehaviour
             }
 
             // If following a unit, keep updating the destination to move to
-            if (followUnit)
+            if (followUnit && !agent.isStopped)
             {
-                // If the unit to follow should be attacked, stop moving and attack.
-                if ((followUnit.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange)
-                {
-                    agent.isStopped = true;
-                }
-                else
-                {
-                    agent.isStopped = false;
-                    agent.destination = followUnit.transform.position;
-                }
+                agent.destination = followUnit.transform.position;
             }
         }
     }
@@ -458,10 +447,12 @@ public class Unit : MonoBehaviour
         for (int i = 0; i < abilities.Length; i++)
         {
             abilities[i].Hotkey = (KeyCode)(i + 49);
-            abilities[i].enabled = true;
         }
 
-        selectIcon.GetComponent<Animator>().Play("UnitFocus");
+        if (Hostility == Hostility.Friendly)
+        {
+            selectIcon.GetComponent<Animator>().Play("UnitFocus");
+        }
         OnFocused?.Invoke(this);
     }
 
@@ -470,10 +461,6 @@ public class Unit : MonoBehaviour
     /// </summary>
     public void Unfocus()
     {
-        // disable listening for ability hotkey presses
-        foreach (UnitAbility a in GetAllAbilities())
-            a.enabled = false;
-
         selectIcon.GetComponent<Animator>().Rebind();
         OnUnfocused?.Invoke(this);
     }

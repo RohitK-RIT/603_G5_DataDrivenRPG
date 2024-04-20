@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Attack : UnitAbility
 {
@@ -51,13 +52,13 @@ public class Attack : UnitAbility
                 
 
                     //now factor in accuracy
-                    float hitRoll = Random.RandomRange(0, 1f);
+                    float hitRoll = Random.Range(0, 1f);
                     float hitChance = accuracy;
                     Debug.Log(hitRoll);
 
                     if (hitRoll < accuracy)
                     {
-                        u.TakeDamage(atkDamage);
+                        target.TakeDamage(atkDamage);
                         Line.startColor = Color.green;
                         Line.endColor = Color.green;
                     }
@@ -72,99 +73,7 @@ public class Attack : UnitAbility
         }
     }
 
-    public override void Execute()
-    {
-        if (target)
-        {
-            target.OnKilled -= Cancel;
-
-            if (Cover.isBehindCover == true)
-            {
-                origin = transform.position;
-                origin.y += 0.5f;
-                dest = target.transform.position;
-                dest.y += 0.5f;
-            }
-            else
-            {
-                origin = transform.position;
-                dest = target.transform.position;
-            }
-
-            ray = new Ray(origin, (dest - origin));
-            Line.SetPosition(0, origin);
-            Line.material.color = Color.red;
-
-            int numHits = Physics.RaycastNonAlloc(ray, hits, atkRange, ~(1 << 6), QueryTriggerInteraction.Ignore);
-
-            if (numHits > 0)
-            {
-                Array.Sort(hits, (RaycastHit x, RaycastHit y) => x.distance.CompareTo(y.distance));
-
-                for (int i = 0; i < numHits; i++)
-                {
-                    Line.SetPosition(1, hits[i].point);
-                    if (hits[0].collider.gameObject.layer == 8 && hits[1].collider.gameObject.layer == 7)
-                    {
-                        if (hits[i].collider.TryGetComponent(out Unit u))
-                        {
-                            Line.material.color = Color.green;
-                            u.TakeDamage(atkDamage / 2);
-                        }
-                    }
-                    else
-                    {
-                        if (hits[i].collider.TryGetComponent(out Unit u))
-                        {
-                            Line.material.color = Color.green;
-                            u.TakeDamage(atkDamage);
-                        }
-                    }
-                    Debug.Log(hits[i].collider.gameObject.layer);
-                }
-            }
-            else
-            {
-                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
-            }
-
-
-
-
-
-
-
-
-
-
-
-            Line.startColor = Color.red;
-            Line.endColor = Color.red;
-            Line.widthMultiplier = 0.75f;
-
-            /*/ Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
-            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
-            {
-                Line.SetPosition(1, hit.point);
-                if (hit.collider.TryGetComponent(out Unit u))
-                {
-                    u.TakeDamage(atkDamage);
-                    if (u == target)
-                    {
-                        Line.startColor = Color.green;
-                        Line.endColor = Color.green;
-                    }
-                }
-            }
-            else
-            {
-                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
-            }
-            target = null;
-            StartCoroutine(shootLine());
-        }
-        base.Execute();
-    }
+   
 
     IEnumerator shootLine()
     {

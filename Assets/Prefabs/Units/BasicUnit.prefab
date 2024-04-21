@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7892114624545858478}
   - component: {fileID: 3803796620225765806}
   - component: {fileID: 7740934489471438959}
+  - component: {fileID: 8777277902650318432}
   - component: {fileID: 679853065967410961}
   m_Layer: 6
   m_Name: BasicUnit
@@ -223,6 +224,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBehindCover: 0
+--- !u!136 &8777277902650318432
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642455808376837321}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!120 &679853065967410961
 LineRenderer:
   serializedVersion: 2

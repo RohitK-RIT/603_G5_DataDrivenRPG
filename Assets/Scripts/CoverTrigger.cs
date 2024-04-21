@@ -6,15 +6,16 @@ public class CoverTrigger : MonoBehaviour
 {
     public bool isBehindCover;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == 8)
+        if (other.gameObject.layer == 8)
         {
             isBehindCover = true;
             Debug.Log("Is Behind Cover");
         }
     }
-    private void OnCollisionExit(Collision collision)
+
+    private void OnTriggerExit(Collider other)
     {
         isBehindCover = false;
         Debug.Log("Not Behind Cover");

@@ -6,7 +6,7 @@ public class CoverTrigger : MonoBehaviour
 {
     public bool isBehindCover;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == 8)
         {

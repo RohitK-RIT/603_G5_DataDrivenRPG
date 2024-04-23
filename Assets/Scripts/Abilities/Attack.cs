@@ -55,18 +55,10 @@ public class Attack : UnitAbility
             if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
             {
                 Line.SetPosition(1, hit.point);
-                if (hit.collider.gameObject.layer == target.gameObject.layer)
+                if (hit.collider.gameObject == target.gameObject)
                 {
-                    //now factor in accuracy
-                    float hitRoll = Random.Range(0, 1f);
-                    float hitChance = accuracy;
-                    Debug.Log(hitRoll);
-
-                    if (hitRoll < accuracy)
-                    {
-                        Line.startColor = Color.green;
-                        Line.endColor = Color.green;
-                    }
+                        Line.startColor = Color.cyan;
+                        Line.endColor = Color.cyan;
                 }
             }
             else

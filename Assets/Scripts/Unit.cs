@@ -205,8 +205,6 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        stopTmr += Time.deltaTime;
-
         //Added and modified By Ty
         actionBarController.actionProgressUI.fillAmount = 1f - (actionBarController.actionBar / actionBarController.maxActionBar);
         healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
@@ -227,9 +225,15 @@ public class Unit : MonoBehaviour
 
         if (agent) // stationary units should not be using an agent
         {
-            if (stopTmr >= stopCD && agent.velocity.sqrMagnitude <= Mathf.Pow(agent.speed * 0.1f, 2))
+            if (Mathf.Approximately(agent.velocity.sqrMagnitude, 0))
             {
-                agent.isStopped = true;
+                stopTmr += Time.deltaTime;
+                if (stopTmr >= stopCD)
+                    agent.isStopped = true;
+            }
+            else
+            {
+                stopTmr = 0f;
             }
 
             // If following a unit, keep updating the destination to move to

@@ -319,9 +319,9 @@ public class SelectionManager : MonoBehaviour
     /// </summary>
     /// <param name="callback">The callback to invoke upon selecting a unit in the level</param>
     /// <param name="unitHostility">The hostility of the units that can be selected for casting.</param>
-    public static void RequestCastUnit(Texture2D cursorVisual, Hostility unitHosility, TargetUnitCastHandler callback)
+    public static void RequestCastUnit(Texture2D cursorVisual, Hostility unitHostility, TargetUnitCastHandler callback)
     {
-        Instance.selectState = unitHosility == Hostility.Friendly ? SelectionState.TargetFriendlyUnit : SelectionState.TargetEnemyUnit;
+        Instance.selectState = unitHostility == Hostility.Friendly ? SelectionState.TargetFriendlyUnit : SelectionState.TargetEnemyUnit;
         Instance.selecting = false;
         OnTargetUnitRequested += callback;
 

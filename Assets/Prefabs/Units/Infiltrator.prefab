@@ -303,6 +303,8 @@ GameObject:
   - component: {fileID: 6074178794061960769}
   - component: {fileID: 562421008025086558}
   - component: {fileID: 1983016881734171433}
+  - component: {fileID: 8731701559135180390}
+  - component: {fileID: 4457100525388997611}
   m_Layer: 6
   m_Name: Infiltrator
   m_TagString: Untagged
@@ -438,7 +440,6 @@ MonoBehaviour:
   agility: 16
   precision: 1
   constitution: 5
-  equippedWeapon: {fileID: 11400000, guid: 03527a94bf6ef514ba4cb789c093d579, type: 2}
   maxHP: 200
   immune: 0
   hostility: 0
@@ -449,6 +450,7 @@ MonoBehaviour:
   unitState: 0
   actionTime: 0.8
   CharPortrait: {fileID: 0}
+  equippedWeapon: {fileID: 11400000, guid: 03527a94bf6ef514ba4cb789c093d579, type: 2}
 --- !u!114 &3850781980061892528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,6 +620,42 @@ MonoBehaviour:
   radius: 5
   stunTime: 4
   selectionCursor: {fileID: 2800000, guid: 61e87d7672c71ec418650c1d490d7c94, type: 3}
+--- !u!136 &8731701559135180390
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565037723059149873}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4457100525388997611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565037723059149873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfab6b7748c1b634894a587968a02d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBehindCover: 0
 --- !u!1 &8008159226004070691
 GameObject:
   m_ObjectHideFlags: 0

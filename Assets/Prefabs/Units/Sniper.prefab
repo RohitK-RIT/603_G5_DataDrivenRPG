@@ -302,6 +302,8 @@ GameObject:
   - component: {fileID: 5560510186188360536}
   - component: {fileID: 642102862407904216}
   - component: {fileID: 7822828962959722241}
+  - component: {fileID: 4657265162054434812}
+  - component: {fileID: 3174151277331100938}
   m_Layer: 6
   m_Name: Sniper
   m_TagString: Untagged
@@ -437,7 +439,6 @@ MonoBehaviour:
   agility: 1
   precision: 13
   constitution: 1
-  equippedWeapon: {fileID: 11400000, guid: e9a94bf57aa72314da2ceb90c3a1dff0, type: 2}
   maxHP: 200
   immune: 0
   hostility: 0
@@ -448,6 +449,7 @@ MonoBehaviour:
   unitState: 0
   actionTime: 0.8
   CharPortrait: {fileID: 0}
+  equippedWeapon: {fileID: 11400000, guid: e9a94bf57aa72314da2ceb90c3a1dff0, type: 2}
 --- !u!54 &5560510186188360536
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -600,6 +602,42 @@ MonoBehaviour:
   SelectionCursor: {fileID: 2800000, guid: 61e87d7672c71ec418650c1d490d7c94, type: 3}
   chargeTime: 2
   accuracyMultiplier: 0.2
+--- !u!136 &4657265162054434812
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279266928126510786}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3174151277331100938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279266928126510786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfab6b7748c1b634894a587968a02d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBehindCover: 0
 --- !u!1 &6122390661081601517
 GameObject:
   m_ObjectHideFlags: 0

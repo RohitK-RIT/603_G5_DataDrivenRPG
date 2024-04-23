@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Attack : UnitAbility
@@ -12,12 +12,39 @@ public class Attack : UnitAbility
     Unit target;
 
     //Added by Ty
+    CoverTrigger Cover;
+    Vector3 origin;
+    Vector3 dest;
+    Ray ray;
+    RaycastHit[] hits = new RaycastHit[2];
     protected LineRenderer Line;
+
+    //equipped weapon (a Scriptable Object)
+    //added by Taode
+    Weapon equippedWeapon;
+    int precision;
+
 
     private void Start()
     {
         Line = GetComponent<LineRenderer>();
+        Cover = GetComponent<CoverTrigger>();
+        equippedWeapon = GetComponent<Unit>().equippedWeapon;
+        precision = GetComponent<Unit>().precision;
         Line.enabled = false;
+
+        //added by Taode, Modified by Ty
+        //modify the attack action on this unit to account for equipped weapon
+
+        if (equippedWeapon != null)
+        {
+            atkDamage = equippedWeapon.damage_per_shot;
+            atkRange = equippedWeapon.range;
+            //Add Precision bonus here
+            //1% per Precision point
+            accuracy = equippedWeapon.baseAccuracy + (precision / 100f);
+            description = equippedWeapon.ParsedDescription();
+        }
     }
 
     protected override void Update()
@@ -26,22 +53,31 @@ public class Attack : UnitAbility
 
         if (target)
         {
-            Vector3 origin = transform.position;
-            origin.y += 0.5f;
-            Vector3 dest = target.transform.position;
-            dest.y += 0.5f;
+            if (Cover.isBehindCover == true)
+            {
+                origin = transform.position;
+                origin.y += 0.5f;
+                dest = target.transform.position;
+                dest.y += 0.5f;
+            }
+            else
+            {
+                origin = transform.position;
+                dest = target.transform.position;
+            }
 
             Line.SetPosition(0, origin);
             Line.startColor = Color.red;
             Line.endColor = Color.red;
 
+            // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
             if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
             {
                 Line.SetPosition(1, hit.point);
                 if (hit.collider.gameObject == target.gameObject)
                 {
-                    Line.startColor = Color.cyan;
-                    Line.endColor = Color.cyan;
+                        Line.startColor = Color.cyan;
+                        Line.endColor = Color.cyan;
                 }
             }
             else
@@ -57,36 +93,63 @@ public class Attack : UnitAbility
         {
             target.OnKilled -= Cancel;
 
-            Vector3 origin = transform.position;
-            origin.y += 0.5f;
-            Vector3 dest = target.transform.position;
-            dest.y += 0.5f;
-
-            Line.SetPosition(0, origin);
-            Line.startColor = Color.red;
-            Line.endColor = Color.red;
-            Line.widthMultiplier = 0.75f;
-
-            // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
-            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
+            if (Cover.isBehindCover == true)
             {
-                Line.SetPosition(1, hit.point);
-                if (hit.collider.TryGetComponent(out Unit u) && (u == target))
-                {
-                    //now factor in accuracy
-                    float hitRoll = Random.Range(0, 1f);
-                    float hitChance = accuracy;
-                    if (hitRoll < accuracy)
-                    {
-                        u.TakeDamage(atkDamage);
-                        Line.startColor = Color.green;
-                        Line.endColor = Color.green;
-                    }
-                }
+                origin = transform.position;
+                origin.y += 0.5f;
+                dest = target.transform.position;
+                dest.y += 0.5f;
             }
             else
             {
-                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
+                origin = transform.position;
+                dest = target.transform.position;
+            }
+
+            ray = new Ray(origin, (dest - origin));
+            Line.SetPosition(0, origin);
+            Line.startColor = Color.red;
+            Line.endColor = Color.red;
+            Line.widthMultiplier = 0.5f;
+
+            int numHits = Physics.RaycastNonAlloc(ray, hits, atkRange, ~(1 << 6), QueryTriggerInteraction.Ignore);
+
+            if (numHits > 0)
+            {
+                Array.Sort(hits, (RaycastHit x, RaycastHit y) => x.distance.CompareTo(y.distance));
+
+                if (hits[0].collider.gameObject.layer == 7)
+                {
+                    if (hits[0].collider.TryGetComponent(out Unit u))
+                    {
+                        Line.SetPosition(1, hits[0].point);
+                        if (u == target)
+                        {
+                            Line.startColor = Color.green;
+                            Line.endColor = Color.green;
+                            u.TakeDamage(atkDamage);
+                        }
+                    }
+                }
+                else if (hits[0].collider.gameObject.layer == 8 && hits[1].collider.gameObject.layer == 7)
+                {
+                    if (hits[1].collider.TryGetComponent(out Unit u))
+                    {
+                        Line.SetPosition(1, hits[1].point);
+                        if (u == target)
+                        {
+                            Line.startColor = Color.green;
+                            Line.endColor = Color.green;
+                            u.TakeDamage(atkDamage / 2);
+                        }
+                    }
+                }
+                else
+                {
+                    Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
+                }
+               // Debug.Log(hits[0].collider.gameObject.layer);
+               // Debug.Log(hits[1].collider.gameObject.layer);
             }
             target = null;
             StartCoroutine(shootLine());
@@ -103,7 +166,7 @@ public class Attack : UnitAbility
 
     public override void Queue()
     {
-        SelectionManager.RequestCastUnit(SelectionCursor, Hostility.Hostile, (Unit unit) => 
+        SelectionManager.RequestCastUnit(SelectionCursor, Hostility.Hostile, (Unit unit) =>
         {
             Line.enabled = true;
             if (target) target.OnKilled -= Cancel;

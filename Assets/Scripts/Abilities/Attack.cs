@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Attack : UnitAbility
 {
@@ -21,11 +19,32 @@ public class Attack : UnitAbility
     Ray ray;
     RaycastHit[] hits = new RaycastHit[2];
 
+    //equipped weapon (a Scriptable Object)
+    //added by Taode
+    Weapon equippedWeapon;
+    int precision;
+
+
     private void Start()
     {
         Line = GetComponent<LineRenderer>();
         Cover = GetComponent<CoverTrigger>();
+        equippedWeapon = GetComponent<Unit>().equippedWeapon;
+        precision = GetComponent<Unit>().precision;
         Line.enabled = false;
+
+        //added by Taode, Modified by Ty
+        //modify the attack action on this unit to account for equipped weapon
+
+        if (equippedWeapon != null)
+        {
+            atkDamage = equippedWeapon.damage_per_shot;
+            atkRange = equippedWeapon.range;
+            //Add Precision bonus here
+            //1% per Precision point
+            accuracy = equippedWeapon.baseAccuracy + (precision / 100f);
+            description = equippedWeapon.ParsedDescription();
+        }
     }
 
     protected override void Update()

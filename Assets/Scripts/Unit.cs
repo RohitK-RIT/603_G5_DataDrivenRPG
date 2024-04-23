@@ -35,18 +35,12 @@ public class Unit : MonoBehaviour
     public event FocusedHandler OnFocused;
     public event FocusedHandler OnUnfocused;
 
-
-
     //attributes
     public int strength = 1; 
     public int dexterity = 1;
     public int agility = 1;
     public int precision = 1;
     public int constitution = 1;
-
-    //equipped weapon (a Scriptable Object)
-    //added by Taode
-    public Weapon equippedWeapon; 
 
     [Tooltip("The maximum HP of this unit. Set to 0 if indestructible.")]
     public float maxHP = 0f;
@@ -92,6 +86,9 @@ public class Unit : MonoBehaviour
     HealthBarController healthBarController;
     [SerializeField] private GameObject CharPortrait;
 
+    //equipped weapon (a Scriptable Object)
+    //added by Taode
+    public Weapon equippedWeapon;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -103,21 +100,6 @@ public class Unit : MonoBehaviour
         healthBarController = CharPortrait.GetComponent<HealthBarController>();
         CharPortrait.GetComponent<CharacterPortrait>()?.SetOwner(this);
 
-
-        //added by Taode
-        //modify the attack action on this unit to account for equipped weapon
-        Attack attackAction = this.GetAbility("Attack") as Attack;
-
-        if(attackAction != null)
-        {
-            attackAction.atkDamage = equippedWeapon.damage_per_shot;
-            attackAction.atkRange = equippedWeapon.range;
-            //Add Precision bonus here
-            //1% per Precision point
-            attackAction.accuracy = equippedWeapon.baseAccuracy + (precision / 100f);
-            attackAction.description = equippedWeapon.ParsedDescription();
-
-        }
         // Add this unit to the list ofselectable units
         switch (hostility)
         {

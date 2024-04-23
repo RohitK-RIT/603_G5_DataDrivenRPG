@@ -361,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 87988781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -176.4562, y: -1.0678, z: -32.7701}
-  m_LocalScale: {x: 1.1495137, y: 12.368377, z: -33.805275}
+  m_LocalScale: {x: 1.1495137, y: 12.368377, z: 33.80527}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1314778831}
@@ -474,7 +474,7 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: unitName
-      value: Peacekeeper Turret
+      value: Headsman Turret
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -490,12 +490,12 @@ PrefabInstance:
         type: 3}
       propertyPath: equippedWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
         type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -792,6 +792,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Headsman Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -870,6 +881,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -1059,10 +1081,21 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 29.35
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Headsman Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -1874,6 +1907,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 29.35
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Headsman Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -2577,7 +2621,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
@@ -3176,6 +3220,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: PeaceKeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -4418,7 +4473,7 @@ PrefabInstance:
     - target: {fileID: 591471722744082370, guid: be703b70a5af93944ab132c079c3671f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 591471722744082370, guid: be703b70a5af93944ab132c079c3671f,
         type: 3}
@@ -4938,7 +4993,7 @@ PrefabInstance:
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -6036,7 +6091,7 @@ PrefabInstance:
     - target: {fileID: 4665403215276680929, guid: a2bb38fa986bc37489c5fb45bfef4d16,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4665403215276680929, guid: a2bb38fa986bc37489c5fb45bfef4d16,
         type: 3}
@@ -6585,7 +6640,7 @@ PrefabInstance:
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -7345,7 +7400,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1138593553
 GameObject:
@@ -7950,7 +8005,7 @@ PrefabInstance:
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6736091198766071087, guid: 65797fcb4bffaa648bc150e0f2bd908d,
         type: 3}
@@ -8368,7 +8423,7 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: unitName
-      value: Peacekeeper Turret
+      value: Headsman Turret
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -8384,12 +8439,12 @@ PrefabInstance:
         type: 3}
       propertyPath: equippedWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
         type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -8498,7 +8553,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -8576,7 +8631,7 @@ PrefabInstance:
     - target: {fileID: 11160038017264302, guid: 88629c9dfe0cf7247b9c3ddd850be002,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 11160038017264302, guid: 88629c9dfe0cf7247b9c3ddd850be002,
         type: 3}
@@ -8779,7 +8834,7 @@ Transform:
   - {fileID: 122817679}
   - {fileID: 372497629}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1315420930
 GameObject:
@@ -8938,7 +8993,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -9044,7 +9099,7 @@ Transform:
   - {fileID: 1771656744}
   - {fileID: 147487860}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1450024216
 GameObject:
@@ -9182,6 +9237,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -10096,7 +10162,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
@@ -10395,7 +10461,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
@@ -11033,7 +11099,7 @@ Transform:
   - {fileID: 1645237781}
   - {fileID: 257659474}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1707464977 stripped
 GameObject:
@@ -11093,7 +11159,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -11560,7 +11626,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1789644004
 MonoBehaviour:
@@ -11701,7 +11767,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9632a1077b7a7c498a54518b6447a22,
         type: 3}
@@ -12114,7 +12180,7 @@ PrefabInstance:
     - target: {fileID: 429589204899788994, guid: caf76d26855b64645a4590b826addbd0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 429589204899788994, guid: caf76d26855b64645a4590b826addbd0,
         type: 3}
@@ -12942,7 +13008,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -13454,7 +13520,7 @@ Transform:
   m_Children:
   - {fileID: 6697912972695173076}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &3573360448567867219
 MonoBehaviour:
@@ -13473,7 +13539,6 @@ MonoBehaviour:
   agility: 1
   precision: 10
   constitution: 8
-  equippedWeapon: {fileID: 11400000, guid: 7b21eb2b56eb111469b6d2712ad3d929, type: 2}
   maxHP: 75
   immune: 0
   hostility: 2
@@ -13484,6 +13549,7 @@ MonoBehaviour:
   unitState: 0
   actionTime: 0
   CharPortrait: {fileID: 1146914226967618014}
+  equippedWeapon: {fileID: 11400000, guid: 7b21eb2b56eb111469b6d2712ad3d929, type: 2}
 --- !u!222 &3635167066532033749
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13591,7 +13657,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &4920774453981698807
 CanvasRenderer:

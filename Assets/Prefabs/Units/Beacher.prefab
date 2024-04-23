@@ -578,7 +578,7 @@ MonoBehaviour:
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 0.8
+  actionTime: 3.8
   CharPortrait: {fileID: 0}
   equippedWeapon: {fileID: 11400000, guid: a7fc23ce51622b949b7c3a4aefc0b0ab, type: 2}
 --- !u!114 &4316200902525515970
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Sprint
   description: Increases Breacher's movement speed by 10% for 2 seconds.
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: 53e67f15be0da674cb00323fdd70ed33, type: 3}
   speedMultiplier: 1.5
   sprintTime: 2
 --- !u!136 &4674900401089365256

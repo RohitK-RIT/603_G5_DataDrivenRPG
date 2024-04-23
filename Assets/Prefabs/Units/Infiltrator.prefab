@@ -448,7 +448,7 @@ MonoBehaviour:
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 0.8
+  actionTime: 3.8
   CharPortrait: {fileID: 0}
   equippedWeapon: {fileID: 11400000, guid: 03527a94bf6ef514ba4cb789c093d579, type: 2}
 --- !u!114 &3850781980061892528
@@ -614,9 +614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: EMP Grenade
-  description: Throw a grenade at the target location. All enemies caught inside
-    the blast are stunned for 4 seconds.
-  abilitySprite: {fileID: 0}
+  description: '[NOT YET IMPLEMENTED]'
+  abilitySprite: {fileID: 21300000, guid: 0955c8fa3af37bb45a19a417d10cf04e, type: 3}
   radius: 5
   stunTime: 4
   selectionCursor: {fileID: 2800000, guid: 61e87d7672c71ec418650c1d490d7c94, type: 3}

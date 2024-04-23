@@ -447,7 +447,7 @@ MonoBehaviour:
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 0.8
+  actionTime: 3.8
   CharPortrait: {fileID: 0}
   equippedWeapon: {fileID: 11400000, guid: e9a94bf57aa72314da2ceb90c3a1dff0, type: 2}
 --- !u!54 &5560510186188360536
@@ -595,7 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Aimed Shot
   description: Fire a precise shot at the target enemy, dealing 48 damage.
-  abilitySprite: {fileID: 21300000, guid: decd16f2bc44e624f99e9ae249a06695, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 659f172823634cc49b72311237941b34, type: 3}
   atkDamage: 48
   atkRange: 33
   accuracy: 50

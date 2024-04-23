@@ -251,13 +251,11 @@ MonoBehaviour:
   immune: 0
   hostility: 2
   unitName: Turret (1)
-  attackDmg: 0
-  attackRange: 0
   selectionPrefab: {fileID: 3423735369810992541, guid: ceda65d003dc44143acb3b8c804dc2f0,
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 0.8
+  actionTime: 3.3
   CharPortrait: {fileID: 8547787947617653108}
 --- !u!114 &7583036914056682796
 MonoBehaviour:

@@ -1,55 +1,118 @@
 ﻿using System.Collections;
+using AI;
 using UnityEngine;
 
-namespace AI.Turret
+public class AIAttack : UnitAbility
 {
-    public class AIAttack : UnitAbility
+    public float atkDamage = 25f;
+    public float accuracy = 50f;
+    [SerializeField] Texture2D SelectionCursor;
+
+    private float atkRange = float.MinValue;
+
+    protected Unit target;
+
+    //Added by Ty
+    protected LineRenderer Line;
+
+    protected override void Start()
     {
-        public float atkDamage = 25f;
+        Line = GetComponent<LineRenderer>();
+        Line.enabled = false;
+        atkRange = GetComponent<AIPerception>().SightDistance;
+    }
 
-        private LineRenderer Line => _line ??= GetComponent<LineRenderer>();
+    protected override void Update()
+    {
+        base.Update();
 
-        private Unit _target;
-        private LineRenderer _line;
-
-
-        private void Start()
+        if (target)
         {
-            Line.enabled = false;
-        }
+            Vector3 origin = transform.position;
+            origin.y += 0.5f;
+            Vector3 dest = target.transform.position;
+            dest.y += 0.5f;
 
-        public override void Execute()
-        {
-            if (!GetComponent<AIPerception>().VisibleUnits.Contains(_target))
-                return;
+            Line.SetPosition(0, origin);
+            Line.startColor = Color.red;
+            Line.endColor = Color.red;
 
-            if (_target)
+            if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
             {
-                _target.TakeDamage(atkDamage);
-                Line.SetPosition(1, _target.transform.position);
-                StartCoroutine(shootLine());
+                Line.SetPosition(1, hit.point);
+                if (hit.collider.gameObject == target.gameObject)
+                {
+                    Line.startColor = Color.cyan;
+                    Line.endColor = Color.cyan;
+                }
             }
+            else
+            {
+                Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
+            }
+        }
+    }
 
-            base.Execute();
+    public override void Execute()
+    {
+        if (!target)
+            return;
+
+        target.OnKilled -= Cancel;
+
+        Vector3 origin = transform.position;
+        origin.y += 0.5f;
+        Vector3 dest = target.transform.position;
+        dest.y += 0.5f;
+
+        Line.SetPosition(0, origin);
+        Line.startColor = Color.red;
+        Line.endColor = Color.red;
+        Line.widthMultiplier = 0.75f;
+
+        Line.SetPosition(1, target.transform.position);
+
+        if (!GetComponent<AIPerception>().VisibleUnits.Contains(target))
+            return;
+
+        //now factor in accuracy
+        float hitRoll = Random.Range(0, 1f);
+        float hitChance = accuracy;
+        if (hitRoll < accuracy)
+        {
+            target.TakeDamage(atkDamage);
+            Line.startColor = Color.green;
+            Line.endColor = Color.green;
         }
 
-        public void Queue(Unit unit)
-        {
-            _target = unit;
-            base.Queue();
-        }
+        target = null;
+        StartCoroutine(shootLine());
+        
+        base.Execute();
+    }
 
-        protected override void Update()
-        {
-            base.Update();
-            Line.SetPosition(0, transform.position);
-        }
+    IEnumerator shootLine()
+    {
+        yield return new WaitForSeconds(.5f);
+        Line.enabled = false;
+        Line.widthMultiplier = 0.2f;
+    }
 
-        IEnumerator shootLine()
+    public void Queue(Unit target)
+    {
+        Line.enabled = true;
+        this.target = target;
+        target.OnKilled += Cancel;
+        base.Queue();
+    }
+
+    protected void Cancel(Unit t)
+    {
+        if (base.Cancel())
         {
-            Line.enabled = true;
-            yield return new WaitForSeconds(.5f);
+            Debug.Log(t.unitName + " -- " + target.unitName);
             Line.enabled = false;
+            target = null;
         }
     }
 }

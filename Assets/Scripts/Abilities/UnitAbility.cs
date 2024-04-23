@@ -28,6 +28,8 @@ public abstract class UnitAbility : MonoBehaviour
         set { hotkey = value; }
     }
 
+    private bool initialized = false;
+
     protected virtual void Awake()
     {
         thisUnit = GetComponent<Unit>();
@@ -42,6 +44,15 @@ public abstract class UnitAbility : MonoBehaviour
                 abilitySprite = Sprite.Create(imgTex, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
             }
         }
+    }
+
+    protected virtual void Start()
+    {
+        if (initialized)
+            return;
+        
+        enabled = false;
+        initialized = true;
     }
 
     protected virtual void Update()

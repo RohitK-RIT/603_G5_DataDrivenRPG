@@ -16,6 +16,7 @@ namespace AI
 
         public bool HasTarget => VisibleUnits?.Count > 0;
         public List<Unit> VisibleUnits { get; private set; }
+        public float SightDistance => sightDistance;
 
         private Vector3 EyePosition => transform.position + eyeOffset;
 

@@ -17,6 +17,7 @@ public abstract class UnitAbility : MonoBehaviour
 
     protected float timer = 0f;
     protected bool focused = false;
+    protected Unit thisUnit;
 
     const string defaultImgPath = "Assets/Art/Sprites/Ability_Default.png";
 
@@ -29,8 +30,9 @@ public abstract class UnitAbility : MonoBehaviour
 
     protected virtual void Awake()
     {
-        GetComponent<Unit>().OnFocused += (Unit u) => focused = true;
-        GetComponent<Unit>().OnUnfocused += (Unit u) => focused = false;
+        thisUnit = GetComponent<Unit>();
+        thisUnit.OnFocused += (Unit u) => focused = true;
+        thisUnit.OnUnfocused += (Unit u) => focused = false;
 
         if (!abilitySprite)
         {
@@ -44,7 +46,7 @@ public abstract class UnitAbility : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (focused && Input.GetKey(hotkey))
+        if (thisUnit.GetQueuedAbility() != this && focused && Input.GetKeyDown(hotkey))
             Queue();
     }
 
@@ -65,7 +67,7 @@ public abstract class UnitAbility : MonoBehaviour
     /// </summary>
     public virtual void Queue()
     {
-        GetComponent<Unit>().SetQueuedAbility(this);
+        thisUnit.SetQueuedAbility(this);
         OnAbilityQueued?.Invoke();
     }
 
@@ -79,10 +81,9 @@ public abstract class UnitAbility : MonoBehaviour
     /// </returns>
     public virtual bool Cancel()
     {
-        Unit u = GetComponent<Unit>();
-        if (u.GetQueuedAbility() == this)
+        if (thisUnit.GetQueuedAbility() == this)
         {
-            u.SetQueuedAbility((UnitAbility)null);
+            thisUnit.SetQueuedAbility((UnitAbility)null);
             OnAbilityCancelled?.Invoke();
             return true;
         }

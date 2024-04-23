@@ -156,13 +156,11 @@ MonoBehaviour:
   immune: 0
   hostility: 2
   unitName: Testing Enemy Unit
-  attackDmg: 50
-  attackRange: 0
   selectionPrefab: {fileID: 3423735369810992541, guid: ceda65d003dc44143acb3b8c804dc2f0,
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 0.8
+  actionTime: 5.8
   CharPortrait: {fileID: 2347300628807073429}
 --- !u!114 &7892114624545858478
 MonoBehaviour:
@@ -182,6 +180,7 @@ MonoBehaviour:
   atkDamage: 25
   atkRange: 50
   accuracy: 50
+  SelectionCursor: {fileID: 0}
 --- !u!114 &5597729487216790004
 MonoBehaviour:
   m_ObjectHideFlags: 0

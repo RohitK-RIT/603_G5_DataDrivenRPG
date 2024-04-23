@@ -18,6 +18,7 @@ public class Attack : UnitAbility
     Vector3 dest;
     Ray ray;
     RaycastHit[] hits = new RaycastHit[2];
+    protected LineRenderer Line;
 
     //equipped weapon (a Scriptable Object)
     //added by Taode

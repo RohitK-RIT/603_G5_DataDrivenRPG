@@ -310,7 +310,7 @@ MonoBehaviour:
   abilityName: AI Attack
   description: Ability Description
   abilitySprite: {fileID: 0}
-  atkDamage: 75
+  atkDamage: 30
 --- !u!1001 &1775833829844556370
 PrefabInstance:
   m_ObjectHideFlags: 0

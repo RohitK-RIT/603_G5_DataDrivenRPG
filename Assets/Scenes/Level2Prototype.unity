@@ -666,7 +666,7 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: unitName
-      value: Peacekeeper Turret
+      value: Headsman Turret
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -682,7 +682,7 @@ PrefabInstance:
         type: 3}
       propertyPath: equippedWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
         type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -990,6 +990,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -1068,6 +1079,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -1257,6 +1279,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 29.35
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Headsman Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -2336,6 +2369,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 29.35
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Headsman Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -3755,6 +3799,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder
@@ -9725,7 +9780,7 @@ PrefabInstance:
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: unitName
-      value: Peacekeeper Turret
+      value: Headsman Turret
       objectReference: {fileID: 0}
     - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -9741,7 +9796,7 @@ PrefabInstance:
         type: 3}
       propertyPath: equippedWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+      objectReference: {fileID: 11400000, guid: d67a73874f05861469f91de155da93a1,
         type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -10676,6 +10731,17 @@ PrefabInstance:
       propertyPath: sightDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: unitName
+      value: Peacekeeper Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251865484847204345, guid: 0bc1164b45bae7a419527f0bc7406684,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8de09c8879c226d498a31f7f69033da9,
+        type: 2}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_RootOrder

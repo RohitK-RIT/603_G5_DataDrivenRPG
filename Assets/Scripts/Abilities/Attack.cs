@@ -153,6 +153,7 @@ public class Attack : UnitAbility
             }
             target = null;
             StartCoroutine(shootLine());
+            ClearHitsArray();
         }
         base.Execute();
     }
@@ -162,6 +163,11 @@ public class Attack : UnitAbility
         yield return new WaitForSeconds(.5f);
         Line.enabled = false;
         Line.widthMultiplier = 0.2f;
+    }
+
+    private void ClearHitsArray()
+    {
+        System.Array.Clear(hits, 0, hits.Length);
     }
 
     public override void Queue()

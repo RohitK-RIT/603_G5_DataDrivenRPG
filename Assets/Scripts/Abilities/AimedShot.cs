@@ -5,7 +5,16 @@ using UnityEngine;
 public class AimedShot : Attack
 {
     public float chargeTime = 1.5f;
-    public float accuracyMultiplier = 0.2f;
+    public float accuracyMultiplier = 1.2f;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        abilityName = "Aimed Shot";
+        description = $"Fire a precise sniper round after {chargeTime} seconds, dealing {equippedWeapon.damage_per_shot} damage.";
+        accuracy *= accuracyMultiplier;
+    }
 
     public override void Execute()
     {

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Attack : UnitAbility
 {
-    public float atkDamage = 25f;
-    public float atkRange = 50f;
-    public float accuracy = 50f;
+    protected float atkDamage = 0f;
+    protected float atkRange = 0f;
+    protected float accuracy = 0f;
     [SerializeField] Texture2D SelectionCursor;
 
     Unit target;
@@ -21,11 +21,11 @@ public class Attack : UnitAbility
 
     //equipped weapon (a Scriptable Object)
     //added by Taode
-    Weapon equippedWeapon;
+    protected Weapon equippedWeapon;
     int precision;
 
 
-    private void Start()
+    protected virtual void Start()
     {
         Line = GetComponent<LineRenderer>();
         Cover = GetComponent<CoverTrigger>();

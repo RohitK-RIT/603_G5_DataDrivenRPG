@@ -4019,7 +4019,7 @@ PrefabInstance:
     - target: {fileID: 7942890330127076134, guid: f56d6537755712c44a058927cdb7caa2,
         type: 3}
       propertyPath: m_Name
-      value: Char Portrait
+      value: Breacher Portrait
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4163,7 +4163,7 @@ PrefabInstance:
     - target: {fileID: 7942890330127076134, guid: f56d6537755712c44a058927cdb7caa2,
         type: 3}
       propertyPath: m_Name
-      value: Char Portrait (2)
+      value: Sniper Portrait
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4302,7 +4302,7 @@ PrefabInstance:
     - target: {fileID: 7942890330127076134, guid: f56d6537755712c44a058927cdb7caa2,
         type: 3}
       propertyPath: m_Name
-      value: Char Portrait (3)
+      value: Infiltrator Portrait
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4877,7 +4877,7 @@ PrefabInstance:
     - target: {fileID: 7942890330127076134, guid: f56d6537755712c44a058927cdb7caa2,
         type: 3}
       propertyPath: m_Name
-      value: Char Portrait (1)
+      value: Tactician Portrait
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

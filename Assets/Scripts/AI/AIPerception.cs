@@ -18,6 +18,7 @@ namespace AI
         public List<Unit> VisibleUnits { get; private set; }
 
         private Vector3 EyePosition => transform.position + eyeOffset;
+        public float SightDistance => sightDistance;
 
         private Mesh _mesh;
         private int _count;

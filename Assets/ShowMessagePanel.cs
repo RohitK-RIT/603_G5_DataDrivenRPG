@@ -12,6 +12,7 @@ public class ShowMessagePanel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        tutorialText.gameObject.SetActive(true);
         tutorialText.text = text;
     }
 

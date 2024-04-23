@@ -13,7 +13,6 @@ public class Attack : UnitAbility
 
     //Added by Ty
     CoverTrigger Cover;
-    LineRenderer Line;
     Vector3 origin;
     Vector3 dest;
     Ray ray;

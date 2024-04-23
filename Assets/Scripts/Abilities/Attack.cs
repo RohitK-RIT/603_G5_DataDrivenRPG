@@ -12,7 +12,7 @@ public class Attack : UnitAbility
     Unit target;
 
     //Added by Ty
-    LineRenderer Line;
+    protected LineRenderer Line;
 
     private void Start()
     {
@@ -117,7 +117,6 @@ public class Attack : UnitAbility
     {
         if (base.Cancel())
         {
-            Debug.Log(t.unitName + " -- " + target.unitName);
             Line.enabled = false;
             target = null;
         }

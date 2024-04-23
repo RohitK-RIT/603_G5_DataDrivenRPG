@@ -9,12 +9,12 @@ public class Attack : UnitAbility
     public float accuracy = 50f;
     [SerializeField] Texture2D SelectionCursor;
 
-    Unit target;
+    protected Unit target;
 
     //Added by Ty
-    LineRenderer Line;
+    protected LineRenderer Line;
 
-    private void Start()
+    protected override void Start()
     {
         Line = GetComponent<LineRenderer>();
         Line.enabled = false;
@@ -113,7 +113,7 @@ public class Attack : UnitAbility
         });
     }
 
-    void Cancel(Unit t)
+    protected void Cancel(Unit t)
     {
         if (base.Cancel())
         {

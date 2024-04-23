@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using UnityEngine;
 public abstract class UnitAbility : MonoBehaviour
 {
     public delegate void AbilityHandler();
+
     public event AbilityHandler OnAbilityExecuted;
     public event AbilityHandler OnAbilityQueued;
     public event AbilityHandler OnAbilityCancelled;
@@ -16,22 +18,21 @@ public abstract class UnitAbility : MonoBehaviour
     public Sprite abilitySprite;
 
     protected float timer = 0f;
-    protected bool focused = false;
 
     const string defaultImgPath = "Assets/Art/Sprites/Ability_Default.png";
 
     KeyCode hotkey;
+
     public KeyCode Hotkey
     {
-        get {  return hotkey; }
+        get { return hotkey; }
         set { hotkey = value; }
     }
 
+    private bool initialized = false;
+
     protected virtual void Awake()
     {
-        GetComponent<Unit>().OnFocused += (Unit u) => focused = true;
-        GetComponent<Unit>().OnUnfocused += (Unit u) => focused = false;
-
         if (!abilitySprite)
         {
             Texture2D imgTex = new Texture2D(128, 128);
@@ -42,9 +43,18 @@ public abstract class UnitAbility : MonoBehaviour
         }
     }
 
+    protected virtual void Start()
+    {
+        if (initialized)
+            return;
+        
+        enabled = false;
+        initialized = true;
+    }
+
     protected virtual void Update()
     {
-        if (focused && Input.GetKey(hotkey))
+        if (Input.GetKey(hotkey))
             Queue();
     }
 
@@ -86,6 +96,7 @@ public abstract class UnitAbility : MonoBehaviour
             OnAbilityCancelled?.Invoke();
             return true;
         }
+
         return false;
     }
 }

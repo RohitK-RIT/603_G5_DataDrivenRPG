@@ -106,7 +106,6 @@ public class Attack : UnitAbility
                 dest = target.transform.position;
             }
 
-
             ray = new Ray(origin, (dest - origin));
             Line.SetPosition(0, origin);
             Line.startColor = Color.red;
@@ -181,7 +180,6 @@ public class Attack : UnitAbility
     {
         if (base.Cancel())
         {
-            Debug.Log(t.unitName + " -- " + target.unitName);
             Line.enabled = false;
             target = null;
         }

@@ -255,7 +255,7 @@ MonoBehaviour:
     type: 3}
   currentHP: 0
   unitState: 0
-  actionTime: 3.8
+  actionTime: 3.3
   CharPortrait: {fileID: 8547787947617653108}
 --- !u!114 &7583036914056682796
 MonoBehaviour:

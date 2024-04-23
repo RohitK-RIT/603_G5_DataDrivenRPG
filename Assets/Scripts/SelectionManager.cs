@@ -73,6 +73,9 @@ public class SelectionManager : MonoBehaviour
         // nullify all event listeners
         OnUnitSelectionChanged = null;
         StopTargetSelection();
+
+        
+        
     }
 
     // Start is called before the first frame update

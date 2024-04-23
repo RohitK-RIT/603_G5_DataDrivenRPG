@@ -9,17 +9,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LevelPrototype");
-    }
-
-    public void OpenControls()
-    {
-
-    }
-
-    public void OpenOptions()
-    {
-
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Level2Prototype");
     }
 
     public void QuitGame()

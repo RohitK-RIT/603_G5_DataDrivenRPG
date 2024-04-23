@@ -189,7 +189,6 @@ public class Unit : MonoBehaviour
     {
         //Added and modified By Ty
         actionBarController.actionProgressUI.fillAmount = 1f - (actionBarController.actionBar / actionBarController.maxActionBar);
-        healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
 
         //modified by QP: actionRegen represents the actual time (ms) for the bar to fill, while maxActionBar is the base action speed
         actionBarController.actionBar += (actionBarController.maxActionBar / actionBarController.actionRegen) * Time.deltaTime;
@@ -303,9 +302,16 @@ public class Unit : MonoBehaviour
     {
         if (immune) return;
         SetCurrentHP(currentHP - dmg);
+    }
 
-        // Added By Ty
-        healthBarController.healthBar -= dmg;
+    /// <summary>
+    /// Heals this unit by a particular amount.
+    /// Can only heal up to its max HP.
+    /// </summary>
+    /// <param name="healAmt">The amount to heal.</param>
+    public void Heal(float healAmt)
+    {
+        SetCurrentHP(currentHP + healAmt);
     }
 
     /// <summary>
@@ -320,6 +326,9 @@ public class Unit : MonoBehaviour
 
         float oldHP = currentHP;
         currentHP = Mathf.Clamp(hp, 0, maxHP);
+
+        healthBarController.healthBar = currentHP;
+        healthBarController.healthProgressUI.fillAmount = healthBarController.healthBar / healthBarController.maxHealthBar;
 
         if (currentHP <= 0)
             Destroy();
@@ -338,16 +347,6 @@ public class Unit : MonoBehaviour
         OnKilled?.Invoke(this);
         Destroy(gameObject);
         healthBarController.healthProgressUI.fillAmount = 0;
-    }
-
-    /// <summary>
-    /// Heals this unit by a particular amount.
-    /// Can only heal up to its max HP.
-    /// </summary>
-    /// <param name="healAmt">The amount to heal.</param>
-    public void Heal(float healAmt)
-    {
-        currentHP = Mathf.Clamp(currentHP + healAmt, 0, maxHP);
     }
 
     /// <summary>

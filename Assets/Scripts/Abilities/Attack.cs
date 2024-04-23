@@ -35,19 +35,13 @@ public class Attack : UnitAbility
             Line.startColor = Color.red;
             Line.endColor = Color.red;
 
-            // Raycast towards target; deal dmg to whatever is hit (which may not be the target if another enemy unit is in the way)
             if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
             {
                 Line.SetPosition(1, hit.point);
                 if (hit.collider.gameObject == target.gameObject)
                 {
-                
-
-                  
-
-                 
-
-                 
+                    Line.startColor = Color.cyan;
+                    Line.endColor = Color.cyan;
                 }
             }
             else
@@ -77,23 +71,16 @@ public class Attack : UnitAbility
             if (Physics.Raycast(origin, dest - origin, out RaycastHit hit, atkRange, ~(1 << 6))) // ignore other friendly units
             {
                 Line.SetPosition(1, hit.point);
-                if (hit.collider.TryGetComponent(out Unit u))
+                if (hit.collider.TryGetComponent(out Unit u) && (u == target))
                 {
-
                     //now factor in accuracy
-                    float hitRoll = Random.RandomRange(0, 1f);
+                    float hitRoll = Random.Range(0, 1f);
                     float hitChance = accuracy;
-                    Debug.Log(hitRoll);
-
-                    u.TakeDamage(atkDamage);
-                    if (u == target)
+                    if (hitRoll < accuracy)
                     {
-                        if (hitRoll < accuracy)
-                        {
-                            u.TakeDamage(atkDamage);
-                            Line.startColor = Color.green;
-                            Line.endColor = Color.green;
-                        }
+                        u.TakeDamage(atkDamage);
+                        Line.startColor = Color.green;
+                        Line.endColor = Color.green;
                     }
                 }
             }

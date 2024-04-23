@@ -15,8 +15,6 @@ public class Attack : UnitAbility
     CoverTrigger Cover;
     Vector3 origin;
     Vector3 dest;
-    Ray ray;
-    RaycastHit[] hits = new RaycastHit[2];
     protected LineRenderer Line;
 
     //equipped weapon (a Scriptable Object)
@@ -106,12 +104,15 @@ public class Attack : UnitAbility
                 dest = target.transform.position;
             }
 
-            ray = new Ray(origin, (dest - origin));
             Line.SetPosition(0, origin);
             Line.startColor = Color.red;
             Line.endColor = Color.red;
             Line.widthMultiplier = 0.5f;
 
+            Ray ray = new Ray(origin, dest - origin);
+            RaycastHit[] hits = new RaycastHit[2];
+            hits[0].distance = 999999;
+            hits[1].distance = 999999;
             int numHits = Physics.RaycastNonAlloc(ray, hits, atkRange, ~(1 << 6), QueryTriggerInteraction.Ignore);
 
             if (numHits > 0)
@@ -153,7 +154,6 @@ public class Attack : UnitAbility
             }
             target = null;
             StartCoroutine(shootLine());
-            ClearHitsArray();
         }
         base.Execute();
     }
@@ -163,11 +163,6 @@ public class Attack : UnitAbility
         yield return new WaitForSeconds(.5f);
         Line.enabled = false;
         Line.widthMultiplier = 0.2f;
-    }
-
-    private void ClearHitsArray()
-    {
-        System.Array.Clear(hits, 0, hits.Length);
     }
 
     public override void Queue()

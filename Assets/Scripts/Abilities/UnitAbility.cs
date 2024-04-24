@@ -19,7 +19,7 @@ public abstract class UnitAbility : MonoBehaviour
     protected bool focused = false;
     protected Unit thisUnit;
 
-    const string defaultImgPath = "Assets/Art/Sprites/Ability_Default.png";
+    const string defaultImgPath = "Ability_Default";
 
     KeyCode hotkey;
     public KeyCode Hotkey
@@ -37,9 +37,10 @@ public abstract class UnitAbility : MonoBehaviour
         if (!abilitySprite)
         {
             Texture2D imgTex = new Texture2D(128, 128);
-            if (imgTex.LoadImage(File.ReadAllBytes(defaultImgPath)))
+            var file = Resources.Load<Texture2D>(defaultImgPath);
+            if (file)
             {
-                abilitySprite = Sprite.Create(imgTex, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
+                abilitySprite = Sprite.Create(file, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
             }
         }
     }

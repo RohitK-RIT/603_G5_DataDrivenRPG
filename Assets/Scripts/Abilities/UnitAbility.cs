@@ -34,7 +34,7 @@ public abstract class UnitAbility : MonoBehaviour
         thisUnit.OnFocused += (Unit u) => focused = true;
         thisUnit.OnUnfocused += (Unit u) => focused = false;
 
-        if (!abilitySprite)
+        if (!abilitySprite && File.Exists(defaultImgPath))
         {
             Texture2D imgTex = new Texture2D(128, 128);
             var file = Resources.Load<Texture2D>(defaultImgPath);

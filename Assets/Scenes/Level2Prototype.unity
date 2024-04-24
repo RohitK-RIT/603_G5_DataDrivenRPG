@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 136297502}
   - component: {fileID: 136297501}
   - component: {fileID: 136297500}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: tutorial_trigger (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1092,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.16999999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -1381,7 +1381,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -1660,7 +1660,7 @@ PrefabInstance:
     - target: {fileID: 6891537473479906589, guid: 3ac925e30b011eb4fa4d772c0466548c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6891537473479906589, guid: 3ac925e30b011eb4fa4d772c0466548c,
         type: 3}
@@ -2549,7 +2549,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.16999999
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -5969,7 +5969,7 @@ GameObject:
   - component: {fileID: 762811119}
   - component: {fileID: 762811118}
   - component: {fileID: 762811117}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: tutorial_trigger (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6080,7 +6080,7 @@ PrefabInstance:
     - target: {fileID: 3958791546401190438, guid: 2a8d2ea529f64904085635a28fe60c55,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3958791546401190438, guid: 2a8d2ea529f64904085635a28fe60c55,
         type: 3}
@@ -6435,7 +6435,7 @@ GameObject:
   - component: {fileID: 814946475}
   - component: {fileID: 814946474}
   - component: {fileID: 814946473}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: tutorial_trigger (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9559,7 +9559,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.12
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -12076,7 +12076,7 @@ PrefabInstance:
     - target: {fileID: 656667859763884659, guid: 05828d93df537724499b0c9013657a88,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 656667859763884659, guid: 05828d93df537724499b0c9013657a88,
         type: 3}
@@ -12459,7 +12459,7 @@ PrefabInstance:
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.31
+      value: 0.49999988
       objectReference: {fileID: 0}
     - target: {fileID: 5953886048064918762, guid: 0bc1164b45bae7a419527f0bc7406684,
         type: 3}
@@ -14864,7 +14864,7 @@ GameObject:
   - component: {fileID: 6505399399383987447}
   - component: {fileID: 6713144574412904420}
   - component: {fileID: 6713144574412904421}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: tutorial_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

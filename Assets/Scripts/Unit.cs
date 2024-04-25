@@ -113,15 +113,6 @@ public class Unit : MonoBehaviour
 
         //add constitution modifier to health
         maxHP *= 1.0f + ((constitution - 5) * 0.1f); //much simpler ~QP
-        //old:
-        //if (constitution < 4)
-        //{
-        //    maxHP *= (1f - (.1f * (4 - (constitution - 1))));
-        //}
-        //else
-        //{
-        //    maxHP *= (1f + (.1f * constitution));
-        //}
 
 
         //move speed modifiers ~weight factoring added by QP
@@ -134,7 +125,6 @@ public class Unit : MonoBehaviour
 
         //action speed modifiers ~balance sheet calcs adjusted by QP
         //string debugmsg = "";
-        //debugmsg += $"Unit: {gameObject.name}\nWeapon: {equippedWeapon.name}\nWeapon DMG: {equippedWeapon.damage_per_shot}\nBASE Action time: {actionTime}\n";
 
         actionTime = (2.0f*actionTime) - (float)(actionTime*Math.Pow(Math.E,0.02f*(dexterity-1)));
         //debugmsg += $"DEX-SCALED Action time: {actionTime}\n";

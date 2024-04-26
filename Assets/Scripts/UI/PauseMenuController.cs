@@ -43,13 +43,16 @@ public class PauseMenuController : MonoBehaviour
     }
 
 
-    public void QuitGame()
+    public void QuitMission()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        OpenScene("Overworld");
     }
 
-    
+    public void OpenScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
     //when the Pause key is pressed
     public void OnPause()

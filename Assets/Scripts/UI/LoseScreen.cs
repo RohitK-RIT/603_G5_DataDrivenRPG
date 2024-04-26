@@ -31,6 +31,6 @@ public class LoseScreen : MonoBehaviour
     public void QuitGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Overworld");
     }
 }

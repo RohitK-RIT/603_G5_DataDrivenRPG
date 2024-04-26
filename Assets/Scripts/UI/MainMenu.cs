@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Level2Prototype");
+        SceneManager.LoadScene("Overworld");
     }
 
     public void QuitGame()

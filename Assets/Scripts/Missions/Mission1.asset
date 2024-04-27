@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7bb41d6b998acb4796bd57ff570d5bc, type: 3}
   m_Name: Mission1
   m_EditorClassIdentifier: 
-  scene_name: Level2Prototype
+  scene_name: LevelPrototype
   mission_title: Training Simulation
   mission_description: "\tWe recently got get a hold of some of Cycorp's experimental
     training software. Don't know what those freaks were thinking, but they managed

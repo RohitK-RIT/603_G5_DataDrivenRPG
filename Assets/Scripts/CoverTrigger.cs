@@ -11,13 +11,15 @@ public class CoverTrigger : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             isBehindCover = true;
-            Debug.Log("Is Behind Cover");
+            other.gameObject.layer = 9;
+            //Debug.Log("Is Behind Cover");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         isBehindCover = false;
-        Debug.Log("Not Behind Cover");
+        other.gameObject.layer = 8;
+        //Debug.Log("Not Behind Cover");
     }
 }

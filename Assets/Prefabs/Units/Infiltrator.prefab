@@ -466,10 +466,10 @@ MonoBehaviour:
   abilityName: Attack
   description: Attack an enemy. Choose a target by left-clicking them with this ability.
   abilitySprite: {fileID: 21300000, guid: decd16f2bc44e624f99e9ae249a06695, type: 3}
-  atkDamage: 40
-  atkRange: 15
-  accuracy: 50
   SelectionCursor: {fileID: 2800000, guid: 61e87d7672c71ec418650c1d490d7c94, type: 3}
+  AvoidLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &6074178794061960769
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

@@ -33,6 +33,7 @@ public class SelectionManager : MonoBehaviour
     public static HashSet<Unit> allFriendlyUnits, allOtherUnits;
 
     public RectTransform selectBox;
+    public GameObject posSelector;
     List<Unit> selected, pending;
     Vector2 mouseStart;
     Camera cam;
@@ -57,6 +58,10 @@ public class SelectionManager : MonoBehaviour
             allFriendlyUnits = new();
             allOtherUnits = new();
             cam = GetComponentInChildren<Camera>();
+
+            // instantiate the position selector for abilities
+            posSelector = Instantiate(posSelector);
+            posSelector.SetActive(false);
         }
         else
         {
@@ -161,21 +166,26 @@ public class SelectionManager : MonoBehaviour
             // -- SELECTING A TARGET POSITION ON THE MAP -- \\
 
             case SelectionState.TargetPosition:
-                if (Input.GetMouseButtonDown(0))
+                if (RaycastMouse(out RaycastHit posHit, 1))
                 {
-                    if (RaycastMouse(out RaycastHit posHit))
+                    Vector3 pos = posHit.point;
+                    pos.y += 0.01f;
+                    posSelector.transform.position = pos;
+                    if (Input.GetMouseButtonDown(0))
                     {
                         OnTargetPositionRequested?.Invoke(posHit.point);
                         StopTargetSelection();
                     }
-                    else
-                    {
-                        HUDController.ShowError("Invalid selection. Please select a valid position.");
-                    }
                 }
-                else if (Input.GetMouseButtonDown(1)) // cancel
+                else if(RaycastMouse(out posHit, 1 << 10))
+                {
+                    posSelector.transform.position = posHit.point;
+                    if (Input.GetMouseButtonDown(0))
+                        HUDController.ShowError("Invalid selection. Please select a valid position.");
+                }
+                    
+                if (Input.GetMouseButtonDown(1)) // cancel
                     StopTargetSelection();
-
                 break;
 
             // -- SELECTING A TARGET FRIENDLY UNIT ON THE MAP -- \\
@@ -228,6 +238,7 @@ public class SelectionManager : MonoBehaviour
 
     void StopTargetSelection()
     {
+        posSelector.SetActive(false);
         Cursor.visible = true;
         Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
         OnTargetPositionRequested = null;
@@ -308,6 +319,9 @@ public class SelectionManager : MonoBehaviour
     /// <param name="callback">The callback to invoke upon selecting a position in the level</param>
     public static void RequestCastPosition(Texture2D aoeVisual, float radius, TargetPosCastHandler callback)
     {
+        Instance.posSelector.SetActive(true);
+        Instance.posSelector.GetComponent<SpriteRenderer>().sprite = Sprite.Create(aoeVisual, new(0, 0, aoeVisual.width, aoeVisual.height), new(0.5f, 0.5f), aoeVisual.width / radius);
+
         Instance.selectState = SelectionState.TargetPosition;
         Instance.selecting = false;
         OnTargetPositionRequested += callback;

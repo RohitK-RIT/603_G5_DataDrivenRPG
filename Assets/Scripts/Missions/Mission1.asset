@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7bb41d6b998acb4796bd57ff570d5bc, type: 3}
+  m_Name: Mission1
+  m_EditorClassIdentifier: 
+  scene_name: Level2Prototype
+  mission_title: Training Simulation
+  mission_description: "\tWe recently got get a hold of some of Cycorp's experimental
+    training software. Don't know what those freaks were thinking, but they managed
+    to make everything feel real - including the pain. \n\n\tI reckon it's a good
+    way to refresh yourself on the basics of command, plus our green-eyed operatives
+    can safely get a taste of the action. "
+  difficulty_indicator: 1

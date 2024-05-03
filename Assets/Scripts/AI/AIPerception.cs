@@ -18,13 +18,14 @@ namespace AI
         public List<Unit> VisibleUnits { get; private set; }
 
         private Vector3 EyePosition => transform.position + eyeOffset;
-        public float SightDistance => sightDistance;
+        public float SightDistance => sightDistance = GetComponent<Unit>().equippedWeapon.range;
 
         private Mesh _mesh;
         private int _count;
         private float _scanInterval;
         private float _scanTimer;
         private Collider[] _colliders = new Collider[10];
+        protected Weapon equippedWeapon;
 
         // Start is called before the first frame update
         private void Start()

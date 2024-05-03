@@ -6,13 +6,13 @@ namespace AI.Turret
 {
     public class AIAttack : UnitAbility
     {
-        public float atkDamage = 25f;
-        public float accuracy = 50f;
-        [SerializeField] Texture2D SelectionCursor;
+        //public float atkDamage = 25f;
+        //public float accuracy = 50f;
 
         Unit target;
 
         //Added by Ty
+        protected Weapon equippedWeapon;
         protected LineRenderer Line;
         private float _atkRange;
         private AIPerception _perception;
@@ -21,6 +21,7 @@ namespace AI.Turret
         {
             Line = GetComponent<LineRenderer>();
             Line.enabled = false;
+            equippedWeapon = GetComponent<Unit>().equippedWeapon;
             _atkRange = GetComponent<AIPerception>().SightDistance;
             _perception = GetComponent<AIPerception>();
         }
@@ -32,9 +33,9 @@ namespace AI.Turret
             if (target)
             {
                 Vector3 origin = transform.position;
-                origin.y += 0.5f;
+                //origin.y += 0.5f;
                 Vector3 dest = target.transform.position;
-                dest.y += 0.5f;
+                //dest.y += 0.5f;
 
                 Line.SetPosition(0, origin);
                 Line.startColor = Color.red;
@@ -77,10 +78,10 @@ namespace AI.Turret
                     
                     //now factor in accuracy
                     var hitRoll = Random.Range(0, 1f);
-                    var hitChance = accuracy;
-                    if (hitRoll < accuracy)
+                    var hitChance = equippedWeapon.baseAccuracy;
+                    if (hitRoll < equippedWeapon.baseAccuracy)
                     {
-                        target.TakeDamage(atkDamage);
+                        target.TakeDamage(equippedWeapon.damage_per_shot);
                         Line.startColor = Color.green;
                         Line.endColor = Color.green;
                     }

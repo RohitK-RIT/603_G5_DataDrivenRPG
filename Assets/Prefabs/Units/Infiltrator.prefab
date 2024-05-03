@@ -615,7 +615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: EMP Grenade
   description: '[NOT YET IMPLEMENTED]'
-  abilitySprite: {fileID: 21300000, guid: 0955c8fa3af37bb45a19a417d10cf04e, type: 3}
+  abilitySprite: {fileID: 21300000, guid: b36899c100f4a05418bdccad39246042, type: 3}
   radius: 5
   stunTime: 4
   selectionCursor: {fileID: 2800000, guid: d09eb9eea39c3e544b9bebcd49dde467, type: 3}

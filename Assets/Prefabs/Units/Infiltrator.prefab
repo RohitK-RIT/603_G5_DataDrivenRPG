@@ -451,6 +451,7 @@ MonoBehaviour:
   actionTime: 3.8
   CharPortrait: {fileID: 0}
   equippedWeapon: {fileID: 11400000, guid: 03527a94bf6ef514ba4cb789c093d579, type: 2}
+  defaultWeaponName: Shredder SMG
 --- !u!114 &3850781980061892528
 MonoBehaviour:
   m_ObjectHideFlags: 0

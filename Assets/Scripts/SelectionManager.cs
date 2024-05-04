@@ -386,4 +386,14 @@ public class SelectionManager : MonoBehaviour
             yield return unit;
         }
     }
+    
+    public static Unit FindUnit(string unitName, Hostility hostility = Hostility.Friendly)
+    {
+        foreach (Unit u in hostility == Hostility.Friendly ? allFriendlyUnits : allOtherUnits)
+        {
+            if (u.unitName.Equals(unitName))
+                return u;
+        }
+        return null;
+    }
 }

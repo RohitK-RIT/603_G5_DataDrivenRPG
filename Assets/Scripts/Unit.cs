@@ -35,6 +35,8 @@ public class Unit : MonoBehaviour
     public delegate void FocusedHandler(Unit focusedUnit);
     public event FocusedHandler OnFocused;
     public event FocusedHandler OnUnfocused;
+    public delegate void WeaponEquippedHandler(Weapon newWeapon);
+    public event WeaponEquippedHandler OnWeaponEquipped;
 
     //attributes
     public int strength = 1; 
@@ -96,6 +98,9 @@ public class Unit : MonoBehaviour
     {
         name = unitName;
 
+        // This will only matter for friendly units
+        EquipWeapon(InventoryManager.Instance.FindEquippedWeapon(unitName));
+
         //Added By Ty
         actionBarController = CharPortrait.GetComponent<ActionBarController>();
         healthBarController = CharPortrait.GetComponent<HealthBarController>();
@@ -115,28 +120,8 @@ public class Unit : MonoBehaviour
         //add constitution modifier to health
         maxHP *= 1.0f + ((constitution - 5) * 0.1f); //much simpler ~QP
 
-
-        //move speed modifiers ~weight factoring added by QP
-        NavMeshAgent agentComponent = GetComponent<NavMeshAgent>();
-
-        if(agentComponent != null)
-        {
-            agentComponent.speed += (.5f * (agility - 1.0f))*(2.0f / MathF.Max(equippedWeapon.weight-strength, 2));
-        }
-
         //action speed modifiers ~balance sheet calcs adjusted by QP
-        //string debugmsg = "";
-
         actionTime = (2.0f*actionTime) - (float)(actionTime*Math.Pow(Math.E,0.02f*(dexterity-1)));
-        //debugmsg += $"DEX-SCALED Action time: {actionTime}\n";
-
-        //account in weight
-        float wt_str_difference = MathF.Pow(MathF.Max(equippedWeapon.weight - strength, 0), 3.0f);
-        //debugmsg += $"Wt-str factor: {1.0f + (.05f * wt_str_difference)}\n";
-
-        actionTime = MathF.Max(actionTime*(1.0f + (.05f*wt_str_difference)), actionTime/2.0f);
-        //debugmsg += $"NET Action time: {actionTime}";
-        //Debug.Log(debugmsg);
 
         currentHP = maxHP;
         if (currentHP == 0f) immune = true;
@@ -145,7 +130,6 @@ public class Unit : MonoBehaviour
         healthBarController.maxHealthBar = maxHP;
         healthBarController.healthBar = currentHP;
         actionBarController.actionRegen = actionTime;
-
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -491,5 +475,21 @@ public class Unit : MonoBehaviour
             SelectionManager.allFriendlyUnits.Remove(this);
         else
             SelectionManager.allOtherUnits.Remove(this);
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        InventoryManager.Instance.SetEquippedWeapon(weapon, this);
+
+        //move speed modifiers ~weight factoring added by QP
+        NavMeshAgent agentComponent = GetComponent<NavMeshAgent>();
+        if (agentComponent)
+            agentComponent.speed += (.5f * (agility - 1.0f)) * (2.0f / MathF.Max(equippedWeapon.weight - strength, 2));
+
+        //account in weight
+        float wt_str_difference = MathF.Pow(MathF.Max(equippedWeapon.weight - strength, 0), 3.0f);
+        actionTime = MathF.Max(actionTime * (1.0f + (.05f * wt_str_difference)), actionTime / 2.0f);
+
+        OnWeaponEquipped?.Invoke(weapon);
     }
 }

@@ -78,9 +78,6 @@ public class SelectionManager : MonoBehaviour
         // nullify all event listeners
         OnUnitSelectionChanged = null;
         StopTargetSelection();
-
-        
-        
     }
 
     // Start is called before the first frame update
@@ -238,7 +235,7 @@ public class SelectionManager : MonoBehaviour
 
     void StopTargetSelection()
     {
-        posSelector.SetActive(false);
+        if (posSelector) posSelector.SetActive(false);
         Cursor.visible = true;
         Cursor.SetCursor(NormalCursor, Vector2.zero, CursorMode.Auto);
         OnTargetPositionRequested = null;

@@ -8,7 +8,7 @@ using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
-    public string inventoryPath = "/save_data/inventory.json";
+    public string inventoryPath = "./save_data/inventory.json";
 
     public Weapon BreacherDefault, SniperDefault, InfiltratorDefault;
 
@@ -24,7 +24,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // make sure there's only ever one instance of this script active
         if (Instance) 

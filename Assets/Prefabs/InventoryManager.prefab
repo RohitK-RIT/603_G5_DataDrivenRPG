@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be0611c4061c721419d6684e7595561f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPath: /save_data/inventory.json
+  inventoryPath: ./save_data/inventory.json
   BreacherDefault: {fileID: 11400000, guid: a7fc23ce51622b949b7c3a4aefc0b0ab, type: 2}
   SniperDefault: {fileID: 11400000, guid: e9a94bf57aa72314da2ceb90c3a1dff0, type: 2}
   InfiltratorDefault: {fileID: 11400000, guid: 03527a94bf6ef514ba4cb789c093d579, type: 2}

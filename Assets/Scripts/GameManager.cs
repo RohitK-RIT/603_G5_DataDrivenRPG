@@ -108,11 +108,3 @@ public class GameManager : MonoBehaviour
         #endif
     }
 }
-
-public sealed class StartSessionEvent : GameEvent
-{
-}
-public sealed class EndSessionEvent : GameEvent
-{
-}
-

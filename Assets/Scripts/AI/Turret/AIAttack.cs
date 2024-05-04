@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Core.Managers.Analytics;
 using UnityEngine;
 
 namespace AI.Turret
@@ -81,6 +82,7 @@ namespace AI.Turret
                     var hitChance = equippedWeapon.baseAccuracy;
                     if (hitRoll < equippedWeapon.baseAccuracy)
                     {
+                        new WeaponUsedEvent(equippedWeapon).Raise();
                         target.TakeDamage(equippedWeapon.damage_per_shot);
                         Line.startColor = Color.green;
                         Line.endColor = Color.green;

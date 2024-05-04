@@ -373,4 +373,17 @@ public class SelectionManager : MonoBehaviour
 
         return true;
     }
+
+    public static IEnumerable<Unit> GetAllUnits()
+    {
+        foreach (var unit in allFriendlyUnits)
+        {
+            yield return unit;
+        }
+        
+        foreach (var unit in allOtherUnits)
+        {
+            yield return unit;
+        }
+    }
 }

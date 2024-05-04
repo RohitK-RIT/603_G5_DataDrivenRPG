@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Core.Managers.Analytics;
 using UnityEngine;
 
 public class Attack : UnitAbility
@@ -74,8 +75,8 @@ public class Attack : UnitAbility
                 Line.SetPosition(1, hit.point);
                 if (hit.collider.gameObject == target.gameObject)
                 {
-                        Line.startColor = Color.cyan;
-                        Line.endColor = Color.cyan;
+                    Line.startColor = Color.cyan;
+                    Line.endColor = Color.cyan;
                 }
             }
             else
@@ -128,6 +129,7 @@ public class Attack : UnitAbility
                         {
                             Line.startColor = Color.green;
                             Line.endColor = Color.green;
+                            new WeaponUsedEvent(u.equippedWeapon).Raise();
                             u.TakeDamage(atkDamage);
                         }
                     }
@@ -141,6 +143,7 @@ public class Attack : UnitAbility
                         {
                             Line.startColor = Color.green;
                             Line.endColor = Color.green;
+                            new WeaponUsedEvent(u.equippedWeapon).Raise();
                             u.TakeDamage(atkDamage / 2);
                         }
                     }
@@ -149,12 +152,14 @@ public class Attack : UnitAbility
                 {
                     Line.SetPosition(1, origin + (dest - origin).normalized * atkRange);
                 }
-               // Debug.Log(hits[0].collider.gameObject.layer);
-               // Debug.Log(hits[1].collider.gameObject.layer);
+                // Debug.Log(hits[0].collider.gameObject.layer);
+                // Debug.Log(hits[1].collider.gameObject.layer);
             }
+
             target = null;
             StartCoroutine(shootLine());
         }
+
         base.Execute();
     }
 

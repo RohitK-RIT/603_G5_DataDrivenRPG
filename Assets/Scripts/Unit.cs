@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Managers.Analytics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -335,6 +336,7 @@ public class Unit : MonoBehaviour
     {
         RemoveFromUnitList();
         OnKilled?.Invoke(this);
+        new UnitKilledEvent(this).Raise();
         Destroy(gameObject);
         healthBarController.healthProgressUI.fillAmount = 0;
     }

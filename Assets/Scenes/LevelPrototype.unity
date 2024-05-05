@@ -1664,70 +1664,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 710005403536652703, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 710005403536652703, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 710005403536652703, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1411445038938838235, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: unitName
-      value: Breacher
-      objectReference: {fileID: 0}
-    - target: {fileID: 2637974849033328508, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: unitName
-      value: Tactician
-      objectReference: {fileID: 0}
     - target: {fileID: 5028514164486557670, guid: be703b70a5af93944ab132c079c3671f,
         type: 3}
       propertyPath: m_Name
       value: In-Game UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5226193343250428286, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Breacher
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335290425649107023, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8026162207573796475, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: unitName
-      value: Sniper
-      objectReference: {fileID: 0}
-    - target: {fileID: 8309233953447195708, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8309233953447195708, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8309233953447195708, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8432393274504966648, guid: be703b70a5af93944ab132c079c3671f,
-        type: 3}
-      propertyPath: unitName
-      value: Infiltrator
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

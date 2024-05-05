@@ -29,6 +29,7 @@ public class InventoryUIHandler : MonoBehaviour
         foreach (Weapon weapon in invWeapons.Keys)
         {
             GameObject newButton = GameObject.Instantiate(invItemPrefab, invContainer.transform, true);
+            Debug.Log(weapon.weapon_name);
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = weapon.weapon_name;
             Vector3 buttonPosition = invContainer.transform.position + new Vector3((invContainer.GetComponent<RectTransform>().rect.width / 2), -55, 0);
             buttonPosition += new Vector3(0, -100 * yOffset, 0);

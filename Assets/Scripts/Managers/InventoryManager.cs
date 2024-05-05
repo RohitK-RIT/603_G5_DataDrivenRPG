@@ -10,13 +10,13 @@ public class InventoryManager : MonoBehaviour
 {
     public string inventoryPath = "./save_data/inventory.json";
 
-    public Weapon BreacherDefault, SniperDefault, InfiltratorDefault;
+    public Weapon BreacherDefault, SniperDefault, InfiltratorDefault, TacticianDefault;
 
     [HideInInspector]
     public static InventoryManager Instance;
 
     // each inventory item tracks the weapon and the name of its holder
-    Dictionary<Weapon, string> inventory;
+    public Dictionary<Weapon, string> inventory;
     struct InventoryData
     {
         public Weapon[] weapons;
@@ -51,6 +51,7 @@ public class InventoryManager : MonoBehaviour
             inventory[BreacherDefault] = "Breacher";
             inventory[SniperDefault] = "Sniper";
             inventory[InfiltratorDefault] = "Infiltrator";
+            inventory[TacticianDefault] = "Tactician";
         }
 
         foreach (var item in inventory)
@@ -139,7 +140,7 @@ public class InventoryManager : MonoBehaviour
         inventory[weapon] = ownedUnit.unitName;
     }
 
-    void SaveInventoryData()
+    public void SaveInventoryData()
     {
         int last = 0;
         for (int i = 0; i < inventoryPath.Length; i++)

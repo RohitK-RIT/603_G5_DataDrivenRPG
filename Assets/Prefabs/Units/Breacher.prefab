@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 4674900401089365256}
   - component: {fileID: 594211749772031708}
   m_Layer: 6
-  m_Name: Beacher
+  m_Name: Breacher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,7 +581,6 @@ MonoBehaviour:
   actionTime: 3.8
   CharPortrait: {fileID: 0}
   equippedWeapon: {fileID: 11400000, guid: a7fc23ce51622b949b7c3a4aefc0b0ab, type: 2}
-  defaultWeaponName: Lancer
 --- !u!114 &4316200902525515970
 MonoBehaviour:
   m_ObjectHideFlags: 0
